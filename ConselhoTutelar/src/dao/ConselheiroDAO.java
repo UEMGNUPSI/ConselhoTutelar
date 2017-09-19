@@ -34,5 +34,55 @@ public class ConselheiroDAO {
             pst.close();
             return usuario;
     }
+        
+        
+        static public void salvar (ConselheiroM conselheiro) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        sql = "insert into Conselheiro values (?,?,?,?,?,?)";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1,0);
+        pst.setString(2, conselheiro.getNome());
+        pst.setString(3, conselheiro.getTelefone());
+        pst.setString(4, conselheiro.getCelular());
+        pst.setString(5, conselheiro.getLogin()); 
+        pst.setString(6, conselheiro.getSenha());        
+        pst.execute();
+        pst.close();
+    }
+        
+          static public void excluir(ConselheiroM conselheiro) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        sql = "delete from Conselheiro where ID = ?";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, conselheiro.getId());
+        pst.execute();
+        pst.close();
+    }
+          
+             static public void alterar(ConselheiroM conselheiro) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        sql = "update Conselheiro set "
+                 + "Nome = ?, "
+                 + "Telefone = ?, "
+                 + "Celular = ?, "
+                 + "Login  = ?, "
+                 + "Senha  = ?, "
+                      
+                 + "where ID = ?";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setString(1, conselheiro.getNome());
+        pst.setString(2, conselheiro.getTelefone());
+        pst.setString(3, conselheiro.getCelular());
+        pst.setString(4, conselheiro.getLogin());
+        pst.setString(5, conselheiro.getSenha());  
+        pst.setInt(6, conselheiro.getId());
+         pst.execute();
+         pst.close();
+     }
+    
+        
     
 }

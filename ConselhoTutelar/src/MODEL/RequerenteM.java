@@ -9,7 +9,7 @@ package MODEL;
  *
  * @author NUPSI-07
  */
-public class Requerente {
+public class RequerenteM {
     
         private int Id;
         private String Nome;
@@ -24,10 +24,10 @@ public class Requerente {
         private String EstadoCivil;
         private String Observação;
 
-    public Requerente() {
+    public RequerenteM() {
     }
 
-    public Requerente(int Id, String Nome, String Telefone1, String Telefone2, String Celular, String Endereço, String Numero, String Bairro, String Cidade, String Estado, String EstadoCivil, String Observação) {
+    public RequerenteM(int Id, String Nome, String Telefone1, String Telefone2, String Celular, String Endereço, String Numero, String Bairro, String Cidade, String Estado, String EstadoCivil, String Observação) {
         this.Id = Id;
         this.Nome = Nome;
         this.Telefone1 = Telefone1;
