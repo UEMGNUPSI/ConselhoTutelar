@@ -13,6 +13,7 @@ public class RequerenteM {
     
         private int Id;
         private String Nome;
+        private String Nascimento;
         private String Telefone1;
         private String Telefone2;
         private String Celular;
@@ -27,9 +28,10 @@ public class RequerenteM {
     public RequerenteM() {
     }
 
-    public RequerenteM(int Id, String Nome, String Telefone1, String Telefone2, String Celular, String Endereço, String Numero, String Bairro, String Cidade, String Estado, String EstadoCivil, String Observação) {
+    public RequerenteM(int Id, String Nome, String Nascimento, String Telefone1, String Telefone2, String Celular, String Endereço, String Numero, String Bairro, String Cidade, String Estado, String EstadoCivil, String Observação) {
         this.Id = Id;
         this.Nome = Nome;
+        this.Nascimento = Nascimento;
         this.Telefone1 = Telefone1;
         this.Telefone2 = Telefone2;
         this.Celular = Celular;
@@ -56,6 +58,14 @@ public class RequerenteM {
 
     public void setNome(String Nome) {
         this.Nome = Nome;
+    }
+
+    public String getNascimento() {
+        return Nascimento;
+    }
+
+    public void setNascimento(String Nascimento) {
+        this.Nascimento = Nascimento;
     }
 
     public String getTelefone1() {
@@ -137,4 +147,6 @@ public class RequerenteM {
     public void setObservação(String Observação) {
         this.Observação = Observação;
     }
+
+    
 }

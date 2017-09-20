@@ -26,6 +26,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        pnl = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuRequerente = new javax.swing.JMenuItem();
@@ -35,11 +36,23 @@ public class PrincipalView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Conselho Tutelar Frutal");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Fernando\\Desktop\\conslhotutelar.png")); // NOI18N
         jLabel1.setToolTipText("");
 
-        jMenu1.setText("Arquivo");
+        javax.swing.GroupLayout pnlLayout = new javax.swing.GroupLayout(pnl);
+        pnl.setLayout(pnlLayout);
+        pnlLayout.setHorizontalGroup(
+            pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlLayout.setVerticalGroup(
+            pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 271, Short.MAX_VALUE)
+        );
 
+        jMenu1.setText("Arquivo");
+        jMenu1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+
+        mnuRequerente.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         mnuRequerente.setText("Requerente");
         mnuRequerente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -48,6 +61,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenu1.add(mnuRequerente);
 
+        mnuConselheiro.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         mnuConselheiro.setText("Conselheiro");
         mnuConselheiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,6 +70,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenu1.add(mnuConselheiro);
 
+        mnuDireitos.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         mnuDireitos.setText("Direitos");
         mnuDireitos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,11 +91,13 @@ public class PrincipalView extends javax.swing.JFrame {
                 .addContainerGap(581, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
+            .addComponent(pnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(277, Short.MAX_VALUE)
+                .addComponent(pnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addContainerGap())
         );
@@ -90,14 +107,23 @@ public class PrincipalView extends javax.swing.JFrame {
 
     private void mnuRequerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRequerenteActionPerformed
         RequerenteView req = new RequerenteView();
+        pnl.removeAll();
+        pnl.add(req);
+        pnl.updateUI();
     }//GEN-LAST:event_mnuRequerenteActionPerformed
 
     private void mnuConselheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConselheiroActionPerformed
        ConselheiroView cons = new ConselheiroView();
+       pnl.removeAll();
+       pnl.add(cons);
+       pnl.updateUI();
     }//GEN-LAST:event_mnuConselheiroActionPerformed
 
     private void mnuDireitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDireitosActionPerformed
        DireitosView dir = new DireitosView();
+       pnl.removeAll();
+       pnl.add(dir);
+       pnl.updateUI();
     }//GEN-LAST:event_mnuDireitosActionPerformed
 
     /**
@@ -112,5 +138,6 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuConselheiro;
     private javax.swing.JMenuItem mnuDireitos;
     private javax.swing.JMenuItem mnuRequerente;
+    private javax.swing.JPanel pnl;
     // End of variables declaration//GEN-END:variables
 }

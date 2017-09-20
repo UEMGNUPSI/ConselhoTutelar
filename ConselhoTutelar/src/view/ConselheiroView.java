@@ -1,23 +1,27 @@
-
 package view;
 
+import MODEL.ConselheiroM;
+import dao.ConselheiroDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
-public class ConselheiroView extends javax.swing.JFrame {
 
-    
+public class ConselheiroView extends javax.swing.JInternalFrame {
+
+    ConselheiroM conselheiro = new ConselheiroM();
+    ConselheiroDAO conselheirodao = new ConselheiroDAO();
+    List<ConselheiroM> listaconselheiro;
     public ConselheiroView() {
         initComponents();
-        this.setVisible(true);
+        listaconselheiro = new ArrayList<>();
     }
 
-   
-    @SuppressWarnings("unchecked")
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
@@ -32,37 +36,18 @@ public class ConselheiroView extends javax.swing.JFrame {
         txtSenha = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblConselheiro = new javax.swing.JTable();
         btnExcluir = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbxFiltro = new javax.swing.JComboBox<>();
         txtBusca = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblConselheiro = new javax.swing.JTable();
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Conselheiro");
-        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações"));
 
@@ -155,23 +140,57 @@ public class ConselheiroView extends javax.swing.JFrame {
 
         btnCancelar.setText("Cancelar");
         btnCancelar.setEnabled(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        tblConselheiro.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblConselheiro.setEnabled(false);
+        jScrollPane3.setViewportView(tblConselheiro);
 
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
 
         btnAlterar.setText("Alterar");
         btnAlterar.setEnabled(false);
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setText("Salvar");
         btnSalvar.setEnabled(false);
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Busca"));
 
         jLabel7.setText("Filtro:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +209,7 @@ public class ConselheiroView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -204,26 +223,12 @@ public class ConselheiroView extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
                     .addComponent(btnLimpar))
                 .addGap(0, 2, Short.MAX_VALUE))
         );
-
-        tblConselheiro.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tblConselheiro.setEnabled(false);
-        jScrollPane3.setViewportView(tblConselheiro);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,7 +254,7 @@ public class ConselheiroView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,6 +284,84 @@ public class ConselheiroView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+    limparCampos();
+    prepararNovo();
+    ativaCampos();
+    btnAlterar.setEnabled(false);
+    btnExcluir.setEnabled(false);
+    txtNome.requestFocusInWindow(); 
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+    conselheiro = new ConselheiroM();
+        if (txtNome.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+            txtNome.requestFocusInWindow();          
+        }
+        else if (txtId.getText().isEmpty()){
+            conselheiro.setNome(txtNome.getText());
+            conselheiro.setTelefone(txtTelefone.getText());
+            conselheiro.setCelular(txtCelular.getText());
+            conselheiro.setLogin(txtLogin.getText());
+            conselheiro.setSenha(txtSenha.getText());
+      
+            try{
+                conselheirodao.Salvar(conselheiro);
+                JOptionPane.showMessageDialog(null, "Gravado com sucesso!");   
+                txtNome.requestFocusInWindow();
+            }
+            catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+            }
+        //atualizarTabela();
+        prepararSalvareCancelar();
+        desativaCampos();
+        limparCampos();
+       }
+        else{
+            conselheiro.setId(Integer.parseInt(txtId.getText()));
+            conselheiro.setNome(txtNome.getText());
+            conselheiro.setTelefone(txtTelefone.getText());
+            conselheiro.setCelular(txtCelular.getText());
+            conselheiro.setLogin(txtLogin.getText());
+            conselheiro.setSenha(txtSenha.getText());
+       
+            try{
+                conselheirodao.Alterar(conselheiro);
+                JOptionPane.showMessageDialog(null, "Alterado com sucesso!");  
+            }
+            catch (SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+            }
+        }
+       //atualizarTabela();
+       prepararSalvareCancelar();
+       desativaCampos();
+       
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        prepararAlterar();
+        ativaCampos();
+        txtNome.requestFocusInWindow(); 
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limparCampos();
+        prepararSalvareCancelar();
+        desativaCampos();
+        cbxFiltro.setEnabled(true);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    public void limparCampos(){
+        txtNome.setText("");
+        txtTelefone.setText("");
+        txtCelular.setText("");
+        txtLogin.setText("");
+        txtSenha.setText("");      
+    }
+    
     public void ativaCampos(){
         txtNome.setEnabled(true);
         txtTelefone.setEnabled(true);
@@ -286,37 +369,37 @@ public class ConselheiroView extends javax.swing.JFrame {
         txtLogin.setEnabled(true);
         txtSenha.setEnabled(true);        
     }
-    
-     public void desativaCampos(){
+
+    public void desativaCampos(){
         txtNome.setEnabled(false);
         txtTelefone.setEnabled(false);
         txtCelular.setEnabled(false);
         txtLogin.setEnabled(false);
         txtSenha.setEnabled(false);        
     }
-     
-     public void prepararNovo() {
+
+    public void prepararNovo() {
        btnNovo.setEnabled(false);
        btnSalvar.setEnabled(true);
        btnCancelar.setEnabled(true);
        tblConselheiro.setEnabled(false);
        tblConselheiro.clearSelection();
-   }
-   
-   public void prepararSalvareCancelar() {
+    }
+
+    public void prepararSalvareCancelar() {
        btnNovo.setEnabled(true);
        btnSalvar.setEnabled(false);
        btnCancelar.setEnabled(false);
        tblConselheiro.setEnabled(true);
-   }
-   
-   public void prepararSelecaoTabela(){
+    }
+
+    public void prepararSelecaoTabela(){
        btnNovo.setEnabled(true);
        btnExcluir.setEnabled(true);
        btnAlterar.setEnabled(true);
-   }
-   
-   public void prepararAlterar(){
+    }
+
+    public void prepararAlterar(){
        btnNovo.setEnabled(false);
        btnExcluir.setEnabled(false);
        btnAlterar.setEnabled(false);
@@ -324,16 +407,12 @@ public class ConselheiroView extends javax.swing.JFrame {
        btnCancelar.setEnabled(true);
        tblConselheiro.setEnabled(false);
        tblConselheiro.clearSelection();
-   }
-   
-   public void prepararExcluir(){
+    }
+
+    public void prepararExcluir(){
        btnExcluir.setEnabled(false);
        btnAlterar.setEnabled(false);
-   }
-     
-     
-    
-    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -342,8 +421,8 @@ public class ConselheiroView extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cbxFiltro;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -352,11 +431,8 @@ public class ConselheiroView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable tblConselheiro;
     private javax.swing.JTextField txtBusca;
     private javax.swing.JTextField txtCelular;
