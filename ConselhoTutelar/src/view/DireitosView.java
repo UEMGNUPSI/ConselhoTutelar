@@ -19,11 +19,11 @@ public class DireitosView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        txtId1 = new javax.swing.JTextField();
+        txtArtigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDescricao = new javax.swing.JTextArea();
         btnNovo = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
@@ -36,7 +36,7 @@ public class DireitosView extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDireitos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Direitos");
@@ -46,13 +46,18 @@ public class DireitosView extends javax.swing.JFrame {
 
         jLabel1.setText("Id:");
 
+        txtId.setEnabled(false);
+
+        txtArtigo.setEnabled(false);
+
         jLabel2.setText("Nº do artigo:");
 
         jLabel3.setText("Descrição:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtDescricao.setColumns(20);
+        txtDescricao.setRows(5);
+        txtDescricao.setEnabled(false);
+        jScrollPane1.setViewportView(txtDescricao);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -68,7 +73,7 @@ public class DireitosView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtId1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -85,7 +90,7 @@ public class DireitosView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtId1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtArtigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -96,12 +101,16 @@ public class DireitosView extends javax.swing.JFrame {
         btnNovo.setText("Novo");
 
         btnSalvar.setText("Salvar");
+        btnSalvar.setEnabled(false);
 
         btnAlterar.setText("Alterar");
+        btnAlterar.setEnabled(false);
 
         btnExcluir.setText("Excluir");
+        btnExcluir.setEnabled(false);
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setEnabled(false);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Busca"));
 
@@ -147,7 +156,7 @@ public class DireitosView extends javax.swing.JFrame {
                 .addGap(0, 2, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDireitos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -158,7 +167,7 @@ public class DireitosView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tblDireitos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -213,6 +222,56 @@ public class DireitosView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void ativaCampos(){
+        
+        txtId.setEnabled(true);
+        txtArtigo.setEnabled(true);
+        txtDescricao.setEnabled(true);
+    }
+    
+     public void desativaCampos(){
+        
+        txtId.setEnabled(false);
+        txtArtigo.setEnabled(false);
+        txtDescricao.setEnabled(false);
+    }
+     
+       
+         public void prepararNovo() {
+       btnNovo.setEnabled(false);
+       btnSalvar.setEnabled(true);
+       btnCancelar.setEnabled(true);
+       tblDireitos.setEnabled(false);
+       tblDireitos.clearSelection();
+         }
+   
+        public void prepararSalvareCancelar() {
+       btnNovo.setEnabled(true);
+       btnSalvar.setEnabled(false);
+       btnCancelar.setEnabled(false);
+       tblDireitos.setEnabled(true);
+         }
+   
+         public void prepararSelecaoTabela(){
+       btnNovo.setEnabled(true);
+       btnExcluir.setEnabled(true);
+       btnAlterar.setEnabled(true);
+         }
+   
+         public void prepararAlterar(){
+       btnNovo.setEnabled(false);
+       btnExcluir.setEnabled(false);
+       btnAlterar.setEnabled(false);
+       btnSalvar.setEnabled(true);
+       btnCancelar.setEnabled(true);
+       tblDireitos.setEnabled(false);
+       tblDireitos.clearSelection();
+         }
+   
+        public void prepararExcluir(){
+       btnExcluir.setEnabled(false);
+       btnAlterar.setEnabled(false);
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -231,10 +290,10 @@ public class DireitosView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTable tblDireitos;
+    private javax.swing.JTextField txtArtigo;
     private javax.swing.JTextField txtBusca;
+    private javax.swing.JTextArea txtDescricao;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtId1;
     // End of variables declaration//GEN-END:variables
 }

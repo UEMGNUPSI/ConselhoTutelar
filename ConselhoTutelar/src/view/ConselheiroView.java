@@ -25,10 +25,10 @@ public class ConselheiroView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
-        txtTelefone1 = new javax.swing.JTextField();
+        txtCelular = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtTelefone2 = new javax.swing.JTextField();
+        txtLogin = new javax.swing.JTextField();
         txtSenha = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
@@ -43,7 +43,7 @@ public class ConselheiroView extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblConselheiro = new javax.swing.JTable();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -68,13 +68,25 @@ public class ConselheiroView extends javax.swing.JFrame {
 
         jLabel1.setText("Id:");
 
+        txtId.setEnabled(false);
+
+        txtNome.setEnabled(false);
+
         jLabel2.setText("Nome:");
 
         jLabel3.setText("Telefone:");
 
+        txtTelefone.setEnabled(false);
+
+        txtCelular.setEnabled(false);
+
         jLabel4.setText("Celular:");
 
         jLabel5.setText("Login:");
+
+        txtLogin.setEnabled(false);
+
+        txtSenha.setEnabled(false);
 
         jLabel6.setText("Senha:");
 
@@ -100,11 +112,11 @@ public class ConselheiroView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTelefone1))
+                        .addComponent(txtCelular))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTelefone2))
+                        .addComponent(txtLogin))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,11 +141,11 @@ public class ConselheiroView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtTelefone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -142,12 +154,16 @@ public class ConselheiroView extends javax.swing.JFrame {
         );
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setEnabled(false);
 
         btnExcluir.setText("Excluir");
+        btnExcluir.setEnabled(false);
 
         btnAlterar.setText("Alterar");
+        btnAlterar.setEnabled(false);
 
         btnSalvar.setText("Salvar");
+        btnSalvar.setEnabled(false);
 
         btnNovo.setText("Novo");
 
@@ -195,7 +211,7 @@ public class ConselheiroView extends javax.swing.JFrame {
                 .addGap(0, 2, Short.MAX_VALUE))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblConselheiro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -206,7 +222,8 @@ public class ConselheiroView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        tblConselheiro.setEnabled(false);
+        jScrollPane3.setViewportView(tblConselheiro);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -262,7 +279,61 @@ public class ConselheiroView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void ativaCampos(){
+        txtNome.setEnabled(true);
+        txtTelefone.setEnabled(true);
+        txtCelular.setEnabled(true);
+        txtLogin.setEnabled(true);
+        txtSenha.setEnabled(true);        
+    }
+    
+     public void desativaCampos(){
+        txtNome.setEnabled(false);
+        txtTelefone.setEnabled(false);
+        txtCelular.setEnabled(false);
+        txtLogin.setEnabled(false);
+        txtSenha.setEnabled(false);        
+    }
+     
+     public void prepararNovo() {
+       btnNovo.setEnabled(false);
+       btnSalvar.setEnabled(true);
+       btnCancelar.setEnabled(true);
+       tblConselheiro.setEnabled(false);
+       tblConselheiro.clearSelection();
+   }
    
+   public void prepararSalvareCancelar() {
+       btnNovo.setEnabled(true);
+       btnSalvar.setEnabled(false);
+       btnCancelar.setEnabled(false);
+       tblConselheiro.setEnabled(true);
+   }
+   
+   public void prepararSelecaoTabela(){
+       btnNovo.setEnabled(true);
+       btnExcluir.setEnabled(true);
+       btnAlterar.setEnabled(true);
+   }
+   
+   public void prepararAlterar(){
+       btnNovo.setEnabled(false);
+       btnExcluir.setEnabled(false);
+       btnAlterar.setEnabled(false);
+       btnSalvar.setEnabled(true);
+       btnCancelar.setEnabled(true);
+       tblConselheiro.setEnabled(false);
+       tblConselheiro.clearSelection();
+   }
+   
+   public void prepararExcluir(){
+       btnExcluir.setEnabled(false);
+       btnAlterar.setEnabled(false);
+   }
+     
+     
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -285,14 +356,14 @@ public class ConselheiroView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTable tblConselheiro;
     private javax.swing.JTextField txtBusca;
+    private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtLogin;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtSenha;
     private javax.swing.JTextField txtTelefone;
-    private javax.swing.JTextField txtTelefone1;
-    private javax.swing.JTextField txtTelefone2;
     // End of variables declaration//GEN-END:variables
 }

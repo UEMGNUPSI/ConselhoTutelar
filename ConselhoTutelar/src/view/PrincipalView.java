@@ -11,10 +11,14 @@ public class PrincipalView extends javax.swing.JFrame {
     
     public PrincipalView(ConselheiroM conselheiro) {
         
-        initComponents();
+                initComponents();
         this.setVisible(true);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        
     }
+    
+   
 
     
     @SuppressWarnings("unchecked")

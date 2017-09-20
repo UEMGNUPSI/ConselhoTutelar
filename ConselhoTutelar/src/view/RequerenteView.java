@@ -37,17 +37,17 @@ public class RequerenteView extends javax.swing.JFrame {
         txtCelular = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxEstadoCivil = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtObs = new javax.swing.JTextArea();
         btnNovo = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblRequerente = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -61,35 +61,57 @@ public class RequerenteView extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações"));
 
+        txtId.setEnabled(false);
+
+        txtNome.setEnabled(false);
+
         jLabel1.setText("Id:");
 
         jLabel2.setText("Nome:");
+
+        txtNascimento.setEnabled(false);
 
         jLabel7.setText("Nascimento:");
 
         jLabel8.setText("Endereço:");
 
+        txtEndereco.setEnabled(false);
+
+        txtBairro.setEnabled(false);
+
         jLabel9.setText("Bairro:");
 
+        txtCidade.setEnabled(false);
+
         jLabel10.setText("Cidade:");
+
+        txtEstado.setEnabled(false);
 
         jLabel11.setText("Estado:");
 
         jLabel12.setText("Tel 1:");
 
+        txtTel1.setEnabled(false);
+
+        txtTel2.setEnabled(false);
+
         jLabel13.setText("Tel 2:");
+
+        txtCelular.setEnabled(false);
 
         jLabel14.setText("Celular:");
 
         jLabel15.setText("Estado cívil:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro(a)", "Casado(a)", "Viúvo(a)", "Divorciado(a)" }));
+        cbxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro(a)", "Casado(a)", "Viúvo(a)", "Divorciado(a)" }));
+        cbxEstadoCivil.setEnabled(false);
 
         jLabel4.setText("Observação:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtObs.setColumns(20);
+        txtObs.setRows(5);
+        txtObs.setEnabled(false);
+        jScrollPane2.setViewportView(txtObs);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,7 +123,7 @@ public class RequerenteView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cbxEstadoCivil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,22 +152,21 @@ public class RequerenteView extends javax.swing.JFrame {
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel7))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
-                                .addComponent(txtNascimento)
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane2))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                            .addComponent(txtNascimento)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,7 +186,7 @@ public class RequerenteView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -203,14 +224,18 @@ public class RequerenteView extends javax.swing.JFrame {
         btnNovo.setText("Novo");
 
         btnSalvar.setText("Salvar");
+        btnSalvar.setEnabled(false);
 
         btnAlterar.setText("Alterar");
+        btnAlterar.setEnabled(false);
 
         btnExcluir.setText("Excluir");
+        btnExcluir.setEnabled(false);
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setEnabled(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblRequerente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -221,7 +246,8 @@ public class RequerenteView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblRequerente.setEnabled(false);
+        jScrollPane1.setViewportView(tblRequerente);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Busca"));
 
@@ -323,7 +349,73 @@ public class RequerenteView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
- 
+        public void ativaCampos(){
+        txtNome.setEnabled(true);
+        txtNascimento.setEnabled(true);
+        cbxEstadoCivil.setEnabled(true);
+        txtEndereco.setEnabled(true);
+        txtCelular.setEnabled(true);
+        txtBairro.setEnabled(true);
+        txtCidade.setEnabled(true);
+        txtEstado.setEnabled(true);
+        txtTel1.setEnabled(true);
+        txtTel2.setEnabled(true);
+        txtCelular.setEnabled(true);
+        txtObs.setEnabled(true);            
+        }
+        
+         public void desativaCampos(){
+        txtNome.setEnabled(false);
+        txtNascimento.setEnabled(false);
+        cbxEstadoCivil.setEnabled(false);
+        txtEndereco.setEnabled(false);
+        txtCelular.setEnabled(false);
+        txtBairro.setEnabled(false);
+        txtCidade.setEnabled(false);
+        txtEstado.setEnabled(false);
+        txtTel1.setEnabled(false);
+        txtTel2.setEnabled(false);
+        txtCelular.setEnabled(false);
+        txtObs.setEnabled(false);            
+        }
+         
+         public void prepararNovo() {
+       btnNovo.setEnabled(false);
+       btnSalvar.setEnabled(true);
+       btnCancelar.setEnabled(true);
+       tblRequerente.setEnabled(false);
+       tblRequerente.clearSelection();
+         }
+   
+        public void prepararSalvareCancelar() {
+       btnNovo.setEnabled(true);
+       btnSalvar.setEnabled(false);
+       btnCancelar.setEnabled(false);
+       tblRequerente.setEnabled(true);
+         }
+   
+         public void prepararSelecaoTabela(){
+       btnNovo.setEnabled(true);
+       btnExcluir.setEnabled(true);
+       btnAlterar.setEnabled(true);
+         }
+   
+         public void prepararAlterar(){
+       btnNovo.setEnabled(false);
+       btnExcluir.setEnabled(false);
+       btnAlterar.setEnabled(false);
+       btnSalvar.setEnabled(true);
+       btnCancelar.setEnabled(true);
+       tblRequerente.setEnabled(false);
+       tblRequerente.clearSelection();
+         }
+   
+        public void prepararExcluir(){
+       btnExcluir.setEnabled(false);
+       btnAlterar.setEnabled(false);
+        }
+     
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
@@ -332,8 +424,8 @@ public class RequerenteView extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cbxEstadoCivil;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -352,8 +444,7 @@ public class RequerenteView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTable tblRequerente;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtBusca;
     private javax.swing.JTextField txtCelular;
@@ -363,6 +454,7 @@ public class RequerenteView extends javax.swing.JFrame {
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNascimento;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextArea txtObs;
     private javax.swing.JTextField txtTel1;
     private javax.swing.JTextField txtTel2;
     // End of variables declaration//GEN-END:variables
