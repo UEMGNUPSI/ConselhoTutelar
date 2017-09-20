@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
-
 import MODEL.ConselheiroM;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +7,7 @@ import java.sql.SQLException;
 
 public class ConselheiroDAO {
     
-        static public ConselheiroM valida(String user, String senha) throws SQLException{
+    static public ConselheiroM Valida(String user, String senha) throws SQLException{
         PreparedStatement pst;
         String sql;
            sql = "select * from Conselheiro where Login = ? and Senha = ?";
@@ -36,7 +30,7 @@ public class ConselheiroDAO {
     }
         
         
-        static public void salvar (ConselheiroM conselheiro) throws SQLException{
+    static public void Salvar (ConselheiroM conselheiro) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "insert into Conselheiro values (?,?,?,?,?,?)";
@@ -51,7 +45,7 @@ public class ConselheiroDAO {
         pst.close();
     }
         
-          static public void excluir(ConselheiroM conselheiro) throws SQLException{
+    static public void Excluir(ConselheiroM conselheiro) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "delete from Conselheiro where ID = ?";
@@ -61,7 +55,7 @@ public class ConselheiroDAO {
         pst.close();
     }
           
-             static public void alterar(ConselheiroM conselheiro) throws SQLException{
+    static public void Alterar(ConselheiroM conselheiro) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "update Conselheiro set "
@@ -79,8 +73,8 @@ public class ConselheiroDAO {
         pst.setString(4, conselheiro.getLogin());
         pst.setString(5, conselheiro.getSenha());  
         pst.setInt(6, conselheiro.getId());
-         pst.execute();
-         pst.close();
+        pst.execute();
+        pst.close();
      }
     
         

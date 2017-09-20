@@ -1,4 +1,3 @@
-
 package dao;
 
 import MODEL.RequerenteM;
@@ -8,7 +7,7 @@ import java.sql.SQLException;
 
 public class RequerenteDAO {
     
-       static public void salvar (RequerenteM requerente) throws SQLException{
+    static public void Salvar (RequerenteM requerente) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "insert into Requerente values (?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -29,7 +28,7 @@ public class RequerenteDAO {
         pst.close();
     }
        
-       static public void excluir(RequerenteM requerente) throws SQLException{
+    static public void Excluir(RequerenteM requerente) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "delete from Requerente where ID = ?";
@@ -39,7 +38,7 @@ public class RequerenteDAO {
         pst.close();
     }       
         
-             static public void alterar(RequerenteM requerente) throws SQLException{
+    static public void Alterar(RequerenteM requerente) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "update Requerente set "
@@ -53,7 +52,7 @@ public class RequerenteDAO {
                  + "Cidade  = ?, "
                  + "Estado  = ?, "
                  + "EstadoCivil  = ?, "
-                 + "Observação  = ?, "
+                 + "Observacao  = ?, "
                 
                  + "where ID = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
@@ -69,8 +68,8 @@ public class RequerenteDAO {
         pst.setString(10, requerente.getEstadoCivil());  
         pst.setString(11, requerente.getObservação());   
         pst.setInt(12, requerente.getId());
-         pst.execute();
-         pst.close();
+        pst.execute();
+        pst.close();
      }
     
 }

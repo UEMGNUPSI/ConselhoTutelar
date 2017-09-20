@@ -1,6 +1,4 @@
-
 package dao;
-
 import MODEL.DireitosM;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -8,7 +6,7 @@ import java.sql.SQLException;
 
 public class DireitosDAO {
     
-            static public void salvar (DireitosM direitos) throws SQLException{
+    static public void Salvar (DireitosM direitos) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "insert into Direitos values (?,?,?)";
@@ -20,7 +18,7 @@ public class DireitosDAO {
         pst.close();
     }
             
-            static public void excluir(DireitosM direitos) throws SQLException{
+    static public void Excluir(DireitosM direitos) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "delete from Direitos where ID = ?";
@@ -30,20 +28,20 @@ public class DireitosDAO {
         pst.close();
     }
         
-            static public void alterar(DireitosM direitos) throws SQLException{
+    static public void Alterar(DireitosM direitos) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "update Direitos set "
                  + "Numero = ?, "
-                 + "Descrição = ?, "
+                 + "Descricao = ?, "
                       
                  + "where ID = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setString(1, direitos.getNumero());
         pst.setString(2, direitos.getDescrição());  
         pst.setInt(3, direitos.getId());
-         pst.execute();
-         pst.close();
+        pst.execute();
+        pst.close();
      }
             
     
