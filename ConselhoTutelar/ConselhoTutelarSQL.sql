@@ -21,7 +21,7 @@ USE `ConselhoTutelar` ;
 -- Table `ConselhoTutelar`.`Conselheiro`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Conselheiro` (
-  `ID` INT NOT NULL,
+  `ID` INT NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(50) NULL,
   `Telefone` VARCHAR(15) NULL,
   `Celular` VARCHAR(15) NULL,
@@ -35,7 +35,7 @@ ENGINE = InnoDB;
 -- Table `ConselhoTutelar`.`Direitos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Direitos` (
-  `ID` INT NOT NULL,
+  `ID` INT NOT NULL AUTO_INCREMENT,
   `Numero` VARCHAR(10) NULL,
   `Descrição` VARCHAR(100) NULL,
   PRIMARY KEY (`ID`))
@@ -66,3 +66,5 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+insert into Conselheiro values(null,"root","telefone","celular","root","root");

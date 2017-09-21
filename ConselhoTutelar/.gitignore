@@ -1,1 +1,6 @@
 /ConselhoTutelar/nbproject/private/
+/ConselhoTutelar/build/
+/dist/
+/ConselhoTutelar/*.class
+/ConselhoTutelar/private.properties
+/ConselhoTutelar/private.xlm
