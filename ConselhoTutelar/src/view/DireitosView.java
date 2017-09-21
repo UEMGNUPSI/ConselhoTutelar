@@ -19,6 +19,8 @@ public class DireitosView extends javax.swing.JInternalFrame {
     List<DireitosM> listaDireitos;
     public DireitosView() {
         initComponents();
+        this.setVisible(true);
+        atualizaTabelaDireitos();
         listaDireitos = new ArrayList<>();
     }
 
@@ -47,6 +49,8 @@ public class DireitosView extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDireitos = new javax.swing.JTable();
         btnSalvar = new javax.swing.JButton();
+
+        setClosable(true);
 
         btnAlterar.setText("Alterar");
         btnAlterar.setEnabled(false);
@@ -238,7 +242,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -312,7 +316,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     
-    public void atualizaTabelaRequerente(){
+    public void atualizaTabelaDireitos(){
         
         direitos = new DireitosM();
         try {

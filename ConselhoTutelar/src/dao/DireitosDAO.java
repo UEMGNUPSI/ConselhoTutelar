@@ -51,7 +51,7 @@ public class DireitosDAO {
         List<DireitosM> listaTodos;
         listaTodos = new ArrayList<>();
 
-        String sql = "select * from Direitos order by nome";
+        String sql = "select * from Direitos order by ID";
         PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
 

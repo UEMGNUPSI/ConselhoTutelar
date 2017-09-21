@@ -17,6 +17,7 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
     List<ConselheiroM> listaconselheiro;
     public ConselheiroView() {
         initComponents();
+        this.setVisible(true);
         listaconselheiro = new ArrayList<>();
         
         txtId.setVisible(false);
@@ -52,6 +53,8 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         txtLogin = new javax.swing.JTextField();
         txtSenha = new javax.swing.JPasswordField();
+
+        setClosable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações Pessoais"));
 
@@ -277,7 +280,7 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 580, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
