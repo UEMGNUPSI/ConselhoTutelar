@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class RequerenteView extends javax.swing.JInternalFrame {
 
@@ -467,7 +470,72 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         desativaCampos();
         cbxFiltro.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
+    
+    public void atualizaTabelaRequerente(){
+        
+        requerente = new RequerenteM();
+        try {
+            listaRequerente = requerentedao.ListaTodos();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+        
+        String dados[][] = new String[listaRequerente.size()][2];
+            int i = 0;
+            for (RequerenteM setor : listaRequerente) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNome();
+                dados[i][2] = setor.getNascimento();
+                dados[i][3] = setor.getTelefone1();
+                dados[i][4] = setor.getTelefone2();
+                dados[i][5] = setor.getCelular();
+                dados[i][6] = setor.getEndereço();
+                dados[i][7] = setor.getNumero();
+                dados[i][8] = setor.getBairro();
+                dados[i][9] = setor.getCidade();
+                dados[i][10] = setor.getEstado();
+                dados[i][11] = setor.getEstadoCivil();
+                dados[i][12] = setor.getObservação();
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Nome", "Nascimento", "Tel 1", "Tel 2", "Celular", "Endereço", "Numero", "Bairro", "Cidade", "Estado", "Estado Cívil", "Observação"};
+            DefaultTableModel tabelaSetor = new DefaultTableModel();
+            tabelaSetor.setDataVector(dados, tituloColuna);
+            tblRequerente.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false
+                };
 
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblRequerente.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblRequerente.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblRequerente.getColumnModel().getColumn(2).setPreferredWidth(15);
+            tblRequerente.getColumnModel().getColumn(3).setPreferredWidth(15);
+            tblRequerente.getColumnModel().getColumn(4).setPreferredWidth(15);
+            tblRequerente.getColumnModel().getColumn(5).setPreferredWidth(15);
+            tblRequerente.getColumnModel().getColumn(6).setPreferredWidth(15);
+            tblRequerente.getColumnModel().getColumn(7).setPreferredWidth(15);
+            tblRequerente.getColumnModel().getColumn(8).setPreferredWidth(15);
+            tblRequerente.getColumnModel().getColumn(9).setPreferredWidth(15);
+            tblRequerente.getColumnModel().getColumn(10).setPreferredWidth(15);
+            tblRequerente.getColumnModel().getColumn(11).setPreferredWidth(15);
+            tblRequerente.getColumnModel().getColumn(12).setPreferredWidth(15);
+            
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblRequerente.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblRequerente.setRowHeight(25);
+            tblRequerente.updateUI();
+        
+                
+    }
+    
+    
     public void limparCampos(){
         txtNome.setText("");
         txtNascimento.setText("");

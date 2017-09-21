@@ -1,11 +1,15 @@
 package view;
 
 import MODEL.DireitosM;
+import MODEL.RequerenteM;
 import dao.DireitosDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 
 public class DireitosView extends javax.swing.JInternalFrame {
@@ -307,6 +311,55 @@ public class DireitosView extends javax.swing.JInternalFrame {
         cbxFiltro.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    
+    public void atualizaTabelaRequerente(){
+        
+        direitos = new DireitosM();
+        try {
+            listaDireitos = direitosdao.ListaTodos();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+        
+        String dados[][] = new String[listaDireitos.size()][2];
+            int i = 0;
+            for (DireitosM setor : listaDireitos) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNumero();
+                dados[i][2] = setor.getDescrição();
+                
+               
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Número", "Descrição"};
+            DefaultTableModel tabelaSetor = new DefaultTableModel();
+            tabelaSetor.setDataVector(dados, tituloColuna);
+            tblDireitos.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblDireitos.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblDireitos.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblDireitos.getColumnModel().getColumn(2).setPreferredWidth(15);
+      
+            
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblDireitos.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblDireitos.setRowHeight(25);
+            tblDireitos.updateUI();
+        
+                
+    }
+    
+    
     public void limparCampos(){
         txtId.setText("");
         txtArtigo.setText("");

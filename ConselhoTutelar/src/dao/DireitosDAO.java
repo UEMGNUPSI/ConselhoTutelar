@@ -1,7 +1,10 @@
 package dao;
 import MODEL.DireitosM;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DireitosDAO {
@@ -44,5 +47,21 @@ public class DireitosDAO {
         pst.close();
      }
             
-    
-}
+    public List<DireitosM> ListaTodos() throws SQLException{ 
+        List<DireitosM> listaTodos;
+        listaTodos = new ArrayList<>();
+
+        String sql = "select * from Direitos order by nome";
+        PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+      while (rs.next()){
+        listaTodos.add(new DireitosM(rs.getInt("ID"), 
+                                   rs.getString("Numero"),
+                                   rs.getString("Descricao")));
+                                   
+          }
+     pst.close();
+     return listaTodos;
+    }
+}   

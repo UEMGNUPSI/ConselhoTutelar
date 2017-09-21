@@ -2,7 +2,10 @@ package dao;
 
 import MODEL.RequerenteM;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RequerenteDAO {
@@ -75,4 +78,31 @@ public class RequerenteDAO {
         pst.close();
      }
     
+    public List<RequerenteM> ListaTodos() throws SQLException{ 
+    List<RequerenteM> listaTodos;
+    listaTodos = new ArrayList<>();
+
+        String sql = "select * from Requerente order by nome";
+        PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
+    ResultSet rs = pst.executeQuery();
+
+    while (rs.next()){
+        listaTodos.add(new RequerenteM(rs.getInt("ID"), 
+                                   rs.getString("Nome"),
+                                   rs.getString("Nascimento"),
+                                   rs.getString("Telefone1"),
+                                   rs.getString("Telefone2"),
+                                   rs.getString("Celular"),
+                                   rs.getString("Endereço"),
+                                   rs.getString("Numero"),
+                                   rs.getString("Bairro"),
+                                   rs.getString("Cidade"),
+                                   rs.getString("Estado"),
+                                   rs.getString("EstadoCivil"),
+                                   rs.getString("Observação")));
+          }
+    pst.close();
+    return listaTodos;
+    }
+
 }
