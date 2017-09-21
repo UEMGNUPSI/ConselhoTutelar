@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 
@@ -21,6 +24,7 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
         listaconselheiro = new ArrayList<>();
         
         txtId.setVisible(false);
+        AtualizaTabelaConselheiro();
     }
 
 
@@ -44,7 +48,6 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
         btnNovo = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        cbxFiltro = new javax.swing.JComboBox<>();
         txtBusca = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
@@ -148,6 +151,11 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
         btnExcluir.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         btnAlterar.setText("Alterar");
@@ -178,10 +186,7 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Busca"));
 
         jLabel7.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
-        jLabel7.setText("Filtro:");
-
-        cbxFiltro.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
-        cbxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel7.setText("Nome:");
 
         txtBusca.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
 
@@ -204,10 +209,8 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLimpar)
@@ -218,7 +221,6 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(cbxFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
                     .addComponent(btnLimpar))
@@ -355,7 +357,7 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
             catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
             }
-        //atualizarTabela();
+        AtualizaTabelaConselheiro();
         prepararSalvareCancelar();
         desativaCampos();
         limparCampos();
@@ -376,7 +378,7 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
             }
         }
-       //atualizarTabela();
+       AtualizaTabelaConselheiro();
        prepararSalvareCancelar();
        desativaCampos();
        
@@ -392,9 +394,78 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
         limparCampos();
         prepararSalvareCancelar();
         desativaCampos();
-        cbxFiltro.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+       if (txtId.getText().isEmpty()){
+           JOptionPane.showMessageDialog(null, "Selecione um Conselheiro!");
+       }
+       else {
+           conselheiro.setId(Integer.parseInt(txtId.getText()));
+           int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: " + txtNome.getText());
+           if (confirma == 0){
+               try{
+                   conselheirodao.Excluir(conselheiro);
+                   limparCampos();
+                   txtNome.requestFocusInWindow();
+               }
+               catch (SQLException ex){
+                   JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+               }
+               AtualizaTabelaConselheiro();
+               prepararExcluir();
+           }
+       }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    public void AtualizaTabelaConselheiro(){
+        
+        conselheiro = new ConselheiroM();
+        try {
+            listaconselheiro = conselheirodao.ListaTodos();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+        
+        String dados[][] = new String[listaconselheiro.size()][5];
+            int i = 0;
+            for (ConselheiroM setor : listaconselheiro) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNome();
+                dados[i][2] = setor.getTelefone();
+                dados[i][3] = setor.getCelular();
+                dados[i][4] = setor.getLogin();
+
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Nome", "Telefone", "Celular", "Login"};
+            DefaultTableModel tabelaConselheiro = new DefaultTableModel();
+            tabelaConselheiro.setDataVector(dados, tituloColuna);
+            tblConselheiro.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false,false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblConselheiro.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblConselheiro.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblConselheiro.getColumnModel().getColumn(2).setPreferredWidth(15);
+      
+            
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblConselheiro.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblConselheiro.setRowHeight(25);
+            tblConselheiro.updateUI();
+        
+                
+    }
+    
      //Mascara que formata para regularizar como é inserido o telefone
     public static DefaultFormatterFactory setFormatoTelefone(){  
         MaskFormatter comFoco = null;  
@@ -489,7 +560,6 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> cbxFiltro;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

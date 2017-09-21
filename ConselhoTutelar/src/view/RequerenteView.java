@@ -5,10 +5,16 @@ import dao.RequerenteDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 public class RequerenteView extends javax.swing.JInternalFrame {
 
@@ -18,8 +24,13 @@ public class RequerenteView extends javax.swing.JInternalFrame {
     public RequerenteView() {
         initComponents();
         this.setVisible(true);
-        atualizaTabelaRequerente();
         listaRequerente = new ArrayList<>();
+        AtualizaTabelaRequerente();
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(RequerenteView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 
@@ -94,6 +105,11 @@ public class RequerenteView extends javax.swing.JInternalFrame {
 
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.setEnabled(false);
@@ -412,7 +428,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
             }
-        //atualizarTabela();
+        AtualizaTabelaRequerente();
         prepararSalvareCancelar();
         desativaCampos();
         limparCampos();
@@ -440,7 +456,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
             }
         }
-       //atualizarTabela();
+       AtualizaTabelaRequerente();
        prepararSalvareCancelar();
        desativaCampos();
        
@@ -462,8 +478,30 @@ public class RequerenteView extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+       if (txtId.getText().isEmpty()){
+           JOptionPane.showMessageDialog(null, "Selecione um Requerente!");
+       }
+       else {
+           requerente.setId(Integer.parseInt(txtId.getText()));
+           int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: " + txtNome.getText());
+           if (confirma == 0){
+               try{
+                   requerentedao.Excluir(requerente);
+                   limparCampos();
+                   txtNome.requestFocusInWindow();
+               }
+               catch (SQLException ex){
+                   JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+               }
+               AtualizaTabelaRequerente();
+               prepararExcluir();
+           }
+       }
+    }//GEN-LAST:event_btnExcluirActionPerformed
     
-    public void atualizaTabelaRequerente(){
+    public void AtualizaTabelaRequerente(){
         
         requerente = new RequerenteM();
         try {
@@ -472,7 +510,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
         }
         
-        String dados[][] = new String[listaRequerente.size()][2];
+        String dados[][] = new String[listaRequerente.size()][13];
             int i = 0;
             for (RequerenteM setor : listaRequerente) {
                 dados[i][0] = String.valueOf(setor.getId());
@@ -491,11 +529,11 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                 i++;
             }
            String tituloColuna[] = {"ID", "Nome", "Nascimento", "Tel 1", "Tel 2", "Celular", "Endereço", "Numero", "Bairro", "Cidade", "Estado", "Estado Cívil", "Observação"};
-            DefaultTableModel tabelaSetor = new DefaultTableModel();
-            tabelaSetor.setDataVector(dados, tituloColuna);
+            DefaultTableModel tabelaRequerente = new DefaultTableModel();
+            tabelaRequerente.setDataVector(dados, tituloColuna);
             tblRequerente.setModel(new DefaultTableModel(dados, tituloColuna) {
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false
+                    false, false, false, false,false, false, false, false,false, false, false, false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -525,6 +563,32 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             tblRequerente.updateUI();
         
                 
+    }
+    
+         //Mascara que formata para regularizar como é inserido o telefone
+    public static DefaultFormatterFactory setFormatoTelefone(){  
+        MaskFormatter comFoco = null;  
+        try   
+        {   
+            comFoco = new MaskFormatter("(##)####-####"); 
+            comFoco.setPlaceholderCharacter('_');
+        }   
+        catch (Exception pe) { }  
+        DefaultFormatterFactory factory = new DefaultFormatterFactory(comFoco, comFoco);  
+        return factory;  
+    }
+    
+    //Mascara que formata para regularizar como é inserido o celular
+    public static DefaultFormatterFactory setFormatoCelular(){  
+        MaskFormatter comFoco = null;  
+        try   
+        {   
+            comFoco = new MaskFormatter("(##)9####-####"); 
+            comFoco.setPlaceholderCharacter('_');
+        }   
+        catch (Exception pe) { }  
+        DefaultFormatterFactory factory = new DefaultFormatterFactory(comFoco, comFoco);  
+        return factory;  
     }
     
     

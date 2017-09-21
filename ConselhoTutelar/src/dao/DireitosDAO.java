@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DireitosDAO {
     
-    static public void Salvar (DireitosM direitos) throws SQLException{
+    public void Salvar (DireitosM direitos) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "insert into Direitos values (?,?,?)";
@@ -21,7 +21,7 @@ public class DireitosDAO {
         pst.close();
     }
             
-    static public void Excluir(DireitosM direitos) throws SQLException{
+    public void Excluir(DireitosM direitos) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "delete from Direitos where ID = ?";
@@ -31,7 +31,7 @@ public class DireitosDAO {
         pst.close();
     }
         
-    static public void Alterar(DireitosM direitos) throws SQLException{
+    public void Alterar(DireitosM direitos) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "update Direitos set "

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RequerenteDAO {
     
-    static public void Salvar (RequerenteM requerente) throws SQLException{
+    public void Salvar (RequerenteM requerente) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "insert into Requerente values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -32,7 +32,7 @@ public class RequerenteDAO {
         pst.close();
     }
        
-    static public void Excluir(RequerenteM requerente) throws SQLException{
+    public void Excluir(RequerenteM requerente) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "delete from Requerente where ID = ?";
@@ -42,7 +42,7 @@ public class RequerenteDAO {
         pst.close();
     }       
         
-    static public void Alterar(RequerenteM requerente) throws SQLException{
+    public void Alterar(RequerenteM requerente) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "update Requerente set "

@@ -3,11 +3,13 @@ import MODEL.ConselheiroM;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ConselheiroDAO {
     
-    static public ConselheiroM Valida(String user, String senha) throws SQLException{
+    public ConselheiroM Valida(String user, String senha) throws SQLException{
         PreparedStatement pst;
         String sql;
            sql = "select * from Conselheiro where Login = ? and Senha = ?";
@@ -30,7 +32,7 @@ public class ConselheiroDAO {
     }
         
         
-    static public void Salvar (ConselheiroM conselheiro) throws SQLException{
+    public void Salvar (ConselheiroM conselheiro) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "insert into Conselheiro values (?,?,?,?,?,?)";
@@ -45,7 +47,7 @@ public class ConselheiroDAO {
         pst.close();
     }
         
-    static public void Excluir(ConselheiroM conselheiro) throws SQLException{
+    public void Excluir(ConselheiroM conselheiro) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "delete from Conselheiro where ID = ?";
@@ -55,7 +57,7 @@ public class ConselheiroDAO {
         pst.close();
     }
           
-    static public void Alterar(ConselheiroM conselheiro) throws SQLException{
+    public void Alterar(ConselheiroM conselheiro) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "update Conselheiro set "
@@ -77,6 +79,26 @@ public class ConselheiroDAO {
         pst.close();
      }
     
+    public List<ConselheiroM> ListaTodos() throws SQLException{ 
+        List<ConselheiroM> listaTodos;
+        listaTodos = new ArrayList<>();
+
+        String sql = "select * from Conselheiro order by Nome";
+        PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+    while (rs.next()){
+        listaTodos.add(new ConselheiroM(rs.getInt("ID"), 
+                                   rs.getString("Nome"),
+                                   rs.getString("Telefone"),
+                                   rs.getString("Celular"),
+                                   rs.getString("Login"),
+                                   rs.getString("Senha")));
+                                   
+          }
+    pst.close();
+    return listaTodos;
+    }
         
     
 }

@@ -20,8 +20,8 @@ public class DireitosView extends javax.swing.JInternalFrame {
     public DireitosView() {
         initComponents();
         this.setVisible(true);
-        atualizaTabelaDireitos();
         listaDireitos = new ArrayList<>();
+        AtualizaTabelaDireitos();
     }
 
     
@@ -118,6 +118,11 @@ public class DireitosView extends javax.swing.JInternalFrame {
 
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.setEnabled(false);
@@ -279,7 +284,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
             catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
             }
-        //atualizarTabela();
+        AtualizaTabelaDireitos();
         prepararSalvareCancelar();
         desativaCampos();
         limparCampos();
@@ -297,7 +302,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
             }
         }
-       //atualizarTabela();
+       AtualizaTabelaDireitos();
        prepararSalvareCancelar();
        desativaCampos();
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -315,8 +320,30 @@ public class DireitosView extends javax.swing.JInternalFrame {
         cbxFiltro.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+       if (txtId.getText().isEmpty()){
+           JOptionPane.showMessageDialog(null, "Selecione um Direito!");
+       }
+       else {
+           direitos.setId(Integer.parseInt(txtId.getText()));
+           int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: " + txtDescricao.getText());
+           if (confirma == 0){
+               try{
+                   direitosdao.Excluir(direitos);
+                   limparCampos();
+                   txtDescricao.requestFocusInWindow();
+               }
+               catch (SQLException ex){
+                   JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+               }
+               AtualizaTabelaDireitos();
+               prepararExcluir();
+           }
+       }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
     
-    public void atualizaTabelaDireitos(){
+    public void AtualizaTabelaDireitos(){
         
         direitos = new DireitosM();
         try {
@@ -325,7 +352,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
         }
         
-        String dados[][] = new String[listaDireitos.size()][2];
+        String dados[][] = new String[listaDireitos.size()][3];
             int i = 0;
             for (DireitosM setor : listaDireitos) {
                 dados[i][0] = String.valueOf(setor.getId());
@@ -336,11 +363,11 @@ public class DireitosView extends javax.swing.JInternalFrame {
                 i++;
             }
            String tituloColuna[] = {"ID", "Número", "Descrição"};
-            DefaultTableModel tabelaSetor = new DefaultTableModel();
-            tabelaSetor.setDataVector(dados, tituloColuna);
+            DefaultTableModel tabelaDireitos = new DefaultTableModel();
+            tabelaDireitos.setDataVector(dados, tituloColuna);
             tblDireitos.setModel(new DefaultTableModel(dados, tituloColuna) {
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false
+                    false, false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
