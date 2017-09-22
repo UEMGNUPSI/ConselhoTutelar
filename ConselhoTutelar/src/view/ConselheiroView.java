@@ -91,19 +91,21 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                            .addComponent(txtCelular, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(81, 81, 81)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNome)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,6 +148,11 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
             }
         ));
         tblConselheiro.setEnabled(false);
+        tblConselheiro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblConselheiroMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblConselheiro);
 
         btnExcluir.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
@@ -417,6 +424,32 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
            }
        }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void tblConselheiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblConselheiroMouseClicked
+        limparCampos();
+        conselheiro = new ConselheiroM();
+
+        txtId.setText(tblConselheiro.getValueAt(tblConselheiro.getSelectedRow(),0).toString());
+        String integer = txtId.getText();
+        int id = Integer.parseInt(integer);
+        conselheiro.setId(id);
+        
+        try{
+            conselheiro = conselheirodao.busca(id);
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+   
+        tblConselheiro.getTableHeader().setReorderingAllowed(false);
+        txtId.setText(Integer.toString(conselheiro.getId()));
+        txtNome.setText(conselheiro.getNome());
+        txtTelefone.setText(conselheiro.getTelefone());
+        txtCelular.setText(conselheiro.getCelular());
+        txtLogin.setText(conselheiro.getLogin());
+        txtSenha.setText(conselheiro.getSenha());
+        btnAlterar.setEnabled(true);
+        btnExcluir.setEnabled(true);
+    }//GEN-LAST:event_tblConselheiroMouseClicked
 
     public void AtualizaTabelaConselheiro(){
         

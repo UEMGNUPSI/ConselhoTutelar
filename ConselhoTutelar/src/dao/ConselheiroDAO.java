@@ -100,5 +100,27 @@ public class ConselheiroDAO {
     return listaTodos;
     }
         
-    
+    public ConselheiroM busca(int id) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        ConselheiroM conselheiro = null;
+        
+        sql = "select * from Requerente where id = ?";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           conselheiro = new ConselheiroM(
+                   rs.getInt("ID"),
+                   rs.getString("Nome"),
+                   rs.getString("Telefone"),
+                   rs.getString("Celular"),
+                   rs.getString("Login"),
+                   rs.getString("Senha"));
+                   
+        }
+        pst.close();
+        
+        return conselheiro;
+    }
 }

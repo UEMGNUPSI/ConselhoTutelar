@@ -37,7 +37,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Direitos` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Numero` VARCHAR(10) NULL,
-  `Descrição` VARCHAR(100) NULL,
+  `Descricao` VARCHAR(100) NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
@@ -52,13 +52,13 @@ CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Requerente` (
   `Telefone1` VARCHAR(15) NULL,
   `Telefone2` VARCHAR(15) NULL,
   `Celular` VARCHAR(15) NULL,
-  `Endereço` VARCHAR(45) NULL,
+  `Endereco` VARCHAR(45) NULL,
   `Numero` VARCHAR(10) NULL,
   `Bairro` VARCHAR(45) NULL,
   `Cidade` VARCHAR(20) NULL,
   `Estado` VARCHAR(15) NULL,
   `EstadoCivil` VARCHAR(15) NULL,
-  `Observação` VARCHAR(45) NULL,
+  `Observacao` VARCHAR(45) NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 

@@ -64,4 +64,25 @@ public class DireitosDAO {
      pst.close();
      return listaTodos;
     }
+    
+    public DireitosM busca(int id) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        DireitosM direito = null;
+        
+        sql = "select * from Direitos where id = ?";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           direito = new DireitosM(
+                   rs.getInt("ID"),
+                   rs.getString("Numero"),
+                   rs.getString("Descricao"));
+                   
+        }
+        pst.close();
+        
+        return direito;
+    }
 }   

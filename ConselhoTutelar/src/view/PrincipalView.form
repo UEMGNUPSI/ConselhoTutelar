@@ -2,20 +2,25 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
+    <Component class="javax.swing.JMenuItem" name="jMenuItem1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+      </Properties>
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Arquivo"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Trebuchet MS" size="14" style="0"/>
+              <Font name="Trebuchet MS" size="18" style="0"/>
             </Property>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnuRequerente">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="12" style="0"/>
+                  <Font name="Trebuchet MS" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Requerente"/>
               </Properties>
@@ -26,7 +31,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnuConselheiro">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="12" style="0"/>
+                  <Font name="Trebuchet MS" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Conselheiro"/>
               </Properties>
@@ -37,7 +42,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mnuDireitos">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Trebuchet MS" size="12" style="0"/>
+                  <Font name="Trebuchet MS" size="14" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Direitos"/>
               </Properties>
@@ -46,6 +51,17 @@
               </Events>
             </MenuItem>
           </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="mnuSair">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sair"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Trebuchet MS" size="18" style="0"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnuSairMouseClicked"/>
+          </Events>
         </Menu>
       </SubComponents>
     </Menu>

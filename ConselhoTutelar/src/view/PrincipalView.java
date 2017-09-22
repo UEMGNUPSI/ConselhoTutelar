@@ -25,6 +25,7 @@ public class PrincipalView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         pnl = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -33,6 +34,9 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuRequerente = new javax.swing.JMenuItem();
         mnuConselheiro = new javax.swing.JMenuItem();
         mnuDireitos = new javax.swing.JMenuItem();
+        mnuSair = new javax.swing.JMenu();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Conselho Tutelar Frutal");
@@ -59,9 +63,9 @@ public class PrincipalView extends javax.swing.JFrame {
         );
 
         jMenu1.setText("Arquivo");
-        jMenu1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jMenu1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
 
-        mnuRequerente.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        mnuRequerente.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         mnuRequerente.setText("Requerente");
         mnuRequerente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +74,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenu1.add(mnuRequerente);
 
-        mnuConselheiro.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        mnuConselheiro.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         mnuConselheiro.setText("Conselheiro");
         mnuConselheiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +83,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenu1.add(mnuConselheiro);
 
-        mnuDireitos.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        mnuDireitos.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         mnuDireitos.setText("Direitos");
         mnuDireitos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +93,15 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenu1.add(mnuDireitos);
 
         jMenuBar1.add(jMenu1);
+
+        mnuSair.setText("Sair");
+        mnuSair.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        mnuSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuSairMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(mnuSair);
 
         setJMenuBar(jMenuBar1);
 
@@ -134,6 +147,10 @@ public class PrincipalView extends javax.swing.JFrame {
        pnl.updateUI();
     }//GEN-LAST:event_mnuDireitosActionPerformed
 
+    private void mnuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuSairMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_mnuSairMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -144,9 +161,11 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem mnuConselheiro;
     private javax.swing.JMenuItem mnuDireitos;
     private javax.swing.JMenuItem mnuRequerente;
+    private javax.swing.JMenu mnuSair;
     private javax.swing.JPanel pnl;
     // End of variables declaration//GEN-END:variables
 }
