@@ -25,9 +25,18 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         initComponents();
         this.setVisible(true);
         listaRequerente = new ArrayList<>();
+        txtId.setVisible(false);
         AtualizaTabelaRequerente();
+        preencheComboBox();
     }
+    
+    public void preencheComboBox(){
+            cbxEstadoCivil.addItem("Solteiro(a)");
+            cbxEstadoCivil.addItem("Casado(a)");
+            cbxEstadoCivil.addItem("Viúvo(a)");
+            cbxEstadoCivil.addItem("Divorciado(a)");
 
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -48,11 +57,11 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         txtNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtNascimento = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         cbxEstadoCivil = new javax.swing.JComboBox<>();
         txtId = new javax.swing.JTextField();
+        txtNascimento = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         txtEndereco = new javax.swing.JTextField();
@@ -179,16 +188,15 @@ public class RequerenteView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nome:");
 
-        txtNascimento.setEnabled(false);
-
         jLabel7.setText("Nascimento:");
 
         jLabel15.setText("Estado cívil:");
 
-        cbxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Solteiro(a)", "Casado(a)", "Viúvo(a)", "Divorciado(a)" }));
         cbxEstadoCivil.setEnabled(false);
 
         txtId.setEnabled(false);
+
+        txtNascimento.setFormatterFactory(setFormatoNascimento());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -199,20 +207,18 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNome)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(78, 78, 78)
-                                .addComponent(jLabel15))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
-                                .addComponent(cbxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -231,9 +237,9 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11))
+                    .addComponent(cbxEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereços e Telefone"));
@@ -290,16 +296,17 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel12)
-                            .addComponent(txtTel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(txtTel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(txtTel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtTel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
+                            .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -418,15 +425,15 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -435,7 +442,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                         .addComponent(btnExcluir)
                         .addComponent(btnCancelar))
                     .addComponent(btnNovo))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -451,7 +458,6 @@ public class RequerenteView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-    requerente = new RequerenteM();
         if (txtNome.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
             txtNome.requestFocusInWindow();          
@@ -495,7 +501,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             requerente.setBairro(txtBairro.getText());
             requerente.setCidade(txtCidade.getText());
             requerente.setEstado(txtEstado.getText());
-            requerente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedIndex()));
+            requerente.setEstadoCivil("0");
             requerente.setObservação(txtObs.getText());
        
             try{
@@ -505,10 +511,11 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             catch (SQLException ex){
                     JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
             }
+        AtualizaTabelaRequerente();
+        prepararSalvareCancelar();
+        desativaCampos();
         }
-       AtualizaTabelaRequerente();
-       prepararSalvareCancelar();
-       desativaCampos();
+
        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -554,14 +561,9 @@ public class RequerenteView extends javax.swing.JInternalFrame {
     private void tblRequerenteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRequerenteMouseClicked
         limparCampos();
         requerente = new RequerenteM();
-
-        txtId.setText(tblRequerente.getValueAt(tblRequerente.getSelectedRow(),0).toString());
-        String integer = txtId.getText();
-        int id = Integer.parseInt(integer);
-        requerente.setId(id);
         
         try{
-            requerente = requerentedao.busca(id);
+            requerente = requerentedao.busca(Integer.parseInt(tblRequerente.getValueAt(tblRequerente.getSelectedRow(),0).toString()));
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
         }
@@ -657,8 +659,21 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         return factory;  
     }
     
+    public static DefaultFormatterFactory setFormatoNascimento(){  
+        MaskFormatter comFoco = null;  
+        try   
+        {   
+            comFoco = new MaskFormatter("##/##/####"); 
+            comFoco.setPlaceholderCharacter('_');
+        }   
+        catch (Exception pe) { }  
+        DefaultFormatterFactory factory = new DefaultFormatterFactory(comFoco, comFoco);  
+        return factory;  
+    }
+    
     
     public void limparCampos(){
+        txtId.setText("");
         txtNome.setText("");
         txtNascimento.setText("");
         cbxEstadoCivil.setSelectedItem(false);
@@ -775,7 +790,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtNascimento;
+    private javax.swing.JFormattedTextField txtNascimento;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextArea txtObs;

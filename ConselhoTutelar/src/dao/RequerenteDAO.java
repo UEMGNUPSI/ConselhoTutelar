@@ -57,7 +57,7 @@ public class RequerenteDAO {
                  + "Cidade  = ?, "
                  + "Estado  = ?, "
                  + "EstadoCivil  = ?, "
-                 + "Observacao  = ?, "
+                 + "Observacao  = ? "
                 
                  + "where ID = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
@@ -128,7 +128,7 @@ public class RequerenteDAO {
                    rs.getString("Cidade"),
                    rs.getString("Estado"),                   
                    rs.getString("EstadoCivil"),
-                   rs.getString("Obsevacao"));
+                   rs.getString("Observacao"));
                    
         }
         pst.close();

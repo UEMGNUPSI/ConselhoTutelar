@@ -105,7 +105,7 @@ public class ConselheiroDAO {
         String sql;
         ConselheiroM conselheiro = null;
         
-        sql = "select * from Requerente where id = ?";
+        sql = "select * from Conselheiro where id = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1, id);
         ResultSet rs = pst.executeQuery();

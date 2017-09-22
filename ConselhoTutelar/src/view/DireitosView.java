@@ -216,8 +216,8 @@ public class DireitosView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(147, 147, 147)
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(81, 81, 81)
                         .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80)
@@ -341,13 +341,9 @@ public class DireitosView extends javax.swing.JInternalFrame {
         limparCampos();
         direitos = new DireitosM();
 
-        txtId.setText(tblDireitos.getValueAt(tblDireitos.getSelectedRow(),0).toString());
-        String integer = txtId.getText();
-        int id = Integer.parseInt(integer);
-        direitos.setId(id);
         
         try{
-            direitos = direitosdao.busca(id);
+            direitos = direitosdao.busca(Integer.parseInt(tblDireitos.getValueAt(tblDireitos.getSelectedRow(),0).toString()));
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
         }
@@ -410,6 +406,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
     
     
     public void limparCampos(){
+        txtId.setText("");
         txtId.setText("");
         txtArtigo.setText("");
         txtDescricao.setText("");

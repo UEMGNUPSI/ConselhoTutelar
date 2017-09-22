@@ -36,7 +36,7 @@ public class DireitosDAO {
         String sql;
         sql = "update Direitos set "
                  + "Numero = ?, "
-                 + "Descricao = ?, "
+                 + "Descricao = ? "
                       
                  + "where ID = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
