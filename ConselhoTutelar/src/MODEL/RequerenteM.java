@@ -17,13 +17,13 @@ public class RequerenteM {
         private String Telefone1;
         private String Telefone2;
         private String Celular;
-        private String Endereço;
+        private String Endereco;
         private String Numero;
         private String Bairro;
         private String Cidade;
         private String Estado;
         private String EstadoCivil;
-        private String Observação;
+        private String Observacao;
 
     public RequerenteM() {
     }
@@ -35,13 +35,13 @@ public class RequerenteM {
         this.Telefone1 = Telefone1;
         this.Telefone2 = Telefone2;
         this.Celular = Celular;
-        this.Endereço = Endereço;
+        this.Endereco = Endereço;
         this.Numero = Numero;
         this.Bairro = Bairro;
         this.Cidade = Cidade;
         this.Estado = Estado;
         this.EstadoCivil = EstadoCivil;
-        this.Observação = Observação;
+        this.Observacao = Observação;
     }
 
     public int getId() {
@@ -93,11 +93,11 @@ public class RequerenteM {
     }
 
     public String getEndereço() {
-        return Endereço;
+        return Endereco;
     }
 
     public void setEndereço(String Endereço) {
-        this.Endereço = Endereço;
+        this.Endereco = Endereço;
     }
 
     public String getNumero() {
@@ -141,11 +141,11 @@ public class RequerenteM {
     }
 
     public String getObservação() {
-        return Observação;
+        return Observacao;
     }
 
     public void setObservação(String Observação) {
-        this.Observação = Observação;
+        this.Observacao = Observação;
     }
 
     

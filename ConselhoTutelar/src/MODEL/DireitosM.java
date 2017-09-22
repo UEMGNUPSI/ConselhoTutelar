@@ -13,7 +13,7 @@ public class DireitosM {
     
     private int Id;
     private String Numero;
-    private String Descrição;
+    private String Descricao;
 
     public DireitosM() {
     }
@@ -21,7 +21,7 @@ public class DireitosM {
     public DireitosM(int Id, String Numero, String Descrição) {
         this.Id = Id;
         this.Numero = Numero;
-        this.Descrição = Descrição;
+        this.Descricao = Descrição;
     }
 
     public int getId() {
@@ -41,11 +41,11 @@ public class DireitosM {
     }
 
     public String getDescrição() {
-        return Descrição;
+        return Descricao;
     }
 
     public void setDescrição(String Descrição) {
-        this.Descrição = Descrição;
+        this.Descricao = Descrição;
     }
     
 }

@@ -65,7 +65,7 @@ public class ConselheiroDAO {
                  + "Telefone = ?, "
                  + "Celular = ?, "
                  + "Login  = ?, "
-                 + "Senha  = ?, "
+                 + "Senha  = ? "
                       
                  + "where ID = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
