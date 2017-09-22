@@ -51,7 +51,7 @@ public class RequerenteDAO {
                  + "Telefone1 = ?, "
                  + "Telefone2 = ?, "
                  + "Celular  = ?, "
-                 + "Endereço  = ?, "
+                 + "Endereco  = ?, "
                  + "Numero  = ?, "
                  + "Bairro  = ?, "
                  + "Cidade  = ?, "
@@ -82,7 +82,7 @@ public class RequerenteDAO {
     List<RequerenteM> listaTodos;
     listaTodos = new ArrayList<>();
 
-        String sql = "select * from Requerente order by nome";
+        String sql = "select * from Requerente order by Nome";
         PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
     ResultSet rs = pst.executeQuery();
 
@@ -93,13 +93,13 @@ public class RequerenteDAO {
                                    rs.getString("Telefone1"),
                                    rs.getString("Telefone2"),
                                    rs.getString("Celular"),
-                                   rs.getString("Endereço"),
+                                   rs.getString("Endereco"),
                                    rs.getString("Numero"),
                                    rs.getString("Bairro"),
                                    rs.getString("Cidade"),
                                    rs.getString("Estado"),
                                    rs.getString("EstadoCivil"),
-                                   rs.getString("Observação")));
+                                   rs.getString("Observacao")));
           }
     pst.close();
     return listaTodos;
@@ -110,7 +110,7 @@ public class RequerenteDAO {
         String sql;
         RequerenteM requerente = null;
         
-        sql = "select * from Requerente where id = ?";
+        sql = "select * from Requerente where ID = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1, id);
         ResultSet rs = pst.executeQuery();
@@ -118,6 +118,7 @@ public class RequerenteDAO {
            requerente = new RequerenteM(
                    rs.getInt("ID"),
                    rs.getString("Nome"),
+                   rs.getString("Nascimento"),
                    rs.getString("Telefone1"),
                    rs.getString("Telefone2"),
                    rs.getString("Celular"),
@@ -125,8 +126,7 @@ public class RequerenteDAO {
                    rs.getString("Numero"),
                    rs.getString("Bairro"),
                    rs.getString("Cidade"),
-                   rs.getString("Estado"),
-                   rs.getString("email"),
+                   rs.getString("Estado"),                   
                    rs.getString("EstadoCivil"),
                    rs.getString("Obsevacao"));
                    

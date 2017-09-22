@@ -147,7 +147,6 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblConselheiro.setEnabled(false);
         tblConselheiro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblConselheiroMouseClicked(evt);

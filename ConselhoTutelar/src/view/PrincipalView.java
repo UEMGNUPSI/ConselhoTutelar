@@ -56,10 +56,10 @@ public class PrincipalView extends javax.swing.JFrame {
         );
         pnlLayout.setVerticalGroup(
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayout.createSequentialGroup()
-                .addContainerGap(488, Short.MAX_VALUE)
+            .addGroup(pnlLayout.createSequentialGroup()
+                .addGap(193, 193, 193)
                 .addComponent(jLabel2)
-                .addGap(602, 602, 602))
+                .addContainerGap(897, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Arquivo");

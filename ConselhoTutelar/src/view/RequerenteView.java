@@ -127,7 +127,6 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblRequerente.setEnabled(false);
         tblRequerente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblRequerenteMouseClicked(evt);
@@ -617,6 +616,11 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             });
 
             tblRequerente.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblRequerente.getColumnModel().getColumn(1).setPreferredWidth(10);
+            tblRequerente.getColumnModel().getColumn(2).setPreferredWidth(10);
+            tblRequerente.getColumnModel().getColumn(3).setPreferredWidth(10);
+            tblRequerente.getColumnModel().getColumn(4).setPreferredWidth(10);
+            tblRequerente.getColumnModel().getColumn(5).setPreferredWidth(10);
             
 
             DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
@@ -675,6 +679,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         txtEndereco.setEnabled(true);
         txtCelular.setEnabled(true);
         txtBairro.setEnabled(true);
+        txtNumero.setEnabled(true);
         txtCidade.setEnabled(true);
         txtEstado.setEnabled(true);
         txtTel1.setEnabled(true);
@@ -690,6 +695,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         txtEndereco.setEnabled(false);
         txtCelular.setEnabled(false);
         txtBairro.setEnabled(false);
+        txtNumero.setEnabled(false);
         txtCidade.setEnabled(false);
         txtEstado.setEnabled(false);
         txtTel1.setEnabled(false);
