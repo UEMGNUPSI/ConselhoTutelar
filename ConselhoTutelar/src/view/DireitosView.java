@@ -50,6 +50,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
         btnSalvar = new javax.swing.JButton();
 
         setClosable(true);
+        setTitle("Direitos");
 
         btnAlterar.setText("Alterar");
         btnAlterar.setEnabled(false);

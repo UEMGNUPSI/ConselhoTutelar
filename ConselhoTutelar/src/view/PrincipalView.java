@@ -34,38 +34,48 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuRequerente = new javax.swing.JMenuItem();
         mnuConselheiro = new javax.swing.JMenuItem();
         mnuDireitos = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnuSair = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Conselho Tutelar Frutal");
+        setPreferredSize(new java.awt.Dimension(1024, 768));
+        getContentPane().setLayout(null);
 
         jLabel1.setToolTipText("");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 357, 0, 0);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/conslhotutelar.png"))); // NOI18N
-        jLabel2.setLabelFor(pnl);
 
         javax.swing.GroupLayout pnlLayout = new javax.swing.GroupLayout(pnl);
         pnl.setLayout(pnlLayout);
         pnlLayout.setHorizontalGroup(
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayout.createSequentialGroup()
-                .addGap(0, 613, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(478, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(22, 22, 22))
         );
         pnlLayout.setVerticalGroup(
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLayout.createSequentialGroup()
-                .addGap(193, 193, 193)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayout.createSequentialGroup()
+                .addContainerGap(184, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addContainerGap(897, Short.MAX_VALUE))
+                .addGap(77, 77, 77))
         );
 
+        getContentPane().add(pnl);
+        pnl.setBounds(0, 0, 1410, 710);
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/folder-open.png"))); // NOI18N
         jMenu1.setText("Arquivo");
         jMenu1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
 
         mnuRequerente.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        mnuRequerente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/4.png"))); // NOI18N
         mnuRequerente.setText("Requerente");
         mnuRequerente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +85,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenu1.add(mnuRequerente);
 
         mnuConselheiro.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        mnuConselheiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/3.png"))); // NOI18N
         mnuConselheiro.setText("Conselheiro");
         mnuConselheiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +95,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenu1.add(mnuConselheiro);
 
         mnuDireitos.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        mnuDireitos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/1.png"))); // NOI18N
         mnuDireitos.setText("Direitos");
         mnuDireitos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,9 +103,11 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
         jMenu1.add(mnuDireitos);
+        jMenu1.add(jSeparator1);
 
         jMenuBar1.add(jMenu1);
 
+        mnuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/5.png"))); // NOI18N
         mnuSair.setText("Sair");
         mnuSair.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         mnuSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -104,24 +118,6 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenuBar1.add(mnuSair);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(1105, 1105, 1105))
-            .addComponent(pnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
-                .addComponent(jLabel1))
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -162,6 +158,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuItem mnuConselheiro;
     private javax.swing.JMenuItem mnuDireitos;
     private javax.swing.JMenuItem mnuRequerente;

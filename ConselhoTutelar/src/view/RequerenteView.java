@@ -85,6 +85,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setClosable(true);
+        setTitle("Requerente");
 
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -680,6 +681,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         txtEndereco.setText("");
         txtCelular.setText("");
         txtBairro.setText("");
+        txtNumero.setText("");
         txtCidade.setText("");
         txtEstado.setText("");
         txtTel1.setText("");
