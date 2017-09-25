@@ -2,6 +2,9 @@
 package view;
 
 import MODEL.ConselheiroM;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import javax.swing.JFrame;
 
 
@@ -13,6 +16,9 @@ public class PrincipalView extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        URL url = this.getClass().getResource("/view/imagem/kids.png");
+        Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
+        this.setIconImage(imagemTitulo);
     }
     
    
@@ -38,7 +44,7 @@ public class PrincipalView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Conselho Tutelar Frutal");
         setPreferredSize(new java.awt.Dimension(1024, 768));
-        getContentPane().setLayout(new java.awt.GridLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/conslhotutelar.png"))); // NOI18N
