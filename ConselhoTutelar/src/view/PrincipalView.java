@@ -23,9 +23,8 @@ public class PrincipalView extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
-        jLabel1 = new javax.swing.JLabel();
         pnl = new javax.swing.JPanel();
-        LabelLogo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuRequerente = new javax.swing.JMenuItem();
@@ -39,33 +38,25 @@ public class PrincipalView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Conselho Tutelar Frutal");
         setPreferredSize(new java.awt.Dimension(1024, 768));
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new java.awt.GridLayout());
 
-        jLabel1.setToolTipText("");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 357, 0, 0);
-
-        LabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/conslhotutelar.png"))); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/conslhotutelar.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlLayout = new javax.swing.GroupLayout(pnl);
         pnl.setLayout(pnlLayout);
         pnlLayout.setHorizontalGroup(
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayout.createSequentialGroup()
-                .addContainerGap(478, Short.MAX_VALUE)
-                .addComponent(LabelLogo)
-                .addGap(22, 22, 22))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1400, Short.MAX_VALUE)
         );
         pnlLayout.setVerticalGroup(
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayout.createSequentialGroup()
-                .addContainerGap(184, Short.MAX_VALUE)
-                .addComponent(LabelLogo)
-                .addGap(77, 77, 77))
+            .addGroup(pnlLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 40, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnl);
-        pnl.setBounds(0, 0, 1410, 710);
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/folder-open.png"))); // NOI18N
         jMenu1.setText("Arquivo");
@@ -150,7 +141,6 @@ public class PrincipalView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LabelLogo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
