@@ -10,12 +10,9 @@ public class PrincipalView extends javax.swing.JFrame {
     ConselheiroM conselheiroAtivo = new ConselheiroM();
     
     public PrincipalView(ConselheiroM conselheiro) {
-        
-                initComponents();
+        initComponents();
         this.setVisible(true);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-        
     }
     
    
@@ -28,7 +25,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         pnl = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        LabelLogo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuRequerente = new javax.swing.JMenuItem();
@@ -48,7 +45,7 @@ public class PrincipalView extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 357, 0, 0);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/conslhotutelar.png"))); // NOI18N
+        LabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/conslhotutelar.png"))); // NOI18N
 
         javax.swing.GroupLayout pnlLayout = new javax.swing.GroupLayout(pnl);
         pnl.setLayout(pnlLayout);
@@ -56,14 +53,14 @@ public class PrincipalView extends javax.swing.JFrame {
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayout.createSequentialGroup()
                 .addContainerGap(478, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(LabelLogo)
                 .addGap(22, 22, 22))
         );
         pnlLayout.setVerticalGroup(
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLayout.createSequentialGroup()
                 .addContainerGap(184, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(LabelLogo)
                 .addGap(77, 77, 77))
         );
 
@@ -153,8 +150,8 @@ public class PrincipalView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelLogo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;

@@ -52,6 +52,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Direitos");
 
+        btnAlterar.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         btnAlterar.setText("Alterar");
         btnAlterar.setEnabled(false);
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +112,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        btnExcluir.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -119,6 +121,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCancelar.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setEnabled(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -166,6 +169,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
                 .addGap(0, 2, Short.MAX_VALUE))
         );
 
+        btnNovo.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,6 +195,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tblDireitos);
 
+        btnSalvar.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setEnabled(false);
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -219,11 +224,11 @@ public class DireitosView extends javax.swing.JInternalFrame {
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(72, 72, 72)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81)
-                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73)
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
                         .addComponent(btnCancelar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

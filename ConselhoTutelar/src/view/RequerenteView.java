@@ -87,6 +87,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Requerente");
 
+        btnNovo.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +95,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSalvar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.setEnabled(false);
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +104,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             }
         });
 
+        btnAlterar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         btnAlterar.setText("Alterar");
         btnAlterar.setEnabled(false);
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +113,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             }
         });
 
+        btnExcluir.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +122,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setEnabled(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -438,7 +443,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -447,7 +452,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                         .addComponent(btnExcluir)
                         .addComponent(btnCancelar))
                     .addComponent(btnNovo))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
