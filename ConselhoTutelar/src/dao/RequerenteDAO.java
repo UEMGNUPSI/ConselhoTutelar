@@ -79,8 +79,7 @@ public class RequerenteDAO {
      }
     
     public List<RequerenteM> ListaTodos() throws SQLException{ 
-    List<RequerenteM> listaTodos;
-    listaTodos = new ArrayList<>();
+    List<RequerenteM> listaTodos = new ArrayList<>();
 
         String sql = "select * from Requerente order by Nome";
         PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
@@ -136,4 +135,43 @@ public class RequerenteDAO {
         return requerente;
     }
 
+    public List<RequerenteM> FiltroBusca(String Nome) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        List<RequerenteM> ListaBusca = new ArrayList<>();
+        int cont = 0;
+        
+        String name = "%"+Nome+"%";
+        
+        sql = "select * from Requerente where Nome like ? order by nome";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setString(1, name);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           ListaBusca.add(new RequerenteM(
+                   rs.getInt("ID"),
+                   rs.getString("Nome"),
+                   rs.getString("Nascimento"),
+                   rs.getString("Telefone1"),
+                   rs.getString("Telefone2"),
+                   rs.getString("Celular"),
+                   rs.getString("Endereco"),
+                   rs.getString("Numero"),
+                   rs.getString("Bairro"),
+                   rs.getString("Cidade"),
+                   rs.getString("Estado"),                   
+                   rs.getString("EstadoCivil"),
+                   rs.getString("Observacao")));
+                   cont++;
+                   
+        }
+        if(cont == 0){
+            return null;
+        }
+            
+        pst.execute();
+        pst.close();                           
+        
+        return ListaBusca;
+    }
 }

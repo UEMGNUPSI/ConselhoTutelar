@@ -49,7 +49,7 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtBusca = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -197,16 +197,21 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
 
         txtBusca.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
         btnLimpar.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -218,7 +223,7 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLimpar)
                 .addGap(78, 78, 78))
@@ -229,7 +234,7 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(btnBuscar)
                     .addComponent(btnLimpar))
                 .addGap(0, 2, Short.MAX_VALUE))
         );
@@ -330,9 +335,34 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+    listaconselheiro = null;
+        if(txtBusca.getText().equals("") )
+        {
+            JOptionPane.showMessageDialog(null, "Preencha o campo corretamente! ", "erro", JOptionPane.WARNING_MESSAGE);
+            AtualizaTabelaConselheiro();
+        }
+        else
+        {
+            try{
+                
+                listaconselheiro = conselheirodao.FiltroBusca(txtBusca.getText());
+                if(listaconselheiro == null){
+                    
+                    JOptionPane.showMessageDialog(null, "Nenhum contato encontrado!","", JOptionPane.WARNING_MESSAGE);
+                    AtualizaTabelaConselheiro();
+                    
+                }else{
+                    
+                AtualizaTabelaConselheiroBusca();
+                
+                }
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+            }
+            
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
     limparCampos();
@@ -446,9 +476,15 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
         btnExcluir.setEnabled(true);
     }//GEN-LAST:event_tblConselheiroMouseClicked
 
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+    txtBusca.setText("");
+    AtualizaTabelaConselheiro();
+    txtBusca.requestFocusInWindow(); 
+    }//GEN-LAST:event_btnLimparActionPerformed
+
     public void AtualizaTabelaConselheiro(){
-        
         conselheiro = new ConselheiroM();
+        
         try {
             listaconselheiro = conselheirodao.ListaTodos();
         } catch (SQLException ex) {
@@ -490,8 +526,47 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
             tblConselheiro.getColumnModel().getColumn(0).setCellRenderer(centralizado);
             tblConselheiro.setRowHeight(25);
             tblConselheiro.updateUI();
+    }
+    
+    public void AtualizaTabelaConselheiroBusca(){
+        conselheiro = new ConselheiroM();
+
         
-                
+        String dados[][] = new String[listaconselheiro.size()][5];
+            int i = 0;
+            for (ConselheiroM setor : listaconselheiro) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNome();
+                dados[i][2] = setor.getTelefone();
+                dados[i][3] = setor.getCelular();
+                dados[i][4] = setor.getLogin();
+
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Nome", "Telefone", "Celular", "Login"};
+            DefaultTableModel tabelaConselheiro = new DefaultTableModel();
+            tabelaConselheiro.setDataVector(dados, tituloColuna);
+            tblConselheiro.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false,false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblConselheiro.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblConselheiro.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblConselheiro.getColumnModel().getColumn(2).setPreferredWidth(15);
+      
+            
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblConselheiro.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblConselheiro.setRowHeight(25);
+            tblConselheiro.updateUI();  
     }
     
      //Mascara que formata para regularizar como é inserido o telefone
@@ -584,12 +659,12 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

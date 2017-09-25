@@ -42,7 +42,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtBusca = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -134,14 +134,19 @@ public class DireitosView extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Nº do artigo:");
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -153,7 +158,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLimpar)
                 .addGap(20, 20, 20))
@@ -164,7 +169,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(btnBuscar)
                     .addComponent(btnLimpar))
                 .addGap(0, 2, Short.MAX_VALUE))
         );
@@ -339,14 +344,38 @@ public class DireitosView extends javax.swing.JInternalFrame {
        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+    listaDireitos = null;
+        if(txtBusca.getText().equals("") )
+        {
+            JOptionPane.showMessageDialog(null, "Preencha o campo corretamente! ", "erro", JOptionPane.WARNING_MESSAGE);
+            AtualizaTabelaDireitos();
+        }
+        else
+        {
+            try{
+                
+                listaDireitos = direitosdao.FiltroBusca(txtBusca.getText());
+                if(listaDireitos == null){
+                    
+                    JOptionPane.showMessageDialog(null, "Nenhum contato encontrado!","", JOptionPane.WARNING_MESSAGE);
+                    AtualizaTabelaDireitos();
+                    
+                }else{
+                    
+                AtualizaTabelaDireitosBusca();
+                
+                }
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+            }
+            
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tblDireitosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDireitosMouseClicked
         limparCampos();
         direitos = new DireitosM();
-
         
         try{
             direitos = direitosdao.busca(Integer.parseInt(tblDireitos.getValueAt(tblDireitos.getSelectedRow(),0).toString()));
@@ -362,10 +391,16 @@ public class DireitosView extends javax.swing.JInternalFrame {
         btnExcluir.setEnabled(true);
     }//GEN-LAST:event_tblDireitosMouseClicked
 
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+    txtBusca.setText("");
+        AtualizaTabelaDireitos();
+    txtBusca.requestFocusInWindow(); 
+    }//GEN-LAST:event_btnLimparActionPerformed
+
     
     public void AtualizaTabelaDireitos(){
-        
         direitos = new DireitosM();
+        
         try {
             listaDireitos = direitosdao.ListaTodos();
         } catch (SQLException ex) {
@@ -406,8 +441,46 @@ public class DireitosView extends javax.swing.JInternalFrame {
             tblDireitos.getColumnModel().getColumn(0).setCellRenderer(centralizado);
             tblDireitos.setRowHeight(25);
             tblDireitos.updateUI();
+    }
+    
+    public void AtualizaTabelaDireitosBusca(){ 
+        direitos = new DireitosM();
         
+        String dados[][] = new String[listaDireitos.size()][3];
+            int i = 0;
+            for (DireitosM setor : listaDireitos) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNumero();
+                dados[i][2] = setor.getDescrição();
                 
+               
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Número", "Descrição"};
+            DefaultTableModel tabelaDireitos = new DefaultTableModel();
+            tabelaDireitos.setDataVector(dados, tituloColuna);
+            tblDireitos.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblDireitos.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblDireitos.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblDireitos.getColumnModel().getColumn(2).setPreferredWidth(15);
+      
+            
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblDireitos.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblDireitos.setRowHeight(25);
+            tblDireitos.updateUI();
+ 
     }
     
     
@@ -469,12 +542,12 @@ public class DireitosView extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;

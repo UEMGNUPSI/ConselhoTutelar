@@ -85,4 +85,34 @@ public class DireitosDAO {
         
         return direito;
     }
+    
+    public List<DireitosM> FiltroBusca(String Nome) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        List<DireitosM> ListaBusca = new ArrayList<>();
+        int cont = 0;
+        
+        String name = "%"+Nome+"%";
+        
+        sql = "select * from Direitos where Numero like ? order by Numero";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setString(1, name);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           ListaBusca.add(new DireitosM(
+                   rs.getInt("ID"),
+                   rs.getString("Numero"),
+                   rs.getString("Descricao")));
+                   cont++;
+                   
+        }
+        if(cont == 0){
+            return null;
+        }
+            
+        pst.execute();
+        pst.close();                           
+        
+        return ListaBusca;
+    }
 }   

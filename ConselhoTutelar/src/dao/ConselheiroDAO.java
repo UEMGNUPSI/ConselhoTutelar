@@ -123,4 +123,36 @@ public class ConselheiroDAO {
         
         return conselheiro;
     }
+    
+    public List<ConselheiroM> FiltroBusca(String Nome) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        List<ConselheiroM> ListaBusca = new ArrayList<>();
+        int cont = 0;
+        
+        String name = "%"+Nome+"%";
+        
+        sql = "select * from Conselheiro where Nome like ? order by nome";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setString(1, name);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           ListaBusca.add(new ConselheiroM(
+                   rs.getInt("ID"),
+                   rs.getString("Nome"),
+                   rs.getString("Telefone"),
+                   rs.getString("Celular"),
+                   rs.getString("Login"),
+                   rs.getString("Senha")));
+                   cont++;
+        }
+        if(cont == 0){
+            return null;
+        }
+            
+        pst.execute();
+        pst.close();                           
+        
+        return ListaBusca;
+    }
 }
