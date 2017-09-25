@@ -198,6 +198,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         txtId.setEnabled(false);
 
         txtNascimento.setFormatterFactory(setFormatoNascimento());
+        txtNascimento.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -272,10 +273,13 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         jLabel11.setText("Estado:");
 
         txtTel2.setFormatterFactory(setFormatoTelefone());
+        txtTel2.setEnabled(false);
 
         txtTel1.setFormatterFactory(setFormatoTelefone());
+        txtTel1.setEnabled(false);
 
         txtCelular.setFormatterFactory(setFormatoCelular());
+        txtCelular.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
