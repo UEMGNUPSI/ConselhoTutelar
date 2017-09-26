@@ -2,6 +2,9 @@ package view;
 
 import MODEL.RequerenteM;
 import dao.RequerenteDAO;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -615,10 +618,12 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         tblRequerente.getTableHeader().setReorderingAllowed(false);
         txtId.setText(Integer.toString(requerente.getId()));
         txtNome.setText(requerente.getNome());
+        txtNascimento.setText(requerente.getNascimento());
         txtTel1.setText(requerente.getTelefone1());
         txtTel2.setText(requerente.getTelefone2());
         txtCelular.setText(requerente.getCelular());
         txtEndereco.setText(requerente.getEndereço());
+        txtNumero.setText(requerente.getNumero());
         txtBairro.setText(requerente.getBairro());
         txtCidade.setText(requerente.getCidade());
         txtEstado.setText(requerente.getEstado());
@@ -892,4 +897,8 @@ public class RequerenteView extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtTel2;
     private javax.swing.JLabel txtlabelbusca;
     // End of variables declaration//GEN-END:variables
+
+    private void setIconImage(Image imagemTitulo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -24,6 +24,10 @@ public class LoginView extends javax.swing.JFrame {
          initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        URL url = this.getClass().getResource("/view/imagem/kids.png");
+        Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
+        this.setIconImage(imagemTitulo);
+        
         ConselheiroM = new ConselheiroM();
         
         this.txtUsuario.requestFocus();
