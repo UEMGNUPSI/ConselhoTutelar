@@ -213,6 +213,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações"));
 
+        txtNome.setBackground(new java.awt.Color(231, 233, 237));
         txtNome.setEnabled(false);
 
         jLabel2.setText("Nome:");
@@ -225,6 +226,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
 
         txtId.setEnabled(false);
 
+        txtNascimento.setBackground(new java.awt.Color(231, 233, 237));
         txtNascimento.setFormatterFactory(setFormatoNascimento());
         txtNascimento.setEnabled(false);
 
@@ -278,12 +280,15 @@ public class RequerenteView extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Endereço:");
 
+        txtEndereco.setBackground(new java.awt.Color(231, 233, 237));
         txtEndereco.setEnabled(false);
 
         jLabel16.setText("Numero:");
 
+        txtNumero.setBackground(new java.awt.Color(231, 233, 237));
         txtNumero.setEnabled(false);
 
+        txtBairro.setBackground(new java.awt.Color(231, 233, 237));
         txtBairro.setEnabled(false);
 
         jLabel9.setText("Bairro:");
@@ -296,18 +301,23 @@ public class RequerenteView extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Cidade:");
 
+        txtCidade.setBackground(new java.awt.Color(231, 233, 237));
         txtCidade.setEnabled(false);
 
+        txtEstado.setBackground(new java.awt.Color(231, 233, 237));
         txtEstado.setEnabled(false);
 
         jLabel11.setText("Estado:");
 
+        txtTel2.setBackground(new java.awt.Color(231, 233, 237));
         txtTel2.setFormatterFactory(setFormatoTelefone());
         txtTel2.setEnabled(false);
 
+        txtTel1.setBackground(new java.awt.Color(231, 233, 237));
         txtTel1.setFormatterFactory(setFormatoTelefone());
         txtTel1.setEnabled(false);
 
+        txtCelular.setBackground(new java.awt.Color(231, 233, 237));
         txtCelular.setFormatterFactory(setFormatoCelular());
         txtCelular.setEnabled(false);
 
@@ -394,6 +404,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Mais Informação"));
 
+        txtObs.setBackground(new java.awt.Color(231, 233, 237));
         txtObs.setColumns(20);
         txtObs.setRows(5);
         txtObs.setEnabled(false);
@@ -466,7 +477,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                         .addGap(1, 1, 1)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 152, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)

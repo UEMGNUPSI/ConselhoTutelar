@@ -70,6 +70,7 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações Pessoais"));
 
+        txtNome.setBackground(new java.awt.Color(231, 233, 237));
         txtNome.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         txtNome.setEnabled(false);
 
@@ -82,14 +83,17 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         jLabel4.setText("Celular:");
 
+        txtTelefone.setBackground(new java.awt.Color(231, 233, 237));
         txtTelefone.setFormatterFactory(setFormatoTelefone());
         txtTelefone.setEnabled(false);
         txtTelefone.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
 
+        txtCelular.setBackground(new java.awt.Color(231, 233, 237));
         txtCelular.setFormatterFactory(setFormatoCelular());
         txtCelular.setEnabled(false);
         txtCelular.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
 
+        txtId.setBackground(new java.awt.Color(231, 233, 237));
         txtId.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         txtId.setEnabled(false);
 
@@ -255,9 +259,11 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         jLabel6.setText("Senha:");
 
+        txtLogin.setBackground(new java.awt.Color(231, 233, 237));
         txtLogin.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         txtLogin.setEnabled(false);
 
+        txtSenha.setBackground(new java.awt.Color(231, 233, 237));
         txtSenha.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         txtSenha.setEnabled(false);
 

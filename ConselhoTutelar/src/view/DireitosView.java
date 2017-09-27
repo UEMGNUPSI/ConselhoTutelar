@@ -67,12 +67,14 @@ public class DireitosView extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações"));
 
+        txtArtigo.setBackground(new java.awt.Color(231, 233, 237));
         txtArtigo.setEnabled(false);
 
         jLabel2.setText("Nº do artigo:");
 
         jLabel3.setText("Descrição:");
 
+        txtDescricao.setBackground(new java.awt.Color(231, 233, 237));
         txtDescricao.setColumns(20);
         txtDescricao.setRows(5);
         txtDescricao.setEnabled(false);

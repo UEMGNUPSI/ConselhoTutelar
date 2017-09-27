@@ -59,7 +59,7 @@ public class PrincipalView extends javax.swing.JFrame {
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 31, Short.MAX_VALUE))
+                .addGap(0, 42, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnl);
@@ -69,7 +69,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenu1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
 
         mnuRequerente.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        mnuRequerente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/people.png"))); // NOI18N
+        mnuRequerente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/pilha.png"))); // NOI18N
         mnuRequerente.setText("Requerente");
         mnuRequerente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +79,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenu1.add(mnuRequerente);
 
         mnuConselheiro.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        mnuConselheiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/pilha.png"))); // NOI18N
+        mnuConselheiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/people.png"))); // NOI18N
         mnuConselheiro.setText("Conselheiro");
         mnuConselheiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

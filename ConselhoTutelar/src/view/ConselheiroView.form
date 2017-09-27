@@ -146,6 +146,9 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtNome">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ed" green="e9" red="e7" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="13" style="0"/>
             </Property>
@@ -178,6 +181,9 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtTelefone">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ed" green="e9" red="e7" type="rgb"/>
+            </Property>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="setFormatoTelefone()" type="code"/>
             </Property>
@@ -189,6 +195,9 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtCelular">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ed" green="e9" red="e7" type="rgb"/>
+            </Property>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="setFormatoCelular()" type="code"/>
             </Property>
@@ -200,6 +209,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtId">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ed" green="e9" red="e7" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="13" style="0"/>
             </Property>
@@ -437,6 +449,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtLogin">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ed" green="e9" red="e7" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="13" style="0"/>
             </Property>
@@ -445,6 +460,9 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtSenha">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ed" green="e9" red="e7" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="13" style="0"/>
             </Property>
