@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import util.LimiteDigitos;
 
 
 public class DireitosView extends javax.swing.JInternalFrame {
@@ -23,6 +24,9 @@ public class DireitosView extends javax.swing.JInternalFrame {
         listaDireitos = new ArrayList<>();
         txtId.setVisible(false);
         AtualizaTabelaDireitos();
+        
+        txtArtigo.setDocument(new LimiteDigitos(10));
+        txtDescricao.setDocument(new LimiteDigitos(100));
     }
 
     

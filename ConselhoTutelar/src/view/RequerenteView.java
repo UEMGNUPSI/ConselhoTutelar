@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import util.LimiteDigitos;
 
 public class RequerenteView extends javax.swing.JInternalFrame {
 
@@ -31,6 +32,20 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         txtId.setVisible(false);
         AtualizaTabelaRequerente();
         preencheComboBox();
+        limparCampos();
+        
+        txtNome.setDocument(new LimiteDigitos(50));
+        txtNascimento.setDocument(new LimiteDigitos(15));
+        txtTel1.setDocument(new LimiteDigitos(15));
+        txtTel2.setDocument(new LimiteDigitos(15));
+        txtCelular.setDocument(new LimiteDigitos(15));
+        txtEndereco.setDocument(new LimiteDigitos(45));
+        txtNumero.setDocument(new LimiteDigitos(10));
+        txtBairro.setDocument(new LimiteDigitos(45));
+        txtCidade.setDocument(new LimiteDigitos(20));
+        txtEstado.setDocument(new LimiteDigitos(15));
+        txtObs.setDocument(new LimiteDigitos(100));
+
     }
     
     public void preencheComboBox(){
@@ -405,8 +420,8 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -445,18 +460,18 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnSalvar)
@@ -464,7 +479,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                         .addComponent(btnExcluir)
                         .addComponent(btnCancelar))
                     .addComponent(btnNovo))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -495,7 +510,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             requerente.setBairro(txtBairro.getText());
             requerente.setCidade(txtCidade.getText());
             requerente.setEstado(txtEstado.getText());
-            requerente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedIndex()));
+            requerente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedItem()));
             requerente.setObservação(txtObs.getText());
       
             try{
@@ -523,7 +538,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             requerente.setBairro(txtBairro.getText());
             requerente.setCidade(txtCidade.getText());
             requerente.setEstado(txtEstado.getText());
-            requerente.setEstadoCivil("0");
+            requerente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedItem()));
             requerente.setObservação(txtObs.getText());
        
             try{
@@ -614,7 +629,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
         }
-   
+        String aux = requerente.getEstadoCivil();
         tblRequerente.getTableHeader().setReorderingAllowed(false);
         txtId.setText(Integer.toString(requerente.getId()));
         txtNome.setText(requerente.getNome());
@@ -627,7 +642,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         txtBairro.setText(requerente.getBairro());
         txtCidade.setText(requerente.getCidade());
         txtEstado.setText(requerente.getEstado());
-        cbxEstadoCivil.setSelectedItem(requerente.getEstadoCivil());
+        cbxEstadoCivil.setSelectedItem(tblRequerente.getValueAt(tblRequerente.getSelectedRow(),6).toString());
         txtObs.setText(requerente.getObservação());
         btnAlterar.setEnabled(true);
         btnExcluir.setEnabled(true);
@@ -648,7 +663,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
         }
         
-        String dados[][] = new String[listaRequerente.size()][6];
+        String dados[][] = new String[listaRequerente.size()][7];
             int i = 0;
             for (RequerenteM setor : listaRequerente) {
                 dados[i][0] = String.valueOf(setor.getId());
@@ -657,14 +672,15 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                 dados[i][3] = setor.getEndereço();
                 dados[i][4] = setor.getCidade();
                 dados[i][5] = setor.getEstado();
+                dados[i][6] = setor.getEstadoCivil();
                 i++;
             }
-           String tituloColuna[] = {"ID", "Nome", "Telefone 1", "Endereço", "Cidade", "Estado"};
+           String tituloColuna[] = {"ID", "Nome", "Telefone 1", "Endereço", "Cidade", "Estado","Estado Civil"};
             DefaultTableModel tabelaRequerente = new DefaultTableModel();
             tabelaRequerente.setDataVector(dados, tituloColuna);
             tblRequerente.setModel(new DefaultTableModel(dados, tituloColuna) {
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, false
+                    false, false, false, false, false, false, false,false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -673,11 +689,6 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             });
 
             tblRequerente.getColumnModel().getColumn(0).setPreferredWidth(10);
-            tblRequerente.getColumnModel().getColumn(1).setPreferredWidth(10);
-            tblRequerente.getColumnModel().getColumn(2).setPreferredWidth(10);
-            tblRequerente.getColumnModel().getColumn(3).setPreferredWidth(10);
-            tblRequerente.getColumnModel().getColumn(4).setPreferredWidth(10);
-            tblRequerente.getColumnModel().getColumn(5).setPreferredWidth(10);
             
 
             DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
@@ -691,7 +702,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         requerente = new RequerenteM();
 
         
-        String dados[][] = new String[listaRequerente.size()][6];
+        String dados[][] = new String[listaRequerente.size()][7];
             int i = 0;
             for (RequerenteM setor : listaRequerente) {
                 dados[i][0] = String.valueOf(setor.getId());
@@ -700,14 +711,15 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                 dados[i][3] = setor.getEndereço();
                 dados[i][4] = setor.getCidade();
                 dados[i][5] = setor.getEstado();
+                dados[i][6] = setor.getEstadoCivil();
                 i++;
             }
-           String tituloColuna[] = {"ID", "Nome", "Telefone 1", "Endereço", "Cidade", "Estado"};
+           String tituloColuna[] = {"ID", "Nome", "Telefone 1", "Endereço", "Cidade", "Estado","Estado Civil"};
             DefaultTableModel tabelaRequerente = new DefaultTableModel();
             tabelaRequerente.setDataVector(dados, tituloColuna);
             tblRequerente.setModel(new DefaultTableModel(dados, tituloColuna) {
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false, false, false, false
+                    false, false, false, false, false, false, false,false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -716,11 +728,6 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             });
 
             tblRequerente.getColumnModel().getColumn(0).setPreferredWidth(10);
-            tblRequerente.getColumnModel().getColumn(1).setPreferredWidth(10);
-            tblRequerente.getColumnModel().getColumn(2).setPreferredWidth(10);
-            tblRequerente.getColumnModel().getColumn(3).setPreferredWidth(10);
-            tblRequerente.getColumnModel().getColumn(4).setPreferredWidth(10);
-            tblRequerente.getColumnModel().getColumn(5).setPreferredWidth(10);
             
 
             DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();

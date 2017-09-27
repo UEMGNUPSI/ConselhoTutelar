@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import util.LimiteDigitos;
 
 
 public class ConselheiroView extends javax.swing.JInternalFrame {
@@ -25,6 +26,13 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
         
         txtId.setVisible(false);
         AtualizaTabelaConselheiro();
+        
+        txtNome.setDocument(new LimiteDigitos(50));
+        txtTelefone.setDocument(new LimiteDigitos(15));
+        txtCelular.setDocument(new LimiteDigitos(15));
+        txtLogin.setDocument(new LimiteDigitos(25));
+        txtSenha.setDocument(new LimiteDigitos(25));
+
     }
 
 
