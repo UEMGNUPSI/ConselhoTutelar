@@ -53,11 +53,13 @@ public class DireitosView extends javax.swing.JInternalFrame {
         tblDireitos = new javax.swing.JTable();
         btnSalvar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(211, 211, 211));
         setClosable(true);
         setTitle("Direitos");
 
         btnAlterar.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 129, 164)));
         btnAlterar.setEnabled(false);
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,7 +67,8 @@ public class DireitosView extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações"));
+        jPanel1.setBackground(new java.awt.Color(211, 211, 211));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 129, 164)), "Informações"));
 
         txtArtigo.setBackground(new java.awt.Color(231, 233, 237));
         txtArtigo.setEnabled(false);
@@ -120,6 +123,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
 
         btnExcluir.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 129, 164)));
         btnExcluir.setEnabled(false);
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +133,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
 
         btnCancelar.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 129, 164)));
         btnCancelar.setEnabled(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +141,8 @@ public class DireitosView extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Busca"));
+        jPanel3.setBackground(new java.awt.Color(211, 211, 211));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 129, 164)), "Informações"));
 
         jLabel7.setText("Nº do artigo:");
 
@@ -182,6 +188,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
 
         btnNovo.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         btnNovo.setText("Novo");
+        btnNovo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 129, 164)));
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoActionPerformed(evt);
@@ -208,6 +215,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
 
         btnSalvar.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         btnSalvar.setText("Salvar");
+        btnSalvar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 129, 164)));
         btnSalvar.setEnabled(false);
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,7 +248,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
                         .addGap(80, 80, 80)
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71)
-                        .addComponent(btnCancelar)))
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -255,11 +263,11 @@ public class DireitosView extends javax.swing.JInternalFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovo)
-                    .addComponent(btnSalvar)
-                    .addComponent(btnAlterar)
-                    .addComponent(btnExcluir)
-                    .addComponent(btnCancelar))
+                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
