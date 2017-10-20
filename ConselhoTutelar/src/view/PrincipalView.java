@@ -37,6 +37,7 @@ public class PrincipalView extends javax.swing.JFrame {
         mnuConselheiro = new javax.swing.JMenuItem();
         mnuDireitos = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        mnuAtendimento = new javax.swing.JMenu();
         mnuSair = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -101,6 +102,20 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        mnuAtendimento.setText("Atendimento");
+        mnuAtendimento.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        mnuAtendimento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuAtendimentoMouseClicked(evt);
+            }
+        });
+        mnuAtendimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAtendimentoActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(mnuAtendimento);
+
         mnuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/close.png"))); // NOI18N
         mnuSair.setText("Sair");
         mnuSair.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
@@ -141,6 +156,18 @@ public class PrincipalView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_mnuSairMouseClicked
 
+    private void mnuAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAtendimentoActionPerformed
+        
+        
+    }//GEN-LAST:event_mnuAtendimentoActionPerformed
+
+    private void mnuAtendimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuAtendimentoMouseClicked
+    AtendimentoView ate = new AtendimentoView();
+         pnl.removeAll();
+        pnl.add(ate);
+        pnl.updateUI();
+    }//GEN-LAST:event_mnuAtendimentoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -152,6 +179,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenu mnuAtendimento;
     private javax.swing.JMenuItem mnuConselheiro;
     private javax.swing.JMenuItem mnuDireitos;
     private javax.swing.JMenuItem mnuRequerente;

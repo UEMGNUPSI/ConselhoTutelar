@@ -325,6 +325,11 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         txtTel1.setBackground(new java.awt.Color(231, 233, 237));
         txtTel1.setFormatterFactory(setFormatoTelefone());
         txtTel1.setEnabled(false);
+        txtTel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTel1ActionPerformed(evt);
+            }
+        });
 
         txtCelular.setBackground(new java.awt.Color(231, 233, 237));
         txtCelular.setFormatterFactory(setFormatoCelular());
@@ -674,6 +679,10 @@ public class RequerenteView extends javax.swing.JInternalFrame {
     AtualizaTabelaRequerente();
     txtBusca.requestFocusInWindow(); 
     }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void txtTel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTel1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTel1ActionPerformed
     
     public void AtualizaTabelaRequerente(){
         requerente = new RequerenteM();

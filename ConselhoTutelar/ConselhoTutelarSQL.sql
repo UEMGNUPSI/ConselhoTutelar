@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Requerente` (
   `Cidade` VARCHAR(20) NULL,
   `Estado` VARCHAR(15) NULL,
   `EstadoCivil` VARCHAR(15) NULL,
-  `Observacao` VARCHAR(100) NULL,
+  `Observacao` VARCHAR(45) NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
@@ -68,3 +68,4 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 insert into Conselheiro values(null,"root","telefone","celular","root","root");
+
