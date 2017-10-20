@@ -1,13 +1,15 @@
 
 package view;
+import MODEL.RequerenteM;
 
 
 public class AtendimentoView extends javax.swing.JInternalFrame {
 
-
+    RequerenteM requerente = new RequerenteM();
     public AtendimentoView() {
         initComponents();
         this.setVisible(true);
+        
     }
 
   
@@ -21,6 +23,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         btnBusca = new javax.swing.JButton();
         txtBusca = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane9 = new javax.swing.JScrollPane();
@@ -150,33 +153,49 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Buscar");
 
+        jButton4.setText("Selecionar");
+
         javax.swing.GroupLayout dlgBuscaLayout = new javax.swing.GroupLayout(dlgBusca.getContentPane());
         dlgBusca.getContentPane().setLayout(dlgBuscaLayout);
         dlgBuscaLayout.setHorizontalGroup(
             dlgBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dlgBuscaLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(dlgBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(dlgBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dlgBuscaLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane3))
+                    .addGroup(dlgBuscaLayout.createSequentialGroup()
+                        .addGroup(dlgBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dlgBuscaLayout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel3)
+                                .addGap(10, 10, 10)
+                                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(dlgBuscaLayout.createSequentialGroup()
+                                .addGap(403, 403, 403)
+                                .addComponent(jButton4)))
+                        .addGap(0, 447, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         dlgBuscaLayout.setVerticalGroup(
             dlgBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dlgBuscaLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(dlgBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(btnBusca)
-                    .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(dlgBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlgBuscaLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel3))
+                    .addGroup(dlgBuscaLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBusca))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(31, 31, 31))
         );
 
         jLabel11.setText("jLabel11");
@@ -856,9 +875,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                             .addComponent(txtTelefoneAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnSalvarAcompanhante)
-                        .addComponent(btnNovoAcompanhante))
+                    .addComponent(btnSalvarAcompanhante)
+                    .addComponent(btnNovoAcompanhante)
                     .addComponent(btnCancelarAcompanhante)
                     .addComponent(btnExcluirAcompanhante)
                     .addComponent(btnAlterarAcompanhante))
@@ -932,7 +950,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtBuscaActionPerformed
 
     private void btnBuscarRequerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRequerenteActionPerformed
-    
+        dlgBusca.setVisible(true);
+        dlgBusca.setSize(941, 508);
     }//GEN-LAST:event_btnBuscarRequerenteActionPerformed
 
     private void txtNumeroNucleoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroNucleoActionPerformed
@@ -994,6 +1013,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
