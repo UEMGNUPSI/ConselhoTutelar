@@ -1,5 +1,5 @@
-
 package view;
+
 import MODEL.RequerenteM;
 
 
@@ -9,7 +9,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     public AtendimentoView() {
         initComponents();
         this.setVisible(true);
-        
+        dlgBusca.setSize(941, 508);
+        //jTabbedPane1.setEnabled(false);
     }
 
   
@@ -29,15 +30,21 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jScrollPane9 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        tblAtendimentos = new javax.swing.JTable();
+        btnNovoAtendimento = new javax.swing.JButton();
+        btnEditarAtendimento = new javax.swing.JButton();
+        btnExlucirAtendimento = new javax.swing.JButton();
         pnlAtendimento = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtRelato = new javax.swing.JTextArea();
+        txtRelatoAtendimento = new javax.swing.JTextArea();
         txtDataAtendimento = new javax.swing.JTextField();
         btnBuscarRequerente = new javax.swing.JButton();
-        txtRequerente = new javax.swing.JTextField();
+        txtRequerenteAtendimento = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtIdAtendimento = new javax.swing.JTextField();
         btnSalvarAtendimento = new javax.swing.JButton();
@@ -71,9 +78,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtBuscarDireitos = new javax.swing.JTextField();
         btnBuscarDireitos = new javax.swing.JButton();
         jScrollPane11 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tblDireitos1 = new javax.swing.JTable();
         jScrollPane12 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        tblDireitos2 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -125,10 +132,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         btnAlterarAcompanhante = new javax.swing.JButton();
         btnExcluirAcompanhante = new javax.swing.JButton();
         btnCancelarAcompanhante = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        tblAtendimentos = new javax.swing.JTable();
-        btnFinalizados = new javax.swing.JButton();
 
         tblBusca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -219,15 +222,76 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         setTitle("Atendimento");
         setToolTipText("");
 
+        tblAtendimentos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane8.setViewportView(tblAtendimentos);
+
+        btnNovoAtendimento.setText("Novo Atendimento");
+        btnNovoAtendimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoAtendimentoActionPerformed(evt);
+            }
+        });
+
+        btnEditarAtendimento.setText("Editar Atendimento");
+
+        btnExlucirAtendimento.setText("Excluir Atendimento");
+        btnExlucirAtendimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExlucirAtendimentoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnNovoAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditarAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnExlucirAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(btnNovoAtendimento)
+                .addGap(32, 32, 32)
+                .addComponent(btnEditarAtendimento)
+                .addGap(32, 32, 32)
+                .addComponent(btnExlucirAtendimento)
+                .addContainerGap(200, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Lista de Atendimentos", jPanel4);
+
         jLabel6.setText("Data:");
 
         jLabel7.setText("Requerente:");
 
         jLabel8.setText("Relato resumido:");
 
-        txtRelato.setColumns(20);
-        txtRelato.setRows(5);
-        jScrollPane1.setViewportView(txtRelato);
+        txtRelatoAtendimento.setColumns(20);
+        txtRelatoAtendimento.setRows(5);
+        jScrollPane1.setViewportView(txtRelatoAtendimento);
 
         btnBuscarRequerente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/lupa.png"))); // NOI18N
         btnBuscarRequerente.addActionListener(new java.awt.event.ActionListener() {
@@ -236,7 +300,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             }
         });
 
-        txtRequerente.setEnabled(false);
+        txtRequerenteAtendimento.setEnabled(false);
 
         jLabel4.setText("ID:");
 
@@ -293,7 +357,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                         .addGap(9, 9, 9)
                         .addComponent(btnBuscarRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(txtRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtRequerenteAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAtendimentoLayout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(9, 9, 9)
@@ -325,7 +389,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                 .addGap(10, 10, 10)
                                 .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
-                                    .addComponent(txtRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtRequerenteAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(29, 29, 29)
                         .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -424,7 +488,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTelefoneCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -481,7 +545,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         btnBuscarDireitos.setText("Buscar");
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tblDireitos1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -492,9 +556,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane11.setViewportView(jTable4);
+        jScrollPane11.setViewportView(tblDireitos1);
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tblDireitos2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -505,7 +569,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane12.setViewportView(jTable5);
+        jScrollPane12.setViewportView(tblDireitos2);
 
         jButton1.setText(">");
 
@@ -522,7 +586,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addComponent(txtBuscarDireitos, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBuscarDireitos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 244, Short.MAX_VALUE))
+                .addGap(0, 250, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -652,7 +716,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel21)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtTelefoneNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtCelularNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -836,7 +900,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addComponent(btnExcluirAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(btnCancelarAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -885,46 +949,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Acompanhante", jPanel3);
 
-        tblAtendimentos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane8.setViewportView(tblAtendimentos);
-
-        btnFinalizados.setText("Atendimentos Finalizados");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnFinalizados, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnFinalizados)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Lista de Atendimentos", jPanel4);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -951,7 +975,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
     private void btnBuscarRequerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRequerenteActionPerformed
         dlgBusca.setVisible(true);
-        dlgBusca.setSize(941, 508);
+        
     }//GEN-LAST:event_btnBuscarRequerenteActionPerformed
 
     private void txtNumeroNucleoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroNucleoActionPerformed
@@ -986,6 +1010,32 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalvarCriancaActionPerformed
 
+    private void btnNovoAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoAtendimentoActionPerformed
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_btnNovoAtendimentoActionPerformed
+
+    private void btnExlucirAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExlucirAtendimentoActionPerformed
+        /*        tfdId.setText(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString());
+        if(tfdId.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "Selecione um Funcionario", "erro", JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+        funcionario.setId(Integer.parseInt(tfdId.getText()));
+        int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: "+ tfdNome.getText());
+        if(confirma ==0){
+        try{
+        funcionarioDAO.excluir(funcionario);
+        limparCamposFuncionario();
+        tfdNome.requestFocusInWindow();
+        }catch(SQLException ex){
+        JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+        }
+        atualizaTabelaFuncionario();
+        prepararExcluir();
+        }
+        }*/
+    }//GEN-LAST:event_btnExlucirAtendimentoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarAcompanhante;
@@ -997,12 +1047,14 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelarAcompanhante;
     private javax.swing.JButton btnCancelarCrianca;
     private javax.swing.JButton btnCancelarNucleo;
+    private javax.swing.JButton btnEditarAtendimento;
     private javax.swing.JButton btnExcluirAcompanhante;
     private javax.swing.JButton btnExcluirAtendimento;
     private javax.swing.JButton btnExcluirCrianca;
     private javax.swing.JButton btnExcluirNucleo;
-    private javax.swing.JButton btnFinalizados;
+    private javax.swing.JButton btnExlucirAtendimento;
     private javax.swing.JButton btnNovoAcompanhante;
+    private javax.swing.JButton btnNovoAtendimento;
     private javax.swing.JButton btnNovoCrianca;
     private javax.swing.JButton btnNovoNucleo;
     private javax.swing.JButton btnSalvarAcompanhante;
@@ -1059,8 +1111,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
     private javax.swing.JPanel pnlAtendente;
     private javax.swing.JPanel pnlAtendimento;
     private javax.swing.JPanel pnlBusca;
@@ -1070,6 +1120,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblAtendimentos;
     private javax.swing.JTable tblBusca;
     private javax.swing.JTable tblCrianca;
+    private javax.swing.JTable tblDireitos1;
+    private javax.swing.JTable tblDireitos2;
     private javax.swing.JTextField txtBairroAcompanhante;
     private javax.swing.JTextField txtBairroCrianca;
     private javax.swing.JTextField txtBairroNucleo;
@@ -1094,8 +1146,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNumeroCrianca;
     private javax.swing.JTextField txtNumeroNucleo;
     private javax.swing.JTextField txtParentescoNucleo;
-    private javax.swing.JTextArea txtRelato;
-    private javax.swing.JTextField txtRequerente;
+    private javax.swing.JTextArea txtRelatoAtendimento;
+    private javax.swing.JTextField txtRequerenteAtendimento;
     private javax.swing.JTextField txtResponsabilidadeNucleo;
     private javax.swing.JTextField txtTelefoneAcompanhante;
     private javax.swing.JTextField txtTelefoneCrianca;
