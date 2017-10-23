@@ -143,6 +143,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         btnExcluirAcompanhante = new javax.swing.JButton();
         btnCancelarAcompanhante = new javax.swing.JButton();
 
+        dlgBusca.setTitle("Buscar Requerente");
+
         tblBusca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
