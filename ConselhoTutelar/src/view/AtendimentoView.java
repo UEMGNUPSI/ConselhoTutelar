@@ -1,19 +1,29 @@
 package view;
 
+import MODEL.AtendimentoM;
 import MODEL.RequerenteM;
+import dao.AtendimentoDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 
 public class AtendimentoView extends javax.swing.JInternalFrame {
 
+    AtendimentoDAO atendimentoDAO = new AtendimentoDAO();
+    AtendimentoM atendimento = new AtendimentoM();
+    List<AtendimentoM> listaAtendimento = new ArrayList<>();
     RequerenteM requerente = new RequerenteM();
     public AtendimentoView() {
         initComponents();
         this.setVisible(true);
         dlgBusca.setSize(941, 508);
         //jTabbedPane1.setEnabled(false);
-    }
-
-  
+    } 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -101,7 +111,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jLabel22 = new javax.swing.JLabel();
         txtResponsabilidadeNucleo = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
-        tblAtendimento = new javax.swing.JTable();
+        tblNucleo = new javax.swing.JTable();
         btnNovoNucleo = new javax.swing.JButton();
         btnSalvarNucleo = new javax.swing.JButton();
         btnAlterarNucleo = new javax.swing.JButton();
@@ -307,6 +317,11 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtIdAtendimento.setEnabled(false);
 
         btnSalvarAtendimento.setText("Salvar");
+        btnSalvarAtendimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarAtendimentoActionPerformed(evt);
+            }
+        });
 
         btnExcluirAtendimento.setText("Excluir");
 
@@ -655,7 +670,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         jLabel22.setText("Responsabilidade:");
 
-        tblAtendimento.setModel(new javax.swing.table.DefaultTableModel(
+        tblNucleo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -666,7 +681,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane6.setViewportView(tblAtendimento);
+        jScrollPane6.setViewportView(tblNucleo);
 
         btnNovoNucleo.setText("Novo");
 
@@ -969,6 +984,52 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void atualizaTabelaAtendimento(){
+        atendimento = new AtendimentoM();
+        try {
+            listaAtendimento = atendimentoDAO.ListaTodos();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        String dados[][] = new String[listaAtendimento.size()][4];
+            int i = 0;
+            for (AtendimentoM atendimento : listaAtendimento) {
+                dados[i][0] = String.valueOf(atendimento.getId());
+                dados[i][1] = String.valueOf(atendimento.getRequerente_id());
+                dados[i][2] = atendimento.getData();
+                dados[i][3] = atendimento.getRelatoResumido();
+               
+                i++;
+            }
+            String tituloColuna[] = {"ID", "Requerente", "data","relato"};
+            DefaultTableModel tabelaFuncionario = new DefaultTableModel();
+            tabelaFuncionario.setDataVector(dados, tituloColuna);
+            tblAtendimentos.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false,
+                };
+
+                
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblAtendimentos.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblAtendimentos.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tblAtendimentos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblAtendimentos.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblAtendimentos.getColumnModel().getColumn(3).setCellRenderer(centralizado);
+            tblAtendimentos.getColumnModel().getColumn(4).setCellRenderer(centralizado);
+            tblAtendimentos.getColumnModel().getColumn(5).setCellRenderer(centralizado);
+            tblAtendimentos.setRowHeight(25);
+            tblAtendimentos.updateUI();
+    }
+    
     private void txtBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscaActionPerformed
@@ -1015,26 +1076,44 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoAtendimentoActionPerformed
 
     private void btnExlucirAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExlucirAtendimentoActionPerformed
-        /*        tfdId.setText(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString());
-        if(tfdId.getText().isEmpty()){
-        JOptionPane.showMessageDialog(null, "Selecione um Funcionario", "erro", JOptionPane.WARNING_MESSAGE);
+        if(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Selecione um Funcionario", "erro", JOptionPane.WARNING_MESSAGE);
+            }else{
+                atendimento.setId(Integer.parseInt(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString()));
+                int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: "+ tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),1).toString());
+                if(confirma ==0){
+                    try{
+                    atendimentoDAO.Excluir(atendimento);
+                    tblAtendimentos.clearSelection();
+                    }catch(SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+                    }
+                    //atualizaTabelaAtendimneto();
+            }
         }
-        else{
-        funcionario.setId(Integer.parseInt(tfdId.getText()));
-        int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: "+ tfdNome.getText());
-        if(confirma ==0){
-        try{
-        funcionarioDAO.excluir(funcionario);
-        limparCamposFuncionario();
-        tfdNome.requestFocusInWindow();
-        }catch(SQLException ex){
-        JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
-        }
-        atualizaTabelaFuncionario();
-        prepararExcluir();
-        }
-        }*/
     }//GEN-LAST:event_btnExlucirAtendimentoActionPerformed
+
+    private void btnSalvarAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAtendimentoActionPerformed
+        if(txtRequerenteAtendimento.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha todos os obrigatórios !", "erro", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(txtIdAtendimento.getText().isEmpty()){
+            //Salva tudo digitado no campo de texto para o objeto e salva no banco de dados
+            atendimento.setId(Integer.parseInt(txtIdAtendimento.getText()));
+            atendimento.setRequerente_id(Integer.parseInt(txtRequerenteAtendimento.getText()));
+            atendimento.setData(txtDataAtendimento.getText());
+            atendimento.setRelatoResumido(txtRelatoAtendimento.getText());            
+            try{
+                atendimentoDAO.Salvar(atendimento);
+                JOptionPane.showMessageDialog(null, "Gravado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+               
+            }
+
+            atualizaTabelaAtendimento();
+        }
+    }//GEN-LAST:event_btnSalvarAtendimentoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1116,12 +1195,12 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlBusca;
     private javax.swing.JTable tblAcompanhante;
     private javax.swing.JTable tblAtendente;
-    private javax.swing.JTable tblAtendimento;
     private javax.swing.JTable tblAtendimentos;
     private javax.swing.JTable tblBusca;
     private javax.swing.JTable tblCrianca;
     private javax.swing.JTable tblDireitos1;
     private javax.swing.JTable tblDireitos2;
+    private javax.swing.JTable tblNucleo;
     private javax.swing.JTextField txtBairroAcompanhante;
     private javax.swing.JTextField txtBairroCrianca;
     private javax.swing.JTextField txtBairroNucleo;
