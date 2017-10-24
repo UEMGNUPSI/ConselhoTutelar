@@ -1,8 +1,10 @@
 package view;
 
 import MODEL.AtendimentoM;
+import MODEL.CriançaM;
 import MODEL.RequerenteM;
 import dao.AtendimentoDAO;
+import dao.CriançaDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +16,14 @@ import javax.swing.table.DefaultTableModel;
 
 public class AtendimentoView extends javax.swing.JInternalFrame {
 
-    AtendimentoDAO atendimentoDAO = new AtendimentoDAO();
     AtendimentoM atendimento = new AtendimentoM();
+    AtendimentoDAO atendimentoDAO = new AtendimentoDAO();
     List<AtendimentoM> listaAtendimento = new ArrayList<>();
+    
+    CriançaM crianca = new CriançaM();
+    CriançaDAO criancaDAO = new CriançaDAO();
+    List<CriançaM> listaCrinaca = new ArrayList<>();
+    
     RequerenteM requerente = new RequerenteM();
     public AtendimentoView() {
         initComponents();
@@ -58,10 +65,12 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         txtIdAtendimento = new javax.swing.JTextField();
         btnSalvarAtendimento = new javax.swing.JButton();
-        btnExcluirAtendimento = new javax.swing.JButton();
-        pnlAtendente = new javax.swing.JPanel();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        tblAtendente = new javax.swing.JTable();
+        jLabel30 = new javax.swing.JLabel();
+        btnBuscarConselheiro1 = new javax.swing.JButton();
+        txtConselheiroAtendimento1 = new javax.swing.JTextField();
+        txtConselheiroAtendimento2 = new javax.swing.JTextField();
+        btnBuscarConselheiro2 = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
         pnlBusca = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -318,50 +327,43 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         txtIdAtendimento.setEnabled(false);
 
-        btnSalvarAtendimento.setText("Salvar");
+        btnSalvarAtendimento.setText("Salvar e Continuar");
         btnSalvarAtendimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarAtendimentoActionPerformed(evt);
             }
         });
 
-        btnExcluirAtendimento.setText("Excluir");
+        jLabel30.setText("Conselheiro:");
 
-        pnlAtendente.setBorder(javax.swing.BorderFactory.createTitledBorder("Atendente"));
-
-        tblAtendente.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        btnBuscarConselheiro1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/lupa.png"))); // NOI18N
+        btnBuscarConselheiro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarConselheiro1ActionPerformed(evt);
             }
-        ));
-        jScrollPane10.setViewportView(tblAtendente);
+        });
 
-        javax.swing.GroupLayout pnlAtendenteLayout = new javax.swing.GroupLayout(pnlAtendente);
-        pnlAtendente.setLayout(pnlAtendenteLayout);
-        pnlAtendenteLayout.setHorizontalGroup(
-            pnlAtendenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane10)
-        );
-        pnlAtendenteLayout.setVerticalGroup(
-            pnlAtendenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-        );
+        txtConselheiroAtendimento1.setEnabled(false);
+
+        txtConselheiroAtendimento2.setEnabled(false);
+
+        btnBuscarConselheiro2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/lupa.png"))); // NOI18N
+        btnBuscarConselheiro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarConselheiro2ActionPerformed(evt);
+            }
+        });
+
+        jLabel31.setText("Conselheiro:");
 
         javax.swing.GroupLayout pnlAtendimentoLayout = new javax.swing.GroupLayout(pnlAtendimento);
         pnlAtendimento.setLayout(pnlAtendimentoLayout);
         pnlAtendimentoLayout.setHorizontalGroup(
             pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAtendimentoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlAtendimentoLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
+                        .addGap(50, 50, 50)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDataAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -369,36 +371,49 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4)
                         .addGap(5, 5, 5)
                         .addComponent(txtIdAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAtendimentoLayout.createSequentialGroup()
+                    .addGroup(pnlAtendimentoLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel7)
                         .addGap(9, 9, 9)
                         .addComponent(btnBuscarRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(txtRequerenteAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAtendimentoLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                    .addGroup(pnlAtendimentoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel30)
                         .addGap(9, 9, 9)
-                        .addComponent(jScrollPane1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAtendimentoLayout.createSequentialGroup()
-                        .addComponent(btnSalvarAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExcluirAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
-                .addComponent(pnlAtendente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBuscarConselheiro1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(txtConselheiroAtendimento1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlAtendimentoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnSalvarAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAtendimentoLayout.createSequentialGroup()
+                                .addComponent(jLabel31)
+                                .addGap(9, 9, 9)
+                                .addComponent(btnBuscarConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(txtConselheiroAtendimento2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addContainerGap())
         );
         pnlAtendimentoLayout.setVerticalGroup(
             pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAtendimentoLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(txtDataAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4)
+                    .addComponent(txtIdAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlAtendimentoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6)
-                                .addComponent(txtDataAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4)
-                            .addComponent(txtIdAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10)
                         .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBuscarRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -407,18 +422,29 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                 .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
                                     .addComponent(txtRequerenteAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(29, 29, 29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnExcluirAtendimento)
-                            .addComponent(btnSalvarAtendimento)))
+                            .addComponent(btnBuscarConselheiro1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlAtendimentoLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel30)
+                                    .addComponent(txtConselheiroAtendimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBuscarConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlAtendimentoLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel31)
+                                    .addComponent(txtConselheiroAtendimento2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(191, 191, 191)
+                        .addComponent(btnSalvarAtendimento)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlAtendimentoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pnlAtendente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
         );
 
         jTabbedPane1.addTab("Atendimento", pnlAtendimento);
@@ -1070,7 +1096,28 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoCriancaActionPerformed
 
     private void btnSalvarCriancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarCriancaActionPerformed
-        // TODO add your handling code here:
+        crianca = new CriançaM();
+        if(txtNomeCrianca.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha todos os obrigatórios !", "erro", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(txtIdCrianca.getText().isEmpty()){
+            crianca.setId(Integer.parseInt(txtIdCrianca.getText()));
+            crianca.setNome(txtNomeCrianca.getText());
+            crianca.setDataNascimento(txtNascimentoCrianca.getText());
+            crianca.setTelefone(txtTelefoneCrianca.getText()); 
+            crianca.setEndereco(txtEnderecoCrianca.getText());  
+            crianca.setNumero(txtNumeroCrianca.getText());  
+            crianca.setBairro(txtBairroCrianca.getText()); 
+            //crianca.setAtendimento_Id(txtIdAtendimento);
+            try{
+                criancaDAO.Salvar(crianca);
+                JOptionPane.showMessageDialog(null, "Gravado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+               
+            }
+
+        }
     }//GEN-LAST:event_btnSalvarCriancaActionPerformed
 
     private void btnNovoAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoAtendimentoActionPerformed
@@ -1078,6 +1125,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoAtendimentoActionPerformed
 
     private void btnExlucirAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExlucirAtendimentoActionPerformed
+        atendimento = new AtendimentoM();
         if(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString().isEmpty()){
             JOptionPane.showMessageDialog(null, "Selecione um Funcionario", "erro", JOptionPane.WARNING_MESSAGE);
             }else{
@@ -1090,7 +1138,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     }catch(SQLException ex){
                     JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
                     }
-                    //atualizaTabelaAtendimneto();
+                    atualizaTabelaAtendimento();
             }
         }
     }//GEN-LAST:event_btnExlucirAtendimentoActionPerformed
@@ -1100,7 +1148,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Preencha todos os obrigatórios !", "erro", JOptionPane.WARNING_MESSAGE);
         }
         else if(txtIdAtendimento.getText().isEmpty()){
-            //Salva tudo digitado no campo de texto para o objeto e salva no banco de dados
             atendimento.setId(Integer.parseInt(txtIdAtendimento.getText()));
             atendimento.setRequerente_id(Integer.parseInt(txtRequerenteAtendimento.getText()));
             atendimento.setData(txtDataAtendimento.getText());
@@ -1113,9 +1160,17 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                
             }
 
-            atualizaTabelaAtendimento();
+            jTabbedPane1.setSelectedIndex(2);
         }
     }//GEN-LAST:event_btnSalvarAtendimentoActionPerformed
+
+    private void btnBuscarConselheiro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConselheiro1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarConselheiro1ActionPerformed
+
+    private void btnBuscarConselheiro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConselheiro2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarConselheiro2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1123,6 +1178,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAlterarCrianca;
     private javax.swing.JButton btnAlterarNucleo;
     private javax.swing.JButton btnBusca;
+    private javax.swing.JButton btnBuscarConselheiro1;
+    private javax.swing.JButton btnBuscarConselheiro2;
     private javax.swing.JButton btnBuscarDireitos;
     private javax.swing.JButton btnBuscarRequerente;
     private javax.swing.JButton btnCancelarAcompanhante;
@@ -1130,7 +1187,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelarNucleo;
     private javax.swing.JButton btnEditarAtendimento;
     private javax.swing.JButton btnExcluirAcompanhante;
-    private javax.swing.JButton btnExcluirAtendimento;
     private javax.swing.JButton btnExcluirCrianca;
     private javax.swing.JButton btnExcluirNucleo;
     private javax.swing.JButton btnExlucirAtendimento;
@@ -1170,6 +1226,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1181,7 +1239,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1192,11 +1249,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JPanel pnlAtendente;
     private javax.swing.JPanel pnlAtendimento;
     private javax.swing.JPanel pnlBusca;
     private javax.swing.JTable tblAcompanhante;
-    private javax.swing.JTable tblAtendente;
     private javax.swing.JTable tblAtendimentos;
     private javax.swing.JTable tblBusca;
     private javax.swing.JTable tblCrianca;
@@ -1210,6 +1265,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtBuscarDireitos;
     private javax.swing.JTextField txtCelularNucleo;
     private javax.swing.JTextField txtCidadeAcompanhante;
+    private javax.swing.JTextField txtConselheiroAtendimento1;
+    private javax.swing.JTextField txtConselheiroAtendimento2;
     private javax.swing.JTextField txtDataAtendimento;
     private javax.swing.JTextField txtEnderecoAcompanhante;
     private javax.swing.JTextField txtEnderecoCrianca;
