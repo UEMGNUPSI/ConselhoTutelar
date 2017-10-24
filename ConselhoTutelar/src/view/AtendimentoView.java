@@ -22,7 +22,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     
     CriançaM crianca = new CriançaM();
     CriançaDAO criancaDAO = new CriançaDAO();
-    List<CriançaM> listaCrinaca = new ArrayList<>();
+    List<CriançaM> listaCrianca = new ArrayList<>();
     
     RequerenteM requerente = new RequerenteM();
     public AtendimentoView() {
@@ -486,6 +486,11 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         btnAlterarCrianca.setText("Alterar");
 
         btnExcluirCrianca.setText("Excluir");
+        btnExcluirCrianca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirCriancaActionPerformed(evt);
+            }
+        });
 
         btnCancelarCrianca.setText("Cancelar");
 
@@ -1030,7 +1035,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                
                 i++;
             }
-            String tituloColuna[] = {"ID", "Requerente", "data","relato"};
+            String tituloColuna[] = {"ID", "Requerente", "Data","Relato"};
             DefaultTableModel tabelaFuncionario = new DefaultTableModel();
             tabelaFuncionario.setDataVector(dados, tituloColuna);
             tblAtendimentos.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -1045,15 +1050,51 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             });
 
             tblAtendimentos.getColumnModel().getColumn(0).setPreferredWidth(10);
-            tblAtendimentos.getColumnModel().getColumn(1).setPreferredWidth(200);
-            tblAtendimentos.getColumnModel().getColumn(2).setPreferredWidth(100);
             
             DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
             centralizado.setHorizontalAlignment(SwingConstants.CENTER);
             tblAtendimentos.getColumnModel().getColumn(0).setCellRenderer(centralizado);
-            tblAtendimentos.getColumnModel().getColumn(3).setCellRenderer(centralizado);
-            tblAtendimentos.getColumnModel().getColumn(4).setCellRenderer(centralizado);
-            tblAtendimentos.getColumnModel().getColumn(5).setCellRenderer(centralizado);
+            tblAtendimentos.setRowHeight(25);
+            tblAtendimentos.updateUI();
+    }
+    
+    public void atualizaTabelaCrianca(){
+        crianca = new CriançaM();
+        try {
+            listaCrianca = criancaDAO.ListaTodos();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        String dados[][] = new String[listaCrianca.size()][4];
+            int i = 0;
+            for (CriançaM Crianca : listaCrianca) {
+                dados[i][0] = String.valueOf(Crianca.getId());
+                dados[i][1] = Crianca.getNome();
+                dados[i][2] = Crianca.getDataNascimento();
+                dados[i][3] = Crianca.getTelefone();
+               
+                i++;
+            }
+            String tituloColuna[] = {"ID", "Nome", "Data","Telefone"};
+            DefaultTableModel tabelaFuncionario = new DefaultTableModel();
+            tabelaFuncionario.setDataVector(dados, tituloColuna);
+            tblAtendimentos.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false,
+                };
+
+                
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblAtendimentos.getColumnModel().getColumn(0).setPreferredWidth(10);
+            
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblAtendimentos.getColumnModel().getColumn(0).setCellRenderer(centralizado);
             tblAtendimentos.setRowHeight(25);
             tblAtendimentos.updateUI();
     }
@@ -1108,7 +1149,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             crianca.setEndereco(txtEnderecoCrianca.getText());  
             crianca.setNumero(txtNumeroCrianca.getText());  
             crianca.setBairro(txtBairroCrianca.getText()); 
-            //crianca.setAtendimento_Id(txtIdAtendimento);
+            crianca.setAtendimento_Id(atendimento);
             try{
                 criancaDAO.Salvar(crianca);
                 JOptionPane.showMessageDialog(null, "Gravado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
@@ -1116,7 +1157,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
                
             }
-
+            // atualiza tabela crianço
         }
     }//GEN-LAST:event_btnSalvarCriancaActionPerformed
 
@@ -1127,7 +1168,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private void btnExlucirAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExlucirAtendimentoActionPerformed
         atendimento = new AtendimentoM();
         if(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Selecione um Funcionario", "erro", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Selecione um Atendimento", "erro", JOptionPane.WARNING_MESSAGE);
             }else{
                 atendimento.setId(Integer.parseInt(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString()));
                 int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: "+ tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),1).toString());
@@ -1144,12 +1185,13 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExlucirAtendimentoActionPerformed
 
     private void btnSalvarAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAtendimentoActionPerformed
+        
         if(txtRequerenteAtendimento.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Preencha todos os obrigatórios !", "erro", JOptionPane.WARNING_MESSAGE);
         }
         else if(txtIdAtendimento.getText().isEmpty()){
             atendimento.setId(Integer.parseInt(txtIdAtendimento.getText()));
-            atendimento.setRequerente_id(Integer.parseInt(txtRequerenteAtendimento.getText()));
+            atendimento.setRequerente_id(requerente);
             atendimento.setData(txtDataAtendimento.getText());
             atendimento.setRelatoResumido(txtRelatoAtendimento.getText());            
             try{
@@ -1171,6 +1213,24 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private void btnBuscarConselheiro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConselheiro2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarConselheiro2ActionPerformed
+
+    private void btnExcluirCriancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirCriancaActionPerformed
+        crianca = new CriançaM();
+        if(tblCrianca.getValueAt(tblCrianca.getSelectedRow(),0).toString().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Selecione uma Criança", "erro", JOptionPane.WARNING_MESSAGE);
+            }else{
+                crianca.setId(Integer.parseInt(tblCrianca.getValueAt(tblCrianca.getSelectedRow(),0).toString()));
+                int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: "+ tblCrianca.getValueAt(tblCrianca.getSelectedRow(),1).toString());
+                if(confirma ==0){
+                    try{
+                    criancaDAO.Excluir(crianca);
+                    tblAtendimentos.clearSelection();
+                    }catch(SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+                    }
+                    //atualizaTabelaAtendimento();
+            }
+        }    }//GEN-LAST:event_btnExcluirCriancaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
