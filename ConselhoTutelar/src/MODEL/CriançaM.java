@@ -11,9 +11,9 @@ public class CriançaM {
     private String Numero;
     private String Bairro;
     private String Telefone;
-    private int Atendimento_Id;
+    private AtendimentoM Atendimento_Id;
 
-    public CriançaM(int Id, String Nome, String DataNascimento, String Endereco, String Numero, String Bairro, String Telefone, int Atendimento_Id) {
+    public CriançaM(int Id, String Nome, String DataNascimento, String Endereco, String Numero, String Bairro, String Telefone, AtendimentoM Atendimento_Id) {
         this.Id = Id;
         this.Nome = Nome;
         this.DataNascimento = DataNascimento;
@@ -83,11 +83,11 @@ public class CriançaM {
         this.Telefone = Telefone;
     }
 
-    public int getAtendimento_Id() {
+    public AtendimentoM getAtendimento_Id() {
         return Atendimento_Id;
     }
 
-    public void setAtendimento_Id(int Atendimento_Id) {
+    public void setAtendimento_Id(AtendimentoM Atendimento_Id) {
         this.Atendimento_Id = Atendimento_Id;
     }
     

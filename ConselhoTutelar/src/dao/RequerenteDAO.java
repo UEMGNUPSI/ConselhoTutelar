@@ -104,7 +104,7 @@ public class RequerenteDAO {
     return listaTodos;
     }
     
-    public RequerenteM busca(int id) throws SQLException{
+    static public RequerenteM busca(int id) throws SQLException{
         PreparedStatement pst;
         String sql;
         RequerenteM requerente = null;

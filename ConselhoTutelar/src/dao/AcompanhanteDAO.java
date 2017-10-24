@@ -2,6 +2,7 @@
 package dao;
 
 import MODEL.AcompanhanteM;
+import MODEL.AtendimentoM;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +25,7 @@ public class AcompanhanteDAO {
         pst.setString(6, acompanhante.getBairro());
         pst.setString(7, acompanhante.getCidade());
         pst.setString(8, acompanhante.getEstado());
-        pst.setInt(9, acompanhante.getAtendimento_Id());
+        pst.setInt(9, acompanhante.getAtendimento_Id().getId());
         
         pst.execute();
         pst.close();
@@ -63,7 +64,7 @@ public class AcompanhanteDAO {
         pst.setString(5, acompanhante.getBairro());
         pst.setString(6, acompanhante.getCidade());
         pst.setString(7, acompanhante.getEstado());
-        pst.setInt(8, acompanhante.getAtendimento_Id());
+        pst.setInt(8, acompanhante.getAtendimento_Id().getId());
         
         pst.setInt(9, acompanhante.getId());
         pst.execute();
@@ -86,12 +87,13 @@ public class AcompanhanteDAO {
                                    rs.getString("Bairro"),
                                    rs.getString("Cidade"),
                                    rs.getString("Estado"),
-                                   rs.getInt("Atendimento_ID")));
+                                   AtendimentoDAO.Busca(rs.getInt("Atendimento_ID"))));
                                   
           }
     pst.close();
     return listaTodos;
     }
+    
     
         
 }

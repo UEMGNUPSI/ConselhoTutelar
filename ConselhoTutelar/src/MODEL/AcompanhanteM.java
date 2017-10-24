@@ -11,9 +11,9 @@ public class AcompanhanteM {
     private String Bairro;
     private String Cidade;
     private String Estado;
-    private int Atendimento_Id;
+    private AtendimentoM Atendimento_Id;
 
-    public AcompanhanteM(int Id, String Nome, String Telefone, String Endereco, String Numero, String Bairro, String Cidade, String Estado, int Atendimento_Id) {
+    public AcompanhanteM(int Id, String Nome, String Telefone, String Endereco, String Numero, String Bairro, String Cidade, String Estado, AtendimentoM Atendimento_Id) {
         this.Id = Id;
         this.Nome = Nome;
         this.Telefone = Telefone;
@@ -92,11 +92,11 @@ public class AcompanhanteM {
         this.Estado = Estado;
     }
 
-    public int getAtendimento_Id() {
+    public AtendimentoM getAtendimento_Id() {
         return Atendimento_Id;
     }
 
-    public void setAtendimento_Id(int Atendimento_Id) {
+    public void setAtendimento_Id(AtendimentoM Atendimento_Id) {
         this.Atendimento_Id = Atendimento_Id;
     }
     

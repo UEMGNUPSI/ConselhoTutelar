@@ -12,9 +12,9 @@ public class NucleoM {
     private String Telefone;
     private String Celular;
     private String Responsabilidade;
-    private int Atendimento_Id;
+    private AtendimentoM  Atendimento_Id;
 
-    public NucleoM(int Id, String Nome, String Parentesco, String Endereco, String Numero, String Bairro, String Telefone, String Celular, String Responsabilidade, int Atendimento_Id) {
+    public NucleoM(int Id, String Nome, String Parentesco, String Endereco, String Numero, String Bairro, String Telefone, String Celular, String Responsabilidade, AtendimentoM Atendimento_Id) {
         this.Id = Id;
         this.Nome = Nome;
         this.Parentesco = Parentesco;
@@ -102,11 +102,11 @@ public class NucleoM {
         this.Responsabilidade = Responsabilidade;
     }
 
-    public int getAtendimento_Id() {
+    public AtendimentoM getAtendimento_Id() {
         return Atendimento_Id;
     }
 
-    public void setAtendimento_Id(int Atendimento_Id) {
+    public void setAtendimento_Id(AtendimentoM Atendimento_Id) {
         this.Atendimento_Id = Atendimento_Id;
     }
     

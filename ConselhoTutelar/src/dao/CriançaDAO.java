@@ -2,6 +2,7 @@
 package dao;
 
 
+import MODEL.AtendimentoM;
 import MODEL.CriançaM;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +25,7 @@ public class CriançaDAO {
         pst.setString(5, criança.getNumero());
         pst.setString(6, criança.getBairro());
         pst.setString(7, criança.getTelefone());
-        pst.setInt(8, criança.getAtendimento_Id());
+        pst.setInt(8, criança.getAtendimento_Id().getId());
         
         pst.execute();
         pst.close();
@@ -61,7 +62,7 @@ public class CriançaDAO {
         pst.setString(4, criança.getNumero());
         pst.setString(5, criança.getBairro());
         pst.setString(6, criança.getTelefone());
-        pst.setInt(7, criança.getAtendimento_Id());
+        pst.setInt(7, criança.getAtendimento_Id().getId());
         
         pst.setInt(8, criança.getId());
         pst.execute();
@@ -84,12 +85,13 @@ public class CriançaDAO {
                                    rs.getString("Numero"),
                                    rs.getString("Bairro"),
                                    rs.getString("Telefone"),
-                                   rs.getInt("Atendimento_ID")));
+                                   AtendimentoDAO.Busca(rs.getInt("Atendimento_ID"))));
                                   
           }
     pst.close();
     return listaTodos;
     }
-    
+         
+                
     
 }

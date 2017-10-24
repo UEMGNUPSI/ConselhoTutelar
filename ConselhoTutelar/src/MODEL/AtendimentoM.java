@@ -7,9 +7,9 @@ public class AtendimentoM {
     private int Id;
     private String Data;
     private String RelatoResumido;
-    private int Requerente_id;
+    private RequerenteM Requerente_id;
 
-    public AtendimentoM(int Id, String Data, String RelatoResumido, int Requerente_id) {
+    public AtendimentoM(int Id, String Data, String RelatoResumido, RequerenteM Requerente_id) {
         this.Id = Id;
         this.Data = Data;
         this.RelatoResumido = RelatoResumido;
@@ -45,11 +45,11 @@ public class AtendimentoM {
         this.RelatoResumido = RelatoResumido;
     }
 
-    public int getRequerente_id() {
+    public RequerenteM getRequerente_id() {
         return Requerente_id;
     }
 
-    public void setRequerente_id(int Requerente_id) {
+    public void setRequerente_id(RequerenteM Requerente_id) {
         this.Requerente_id = Requerente_id;
     }
     

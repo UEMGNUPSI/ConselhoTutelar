@@ -25,7 +25,7 @@ public class NucleoDAO {
         pst.setString(7, nucleo.getTelefone());
         pst.setString(8, nucleo.getCelular());
         pst.setString(9, nucleo.getResponsabilidade());
-        pst.setInt(9, nucleo.getAtendimento_Id());
+        pst.setInt(9, nucleo.getAtendimento_Id().getId());
         pst.setInt(10, nucleo.getId());
         
         pst.execute();
@@ -66,7 +66,7 @@ public class NucleoDAO {
         pst.setString(6, nucleo.getTelefone());
         pst.setString(7, nucleo.getCelular());
         pst.setString(8, nucleo.getResponsabilidade());
-        pst.setInt(9, nucleo.getAtendimento_Id());
+        pst.setInt(9, nucleo.getAtendimento_Id().getId());
         
         pst.setInt(8, nucleo.getId());
         pst.execute();
@@ -90,7 +90,7 @@ public class NucleoDAO {
                                    rs.getString("Telefone"),
                                    rs.getString("Celular"),
                                    rs.getString("Responsabilidade"),
-                                   rs.getInt("Atendimento_ID")));
+                                   AtendimentoDAO.Busca(rs.getInt("Atendimento_ID"))));
                                   
           }
     pst.close();

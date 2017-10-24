@@ -20,7 +20,7 @@ public class AtendimentoDAO {
         pst.setInt(1,0);
         pst.setString(2, atendimento.getData());
         pst.setString(3, atendimento.getRelatoResumido());
-        pst.setInt(4, atendimento.getRequerente_id());
+        pst.setInt(4, atendimento.getRequerente_id().getId());
     
         pst.execute();
         pst.close();
@@ -49,7 +49,7 @@ public class AtendimentoDAO {
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setString(1, atendimento.getData());
         pst.setString(2, atendimento.getRelatoResumido());
-        pst.setInt(3, atendimento.getRequerente_id());
+        pst.setInt(3, atendimento.getRequerente_id().getId());
  
         pst.setInt(4, atendimento.getId());
         pst.execute();
@@ -68,13 +68,31 @@ public class AtendimentoDAO {
         listaTodos.add(new AtendimentoM(rs.getInt("ID"), 
                                    rs.getString("Data"),
                                    rs.getString("RelatoResumido"),
-                                   rs.getInt("Requerente_ID")));
+                                   RequerenteDAO.busca(rs.getInt("Requerente_ID"))));
                           
           }
     pst.close();
     return listaTodos;
     }
     
+    
+    static public AtendimentoM Busca(int id) throws SQLException{
+        String sql = "select * from Atendimento where ID = ?";
+        PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, id);
+        AtendimentoM atendimento = null;
+        ResultSet rs = pst.executeQuery();
+            while (rs.next()){
+            atendimento = new AtendimentoM(rs.getInt("ID"), 
+                                       rs.getString("Data"),
+                                       rs.getString("RelatoResumido"),
+                                       RequerenteDAO.busca(rs.getInt("Requerente_ID")));
+              }
+        pst.close();
+        return atendimento;
+    }
+        
+        
     
     
 }
