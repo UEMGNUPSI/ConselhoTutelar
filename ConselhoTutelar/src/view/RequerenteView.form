@@ -263,6 +263,9 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtBusca">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBuscaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtnBuscar">
           <Properties>
@@ -395,6 +398,9 @@
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxEstadoCivilActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

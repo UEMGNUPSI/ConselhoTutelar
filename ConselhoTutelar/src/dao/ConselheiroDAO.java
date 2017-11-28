@@ -100,7 +100,7 @@ public class ConselheiroDAO {
     return listaTodos;
     }
         
-    public ConselheiroM busca(int id) throws SQLException{
+    static public ConselheiroM busca(int id) throws SQLException{
         PreparedStatement pst;
         String sql;
         ConselheiroM conselheiro = null;

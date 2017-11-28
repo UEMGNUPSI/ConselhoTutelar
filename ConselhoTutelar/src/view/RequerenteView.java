@@ -55,6 +55,8 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             cbxEstadoCivil.addItem("Divorciado(a)");
 
     }
+    
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -176,6 +178,12 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(211, 211, 211));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 129, 164)), "Mais Informação"));
 
+        txtBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscaActionPerformed(evt);
+            }
+        });
+
         BtnBuscar.setText("Buscar");
         BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,6 +239,11 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         jLabel15.setText("Estado cívil:");
 
         cbxEstadoCivil.setEnabled(false);
+        cbxEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxEstadoCivilActionPerformed(evt);
+            }
+        });
 
         txtId.setEnabled(false);
 
@@ -683,6 +696,14 @@ public class RequerenteView extends javax.swing.JInternalFrame {
     private void txtTel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTel1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTel1ActionPerformed
+
+    private void cbxEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEstadoCivilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxEstadoCivilActionPerformed
+
+    private void txtBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaActionPerformed
+         // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscaActionPerformed
     
     public void AtualizaTabelaRequerente(){
         requerente = new RequerenteM();
@@ -767,8 +788,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             tblRequerente.updateUI();     
     }
     
-    
-    //Mascara que formata para regularizar como é inserido o telefone
+            //Mascara que formata para regularizar como é inserido o telefone
     public static DefaultFormatterFactory setFormatoTelefone(){  
         MaskFormatter comFoco = null;  
         try   
@@ -805,6 +825,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         DefaultFormatterFactory factory = new DefaultFormatterFactory(comFoco, comFoco);  
         return factory;  
     }
+
     
     
     public void limparCampos(){

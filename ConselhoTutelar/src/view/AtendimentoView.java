@@ -1,11 +1,22 @@
 package view;
 
+import MODEL.AcompanhanteM;
 import MODEL.AtendimentoM;
+import MODEL.ConselheiroM;
 import MODEL.CriançaM;
+import MODEL.DireitosM;
+import MODEL.NucleoM;
 import MODEL.RequerenteM;
+import dao.AcompanhanteDAO;
 import dao.AtendimentoDAO;
+import dao.ConselheiroDAO;
 import dao.CriançaDAO;
+import dao.DireitosDAO;
+import dao.NucleoDAO;
+import dao.RequerenteDAO;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
@@ -26,27 +37,74 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     List<CriançaM> listaCrianca = new ArrayList<>();
     
     RequerenteM requerente = new RequerenteM();
+    RequerenteDAO requerenteDao = new RequerenteDAO();
+    List<RequerenteM> listaRequerente = new ArrayList<>();
+    
+    ConselheiroM conselheiro = new ConselheiroM();
+    ConselheiroDAO conselheiroDao = new ConselheiroDAO();
+    List<ConselheiroM> listaConselheiro = new ArrayList<>();
+    
+    DireitosM direitos = new DireitosM();
+    DireitosDAO direitosDao = new DireitosDAO();
+    List<DireitosM> listaDireitos = new ArrayList<>();
+    
+    NucleoM nucleo = new NucleoM();
+    NucleoDAO nucleoDAO = new NucleoDAO();
+    
+    AcompanhanteM acompanhante = new AcompanhanteM();
+    AcompanhanteDAO acompanhanteDAO = new AcompanhanteDAO();
+    
     public AtendimentoView() {
         initComponents();
         this.setVisible(true);
-        dlgBusca.setSize(941, 508);
+        atualizaTabelaAtendimento();
+        AtualizaTabelaDireitos();
+        dlgBuscaRequerente.setSize(941, 508);
+        dlgBuscaConselheiro.setSize(941, 508);
+        dlgBuscaConselheiro2.setSize(941, 508);
+        txtAtendimentoIdRequerente.setVisible(false);
+        txtAtendimentoIdConselheiro1.setVisible(false);
+        txtAtendimentoIdConselheiro2.setVisible(false);
+        Data();
+        AtualizaTabelaBuscaRequerente();
+        AtualizaTabelaConselheiro();
+        AtualizaTabelaConselheiro2();
+        //atualizaTabelaCrianca();
+        
         //jTabbedPane1.setEnabled(false);
     } 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dlgBusca = new javax.swing.JDialog();
+        dlgBuscaRequerente = new javax.swing.JDialog();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblBusca = new javax.swing.JTable();
-        btnBusca = new javax.swing.JButton();
-        txtBusca = new javax.swing.JTextField();
+        tblBuscaRequerente = new javax.swing.JTable();
+        btnBuscaRequerente = new javax.swing.JButton();
+        txtBuscaRequerente = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        btnSelecionarRequerente = new javax.swing.JButton();
+        btnLimparRequerente = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane9 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        dlgBuscaConselheiro = new javax.swing.JDialog();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblBuscarConselheiro1 = new javax.swing.JTable();
+        btnSelecionarConselheiro1 = new javax.swing.JButton();
+        jLabel32 = new javax.swing.JLabel();
+        txtBuscaConselheiro = new javax.swing.JTextField();
+        btnBuscarConselheiro = new javax.swing.JButton();
+        btnLimparConselheiro = new javax.swing.JButton();
+        dlgBuscaConselheiro2 = new javax.swing.JDialog();
+        btnSelecionarConselheiro2 = new javax.swing.JButton();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        tblBuscarConselheiro2 = new javax.swing.JTable();
+        jLabel33 = new javax.swing.JLabel();
+        txtBuscaConselheiro2 = new javax.swing.JTextField();
+        btnBuscarConselheiro2 = new javax.swing.JButton();
+        btnLimparConselheiro2 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -69,10 +127,14 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jLabel30 = new javax.swing.JLabel();
         btnBuscarConselheiro1 = new javax.swing.JButton();
         txtConselheiroAtendimento1 = new javax.swing.JTextField();
-        txtConselheiroAtendimento2 = new javax.swing.JTextField();
-        btnBuscarConselheiro2 = new javax.swing.JButton();
         jLabel31 = new javax.swing.JLabel();
-        pnlBusca = new javax.swing.JPanel();
+        btnBuscarConselheiro3 = new javax.swing.JButton();
+        txtConselheiroAtendimento2 = new javax.swing.JTextField();
+        btnSalvarAvancar = new javax.swing.JButton();
+        txtAtendimentoIdRequerente = new javax.swing.JTextField();
+        txtAtendimentoIdConselheiro1 = new javax.swing.JTextField();
+        txtAtendimentoIdConselheiro2 = new javax.swing.JTextField();
+        pnlCrianca = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -99,10 +161,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         btnBuscarDireitos = new javax.swing.JButton();
         jScrollPane11 = new javax.swing.JScrollPane();
         tblDireitos1 = new javax.swing.JTable();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        tblDireitos2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSalvarFato = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         txtIdNucleo = new javax.swing.JTextField();
@@ -153,9 +212,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         btnExcluirAcompanhante = new javax.swing.JButton();
         btnCancelarAcompanhante = new javax.swing.JButton();
 
-        dlgBusca.setTitle("Buscar Requerente");
+        dlgBuscaRequerente.setTitle("Buscar Requerente");
 
-        tblBusca.setModel(new javax.swing.table.DefaultTableModel(
+        tblBuscaRequerente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -166,61 +225,86 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(tblBusca);
+        tblBuscaRequerente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBuscaRequerenteMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblBuscaRequerente);
 
-        btnBusca.setText("Buscar");
-
-        txtBusca.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscaRequerente.setText("Buscar");
+        btnBuscaRequerente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscaActionPerformed(evt);
+                btnBuscaRequerenteActionPerformed(evt);
+            }
+        });
+
+        txtBuscaRequerente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscaRequerenteActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Buscar");
 
-        jButton4.setText("Selecionar");
+        btnSelecionarRequerente.setText("Selecionar");
+        btnSelecionarRequerente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarRequerenteActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout dlgBuscaLayout = new javax.swing.GroupLayout(dlgBusca.getContentPane());
-        dlgBusca.getContentPane().setLayout(dlgBuscaLayout);
-        dlgBuscaLayout.setHorizontalGroup(
-            dlgBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlgBuscaLayout.createSequentialGroup()
-                .addGroup(dlgBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dlgBuscaLayout.createSequentialGroup()
+        btnLimparRequerente.setText("Limpar");
+        btnLimparRequerente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparRequerenteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dlgBuscaRequerenteLayout = new javax.swing.GroupLayout(dlgBuscaRequerente.getContentPane());
+        dlgBuscaRequerente.getContentPane().setLayout(dlgBuscaRequerenteLayout);
+        dlgBuscaRequerenteLayout.setHorizontalGroup(
+            dlgBuscaRequerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlgBuscaRequerenteLayout.createSequentialGroup()
+                .addGroup(dlgBuscaRequerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlgBuscaRequerenteLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane3))
-                    .addGroup(dlgBuscaLayout.createSequentialGroup()
-                        .addGroup(dlgBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(dlgBuscaLayout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel3)
-                                .addGap(10, 10, 10)
-                                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(btnBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(dlgBuscaLayout.createSequentialGroup()
-                                .addGap(403, 403, 403)
-                                .addComponent(jButton4)))
-                        .addGap(0, 447, Short.MAX_VALUE)))
+                    .addGroup(dlgBuscaRequerenteLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel3)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtBuscaRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnBuscaRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimparRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 350, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dlgBuscaRequerenteLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSelecionarRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(407, 407, 407))
         );
-        dlgBuscaLayout.setVerticalGroup(
-            dlgBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dlgBuscaLayout.createSequentialGroup()
+        dlgBuscaRequerenteLayout.setVerticalGroup(
+            dlgBuscaRequerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlgBuscaRequerenteLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(dlgBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dlgBuscaLayout.createSequentialGroup()
+                .addGroup(dlgBuscaRequerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlgBuscaRequerenteLayout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(jLabel3))
-                    .addGroup(dlgBuscaLayout.createSequentialGroup()
+                    .addGroup(dlgBuscaRequerenteLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnBusca))
+                        .addComponent(txtBuscaRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dlgBuscaRequerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBuscaRequerente)
+                        .addComponent(btnLimparRequerente)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(31, 31, 31))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSelecionarRequerente)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jLabel11.setText("jLabel11");
@@ -239,6 +323,196 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             }
         ));
         jScrollPane9.setViewportView(jTable2);
+
+        dlgBuscaConselheiro.setTitle("Buscar Conselheiro");
+
+        tblBuscarConselheiro1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblBuscarConselheiro1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBuscarConselheiro1MouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tblBuscarConselheiro1);
+
+        btnSelecionarConselheiro1.setText("Selecionar");
+        btnSelecionarConselheiro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarConselheiro1ActionPerformed(evt);
+            }
+        });
+
+        jLabel32.setText("Buscar");
+
+        txtBuscaConselheiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscaConselheiroActionPerformed(evt);
+            }
+        });
+
+        btnBuscarConselheiro.setText("Buscar");
+        btnBuscarConselheiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarConselheiroActionPerformed(evt);
+            }
+        });
+
+        btnLimparConselheiro.setText("Limpar");
+        btnLimparConselheiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparConselheiroActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dlgBuscaConselheiroLayout = new javax.swing.GroupLayout(dlgBuscaConselheiro.getContentPane());
+        dlgBuscaConselheiro.getContentPane().setLayout(dlgBuscaConselheiroLayout);
+        dlgBuscaConselheiroLayout.setHorizontalGroup(
+            dlgBuscaConselheiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlgBuscaConselheiroLayout.createSequentialGroup()
+                .addGroup(dlgBuscaConselheiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlgBuscaConselheiroLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane5))
+                    .addGroup(dlgBuscaConselheiroLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel32)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtBuscaConselheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnBuscarConselheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimparConselheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 351, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(dlgBuscaConselheiroLayout.createSequentialGroup()
+                .addGap(426, 426, 426)
+                .addComponent(btnSelecionarConselheiro1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        dlgBuscaConselheiroLayout.setVerticalGroup(
+            dlgBuscaConselheiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlgBuscaConselheiroLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(dlgBuscaConselheiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlgBuscaConselheiroLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel32))
+                    .addGroup(dlgBuscaConselheiroLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(txtBuscaConselheiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dlgBuscaConselheiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBuscarConselheiro)
+                        .addComponent(btnLimparConselheiro)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSelecionarConselheiro1)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        dlgBuscaConselheiro2.setTitle("Buscar Conselheiro 2");
+
+        btnSelecionarConselheiro2.setText("Selecionar");
+        btnSelecionarConselheiro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarConselheiro2ActionPerformed(evt);
+            }
+        });
+
+        tblBuscarConselheiro2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblBuscarConselheiro2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBuscarConselheiro2MouseClicked(evt);
+            }
+        });
+        jScrollPane10.setViewportView(tblBuscarConselheiro2);
+
+        jLabel33.setText("Buscar");
+
+        txtBuscaConselheiro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscaConselheiro2ActionPerformed(evt);
+            }
+        });
+
+        btnBuscarConselheiro2.setText("Buscar");
+        btnBuscarConselheiro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarConselheiro2ActionPerformed(evt);
+            }
+        });
+
+        btnLimparConselheiro2.setText("Limpar");
+        btnLimparConselheiro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparConselheiro2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dlgBuscaConselheiro2Layout = new javax.swing.GroupLayout(dlgBuscaConselheiro2.getContentPane());
+        dlgBuscaConselheiro2.getContentPane().setLayout(dlgBuscaConselheiro2Layout);
+        dlgBuscaConselheiro2Layout.setHorizontalGroup(
+            dlgBuscaConselheiro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlgBuscaConselheiro2Layout.createSequentialGroup()
+                .addGroup(dlgBuscaConselheiro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlgBuscaConselheiro2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane10))
+                    .addGroup(dlgBuscaConselheiro2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel33)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtBuscaConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnBuscarConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimparConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 336, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(dlgBuscaConselheiro2Layout.createSequentialGroup()
+                .addGap(426, 426, 426)
+                .addComponent(btnSelecionarConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        dlgBuscaConselheiro2Layout.setVerticalGroup(
+            dlgBuscaConselheiro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlgBuscaConselheiro2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(dlgBuscaConselheiro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlgBuscaConselheiro2Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel33))
+                    .addGroup(dlgBuscaConselheiro2Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(txtBuscaConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dlgBuscaConselheiro2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBuscarConselheiro2)
+                        .addComponent(btnLimparConselheiro2)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSelecionarConselheiro2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         setClosable(true);
         setTitle("Atendimento");
@@ -265,6 +539,11 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         });
 
         btnEditarAtendimento.setText("Editar Atendimento");
+        btnEditarAtendimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarAtendimentoActionPerformed(evt);
+            }
+        });
 
         btnExlucirAtendimento.setText("Excluir Atendimento");
         btnExlucirAtendimento.addActionListener(new java.awt.event.ActionListener() {
@@ -283,7 +562,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     .addComponent(btnNovoAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditarAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnExlucirAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -314,6 +593,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtRelatoAtendimento.setColumns(20);
         txtRelatoAtendimento.setRows(5);
         jScrollPane1.setViewportView(txtRelatoAtendimento);
+
+        txtDataAtendimento.setEnabled(false);
 
         btnBuscarRequerente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/lupa.png"))); // NOI18N
         btnBuscarRequerente.addActionListener(new java.awt.event.ActionListener() {
@@ -346,16 +627,29 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         txtConselheiroAtendimento1.setEnabled(false);
 
-        txtConselheiroAtendimento2.setEnabled(false);
+        jLabel31.setText("Conselheiro:");
 
-        btnBuscarConselheiro2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/lupa.png"))); // NOI18N
-        btnBuscarConselheiro2.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarConselheiro3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/lupa.png"))); // NOI18N
+        btnBuscarConselheiro3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarConselheiro2ActionPerformed(evt);
+                btnBuscarConselheiro3ActionPerformed(evt);
             }
         });
 
-        jLabel31.setText("Conselheiro:");
+        txtConselheiroAtendimento2.setEnabled(false);
+
+        btnSalvarAvancar.setText("Salvar e Avançar");
+        btnSalvarAvancar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarAvancarActionPerformed(evt);
+            }
+        });
+
+        txtAtendimentoIdRequerente.setEnabled(false);
+
+        txtAtendimentoIdConselheiro1.setEnabled(false);
+
+        txtAtendimentoIdConselheiro2.setEnabled(false);
 
         javax.swing.GroupLayout pnlAtendimentoLayout = new javax.swing.GroupLayout(pnlAtendimento);
         pnlAtendimento.setLayout(pnlAtendimentoLayout);
@@ -364,57 +658,68 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             .addGroup(pnlAtendimentoLayout.createSequentialGroup()
                 .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlAtendimentoLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDataAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel4)
-                        .addGap(5, 5, 5)
-                        .addComponent(txtIdAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(244, 244, 244)
+                        .addComponent(btnSalvarAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlAtendimentoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7)
-                        .addGap(9, 9, 9)
-                        .addComponent(btnBuscarRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(txtRequerenteAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlAtendimentoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel30)
-                        .addGap(9, 9, 9)
-                        .addComponent(btnBuscarConselheiro1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(txtConselheiroAtendimento1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlAtendimentoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnSalvarAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAtendimentoLayout.createSequentialGroup()
-                                .addComponent(jLabel31)
-                                .addGap(9, 9, 9)
-                                .addComponent(btnBuscarConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(txtConselheiroAtendimento2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addContainerGap())
+                        .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlAtendimentoLayout.createSequentialGroup()
+                                .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlAtendimentoLayout.createSequentialGroup()
+                                        .addGap(50, 50, 50)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtDataAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(25, 25, 25)
+                                        .addComponent(jLabel4)
+                                        .addGap(5, 5, 5)
+                                        .addComponent(txtIdAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlAtendimentoLayout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jLabel7)
+                                        .addGap(9, 9, 9)
+                                        .addComponent(btnBuscarRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(txtRequerenteAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlAtendimentoLayout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jLabel30)
+                                        .addGap(9, 9, 9)
+                                        .addComponent(btnBuscarConselheiro1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(txtConselheiroAtendimento1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlAtendimentoLayout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtAtendimentoIdRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel31)
+                                            .addComponent(txtAtendimentoIdConselheiro1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtAtendimentoIdConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(9, 9, 9)
+                                        .addComponent(btnBuscarConselheiro3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(txtConselheiroAtendimento2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAtendimentoLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnSalvarAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         pnlAtendimentoLayout.setVerticalGroup(
             pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAtendimentoLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(txtDataAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4)
-                    .addComponent(txtIdAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlAtendimentoLayout.createSequentialGroup()
+                        .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(txtDataAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4)
+                            .addComponent(txtIdAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10)
                         .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBuscarRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -433,22 +738,32 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                     .addComponent(txtConselheiroAtendimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBuscarConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscarConselheiro3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlAtendimentoLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel31)
                                     .addComponent(txtConselheiroAtendimento2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(191, 191, 191)
-                        .addComponent(btnSalvarAtendimento)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(63, 63, 63)
+                        .addComponent(txtAtendimentoIdRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtAtendimentoIdConselheiro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtAtendimentoIdConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(btnSalvarAvancar))
                     .addGroup(pnlAtendimentoLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addComponent(btnSalvarAtendimento)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Atendimento", pnlAtendimento);
+
+        pnlCrianca.setEnabled(false);
 
         jLabel2.setText("Nome:");
 
@@ -462,7 +777,19 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         jLabel13.setText("Telefone:");
 
+        txtNomeCrianca.setEnabled(false);
+
         txtIdCrianca.setEnabled(false);
+
+        txtNascimentoCrianca.setEnabled(false);
+
+        txtEnderecoCrianca.setEnabled(false);
+
+        txtNumeroCrianca.setEnabled(false);
+
+        txtBairroCrianca.setEnabled(false);
+
+        txtTelefoneCrianca.setEnabled(false);
 
         tblCrianca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -478,6 +805,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jScrollPane4.setViewportView(tblCrianca);
 
         btnSalvarCrianca.setText("Salvar");
+        btnSalvarCrianca.setEnabled(false);
         btnSalvarCrianca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarCriancaActionPerformed(evt);
@@ -485,8 +813,15 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         });
 
         btnAlterarCrianca.setText("Alterar");
+        btnAlterarCrianca.setEnabled(false);
+        btnAlterarCrianca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarCriancaActionPerformed(evt);
+            }
+        });
 
         btnExcluirCrianca.setText("Excluir");
+        btnExcluirCrianca.setEnabled(false);
         btnExcluirCrianca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirCriancaActionPerformed(evt);
@@ -494,6 +829,12 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         });
 
         btnCancelarCrianca.setText("Cancelar");
+        btnCancelarCrianca.setEnabled(false);
+        btnCancelarCrianca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarCriancaActionPerformed(evt);
+            }
+        });
 
         btnNovoCrianca.setText("Novo");
         btnNovoCrianca.addActionListener(new java.awt.event.ActionListener() {
@@ -502,16 +843,16 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout pnlBuscaLayout = new javax.swing.GroupLayout(pnlBusca);
-        pnlBusca.setLayout(pnlBuscaLayout);
-        pnlBuscaLayout.setHorizontalGroup(
-            pnlBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlBuscaLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlCriancaLayout = new javax.swing.GroupLayout(pnlCrianca);
+        pnlCrianca.setLayout(pnlCriancaLayout);
+        pnlCriancaLayout.setHorizontalGroup(
+            pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCriancaLayout.createSequentialGroup()
                 .addGap(117, 117, 117)
                 .addComponent(txtIdCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
-                .addGroup(pnlBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlBuscaLayout.createSequentialGroup()
+                .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlCriancaLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(9, 9, 9)
                         .addComponent(txtNomeCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -519,7 +860,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNascimentoCrianca))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlBuscaLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlCriancaLayout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtEnderecoCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -528,21 +869,21 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNumeroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(pnlBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pnlBuscaLayout.createSequentialGroup()
+                .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlCriancaLayout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtBairroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlBuscaLayout.createSequentialGroup()
+                    .addGroup(pnlCriancaLayout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTelefoneCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(238, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscaLayout.createSequentialGroup()
+                .addContainerGap(246, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCriancaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnlBuscaLayout.createSequentialGroup()
+            .addGroup(pnlCriancaLayout.createSequentialGroup()
                 .addGap(154, 154, 154)
                 .addComponent(btnNovoCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
@@ -555,20 +896,20 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addComponent(btnCancelarCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        pnlBuscaLayout.setVerticalGroup(
-            pnlBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlBuscaLayout.createSequentialGroup()
+        pnlCriancaLayout.setVerticalGroup(
+            pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCriancaLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(pnlBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addGroup(pnlBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtNomeCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5)
                         .addComponent(txtNascimentoCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel13)
                         .addComponent(txtTelefoneCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(pnlBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtEnderecoCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
@@ -579,7 +920,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(pnlBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvarCrianca)
                     .addComponent(btnAlterarCrianca)
                     .addComponent(btnExcluirCrianca)
@@ -588,7 +929,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Criança", pnlBusca);
+        jTabbedPane1.addTab("Criança", pnlCrianca);
 
         jLabel15.setText("Buscar:");
 
@@ -607,22 +948,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         ));
         jScrollPane11.setViewportView(tblDireitos1);
 
-        tblDireitos2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane12.setViewportView(tblDireitos2);
-
-        jButton1.setText(">");
-
-        jButton3.setText("<");
+        btnSalvarFato.setText("Salvar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -635,15 +961,16 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addComponent(txtBuscarDireitos, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBuscarDireitos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 250, Short.MAX_VALUE))
+                .addGap(0, 258, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(375, 375, 375)
+                        .addComponent(btnSalvarFato, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -653,19 +980,11 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel15)
                     .addComponent(txtBuscarDireitos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarDireitos))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(jButton1)
-                        .addGap(43, 43, 43)
-                        .addComponent(jButton3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSalvarFato)
+                .addGap(9, 9, 9))
         );
 
         jTabbedPane1.addTab("Fatos", jPanel1);
@@ -674,18 +993,26 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         jLabel14.setText("Nome:");
 
+        txtNomeNucleo.setEnabled(false);
+
         jLabel16.setText("Parentesco:");
+
+        txtParentescoNucleo.setEnabled(false);
 
         jLabel18.setText("Endereço:");
 
+        txtEnderecoNucleo.setEnabled(false);
+
         jLabel19.setText("Número:");
 
+        txtNumeroNucleo.setEnabled(false);
         txtNumeroNucleo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumeroNucleoActionPerformed(evt);
             }
         });
 
+        txtBairroNucleo.setEnabled(false);
         txtBairroNucleo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBairroNucleoActionPerformed(evt);
@@ -696,6 +1023,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         jLabel21.setText("Telefone:");
 
+        txtTelefoneNucleo.setEnabled(false);
         txtTelefoneNucleo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefoneNucleoActionPerformed(evt);
@@ -703,6 +1031,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         });
 
         jLabel22.setText("Responsabilidade:");
+
+        txtResponsabilidadeNucleo.setEnabled(false);
 
         tblNucleo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -718,16 +1048,47 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jScrollPane6.setViewportView(tblNucleo);
 
         btnNovoNucleo.setText("Novo");
+        btnNovoNucleo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoNucleoActionPerformed(evt);
+            }
+        });
 
         btnSalvarNucleo.setText("Salvar");
+        btnSalvarNucleo.setEnabled(false);
+        btnSalvarNucleo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarNucleoActionPerformed(evt);
+            }
+        });
 
         btnAlterarNucleo.setText("Alterar");
+        btnAlterarNucleo.setEnabled(false);
+        btnAlterarNucleo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarNucleoActionPerformed(evt);
+            }
+        });
 
         btnExcluirNucleo.setText("Excluir");
+        btnExcluirNucleo.setEnabled(false);
+        btnExcluirNucleo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirNucleoActionPerformed(evt);
+            }
+        });
 
         btnCancelarNucleo.setText("Cancelar");
+        btnCancelarNucleo.setEnabled(false);
+        btnCancelarNucleo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarNucleoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Celular:");
+
+        txtCelularNucleo.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -765,7 +1126,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel21)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtTelefoneNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtCelularNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -847,16 +1208,22 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         jLabel24.setText("Nome:");
 
+        txtNomeAcompanhante.setEnabled(false);
         txtNomeAcompanhante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeAcompanhanteActionPerformed(evt);
             }
         });
 
+        txtEnderecoAcompanhante.setEnabled(false);
+
         jLabel25.setText("Endereço:");
+
+        txtNumeroAcompanhante.setEnabled(false);
 
         jLabel26.setText("Número:");
 
+        txtBairroAcompanhante.setEnabled(false);
         txtBairroAcompanhante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBairroAcompanhanteActionPerformed(evt);
@@ -867,9 +1234,15 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         jLabel28.setText("Telefone:");
 
+        txtTelefoneAcompanhante.setEnabled(false);
+
         jLabel29.setText("Cidade:");
 
+        txtCidadeAcompanhante.setEnabled(false);
+
         jLabel23.setText("Estado:");
+
+        txtEstadoAcompanhante.setEnabled(false);
 
         tblAcompanhante.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -885,14 +1258,43 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jScrollPane7.setViewportView(tblAcompanhante);
 
         btnNovoAcompanhante.setText("Novo");
+        btnNovoAcompanhante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoAcompanhanteActionPerformed(evt);
+            }
+        });
 
         btnSalvarAcompanhante.setText("Salvar");
+        btnSalvarAcompanhante.setEnabled(false);
+        btnSalvarAcompanhante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarAcompanhanteActionPerformed(evt);
+            }
+        });
 
         btnAlterarAcompanhante.setText("Alterar");
+        btnAlterarAcompanhante.setEnabled(false);
+        btnAlterarAcompanhante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarAcompanhanteActionPerformed(evt);
+            }
+        });
 
         btnExcluirAcompanhante.setText("Excluir");
+        btnExcluirAcompanhante.setEnabled(false);
+        btnExcluirAcompanhante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirAcompanhanteActionPerformed(evt);
+            }
+        });
 
         btnCancelarAcompanhante.setText("Cancelar");
+        btnCancelarAcompanhante.setEnabled(false);
+        btnCancelarAcompanhante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarAcompanhanteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -949,7 +1351,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addComponent(btnExcluirAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(btnCancelarAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1020,23 +1422,26 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
     public void atualizaTabelaAtendimento(){
         atendimento = new AtendimentoM();
+        
         try {
             listaAtendimento = atendimentoDAO.ListaTodos();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
         }
         
-        String dados[][] = new String[listaAtendimento.size()][4];
+        String dados[][] = new String[listaAtendimento.size()][5];
             int i = 0;
             for (AtendimentoM atendimento : listaAtendimento) {
                 dados[i][0] = String.valueOf(atendimento.getId());
-                dados[i][1] = String.valueOf(atendimento.getRequerente_id());
+                dados[i][1] = String.valueOf(atendimento.getRequerente_id().getNome());
                 dados[i][2] = atendimento.getData();
-                dados[i][3] = atendimento.getRelatoResumido();
+                dados[i][3] = String.valueOf(atendimento.getConselheiro1_id().getNome());
+                dados[i][4] = String.valueOf(atendimento.getConselheiro2_id().getNome());
+                
                
                 i++;
             }
-            String tituloColuna[] = {"ID", "Requerente", "Data","Relato"};
+            String tituloColuna[] = {"ID", "Requerente", "Data", "Requerente1", "Requerente2"};
             DefaultTableModel tabelaFuncionario = new DefaultTableModel();
             tabelaFuncionario.setDataVector(dados, tituloColuna);
             tblAtendimentos.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -1077,7 +1482,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                
                 i++;
             }
-            String tituloColuna[] = {"ID", "Nome", "Data","Telefone"};
+            String tituloColuna[] = {"ID", "Nome", "Nascimento","Telefone"};
             DefaultTableModel tabelaFuncionario = new DefaultTableModel();
             tabelaFuncionario.setDataVector(dados, tituloColuna);
             tblAtendimentos.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -1100,12 +1505,56 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             tblAtendimentos.updateUI();
     }
     
-    private void txtBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaActionPerformed
+       public void AtualizaTabelaDireitos(){
+        direitos = new DireitosM();
+        
+        try {
+            listaDireitos = direitosDao.ListaTodos();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+        
+        String dados[][] = new String[listaDireitos.size()][3];
+            int i = 0;
+            for (DireitosM setor : listaDireitos) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNumero();
+                dados[i][2] = setor.getDescrição();
+                
+               
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Número", "Descrição"};
+            DefaultTableModel tabelaDireitos = new DefaultTableModel();
+            tabelaDireitos.setDataVector(dados, tituloColuna);
+            tblDireitos1.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblDireitos1.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblDireitos1.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblDireitos1.getColumnModel().getColumn(2).setPreferredWidth(15);
+      
+            
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblDireitos1.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblDireitos1.setRowHeight(25);
+            tblDireitos1.updateUI();
+    }
+    private void txtBuscaRequerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaRequerenteActionPerformed
        
-    }//GEN-LAST:event_txtBuscaActionPerformed
+    }//GEN-LAST:event_txtBuscaRequerenteActionPerformed
 
     private void btnBuscarRequerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRequerenteActionPerformed
-        dlgBusca.setVisible(true);
+        dlgBuscaRequerente.setVisible(true);
         
     }//GEN-LAST:event_btnBuscarRequerenteActionPerformed
 
@@ -1134,16 +1583,25 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtIdAcompanhanteActionPerformed
 
     private void btnNovoCriancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoCriancaActionPerformed
-        // TODO add your handling code here:
+        limparCamposCriança();
+        prepararNovoCriança();
+        ativaCamposCriança();
+        btnAlterarCrianca.setEnabled(false);
+        btnExcluirCrianca.setEnabled(false);
+        txtNomeCrianca.requestFocusInWindow();
     }//GEN-LAST:event_btnNovoCriancaActionPerformed
 
     private void btnSalvarCriancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarCriancaActionPerformed
         crianca = new CriançaM();
+        atendimento = new AtendimentoM();
+        AtendimentoView atendimentoview = new AtendimentoView();
+        
+        atendimento.setId(Integer.parseInt(txtIdAtendimento.getText()));
         if(txtNomeCrianca.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Preencha todos os obrigatórios !", "erro", JOptionPane.WARNING_MESSAGE);
         }
         else if(txtIdCrianca.getText().isEmpty()){
-            crianca.setId(Integer.parseInt(txtIdCrianca.getText()));
+            
             crianca.setNome(txtNomeCrianca.getText());
             crianca.setDataNascimento(txtNascimentoCrianca.getText());
             crianca.setTelefone(txtTelefoneCrianca.getText()); 
@@ -1151,6 +1609,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             crianca.setNumero(txtNumeroCrianca.getText());  
             crianca.setBairro(txtBairroCrianca.getText()); 
             crianca.setAtendimento_Id(atendimento);
+            
+            
             try{
                 criancaDAO.Salvar(crianca);
                 JOptionPane.showMessageDialog(null, "Gravado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
@@ -1158,8 +1618,33 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
                
             }
-            // atualiza tabela crianço
+            atualizaTabelaCrianca();
+            prepararSalvareCancelarCriança();
+            desativaCamposCriança();
+            limparCamposCriança();
+            }
+              else{
+            crianca.setNome(txtNomeCrianca.getText());
+            crianca.setDataNascimento(txtNascimentoCrianca.getText());
+            crianca.setTelefone(txtTelefoneCrianca.getText()); 
+            crianca.setEndereco(txtEnderecoCrianca.getText());  
+            crianca.setNumero(txtNumeroCrianca.getText());  
+            crianca.setBairro(txtBairroCrianca.getText()); 
+       
+            try{
+                criancaDAO.Alterar(crianca);
+                JOptionPane.showMessageDialog(null, "Alterado com sucesso!");  
+            }
+            catch (SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+            }
         }
+         atualizaTabelaCrianca();
+         prepararSalvareCancelarCriança();
+         desativaCamposCriança();
+        
+        
+        
     }//GEN-LAST:event_btnSalvarCriancaActionPerformed
 
     private void btnNovoAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoAtendimentoActionPerformed
@@ -1208,13 +1693,10 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarAtendimentoActionPerformed
 
     private void btnBuscarConselheiro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConselheiro1ActionPerformed
-        // TODO add your handling code here:
+       dlgBuscaConselheiro.setVisible(true);
     }//GEN-LAST:event_btnBuscarConselheiro1ActionPerformed
 
-    private void btnBuscarConselheiro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConselheiro2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarConselheiro2ActionPerformed
-
+    
     private void btnExcluirCriancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirCriancaActionPerformed
         crianca = new CriançaM();
         if(tblCrianca.getValueAt(tblCrianca.getSelectedRow(),0).toString().isEmpty()){
@@ -1233,14 +1715,879 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             }
         }    }//GEN-LAST:event_btnExcluirCriancaActionPerformed
 
+    private void btnBuscaRequerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaRequerenteActionPerformed
+        listaRequerente = null;
+        if(txtBuscaRequerente.getText().equals("") )
+        {
+            JOptionPane.showMessageDialog(null, "Preencha o campo corretamente! ", "erro", JOptionPane.WARNING_MESSAGE);
+            AtualizaTabelaRequerenteBusca();
+        }
+        else
+        {
+            try{
+                
+                listaRequerente = requerenteDao.FiltroBusca(txtBuscaRequerente.getText());
+                if(listaRequerente == null){
+                    
+                    JOptionPane.showMessageDialog(null, "Nenhum contato encontrado!","", JOptionPane.WARNING_MESSAGE);
+                    AtualizaTabelaRequerenteBusca();
+                    
+                }else{
+                    
+                AtualizaTabelaRequerenteBusca();
+                
+                }
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+            }
+            
+        }
+    }//GEN-LAST:event_btnBuscaRequerenteActionPerformed
 
+    private void tblBuscaRequerenteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBuscaRequerenteMouseClicked
+       
+    }//GEN-LAST:event_tblBuscaRequerenteMouseClicked
+
+    private void tblBuscarConselheiro1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBuscarConselheiro1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblBuscarConselheiro1MouseClicked
+
+    private void txtBuscaConselheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaConselheiroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscaConselheiroActionPerformed
+
+    private void btnBuscarConselheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConselheiroActionPerformed
+     listaConselheiro = null;
+        if(txtBuscaConselheiro.getText().equals("") )
+        {
+            JOptionPane.showMessageDialog(null, "Preencha o campo corretamente! ", "erro", JOptionPane.WARNING_MESSAGE);
+            AtualizaTabelaConselheiro();
+        }
+        else
+        {
+            try{
+                
+                listaConselheiro = conselheiroDao.FiltroBusca(txtBuscaConselheiro.getText());
+                if(listaConselheiro == null){
+                    
+                    JOptionPane.showMessageDialog(null, "Nenhum contato encontrado!","", JOptionPane.WARNING_MESSAGE);
+                    AtualizaTabelaConselheiro();
+                    
+                }else{
+                    
+                AtualizaTabelaConselheiro();
+                
+                }
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+            }
+            
+        }
+    }//GEN-LAST:event_btnBuscarConselheiroActionPerformed
+
+    private void btnLimparRequerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparRequerenteActionPerformed
+     txtBuscaRequerente.setText("");
+    AtualizaTabelaBuscaRequerente();
+    txtBuscaRequerente.requestFocusInWindow();
+    }//GEN-LAST:event_btnLimparRequerenteActionPerformed
+
+    private void btnLimparConselheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparConselheiroActionPerformed
+     txtBuscaConselheiro.setText("");
+    AtualizaTabelaConselheiro();
+    txtBuscaConselheiro.requestFocusInWindow();
+    }//GEN-LAST:event_btnLimparConselheiroActionPerformed
+
+    private void btnSalvarNucleoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarNucleoActionPerformed
+         nucleo = new NucleoM();
+        if(txtNomeNucleo.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha todos os obrigatórios !", "erro", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(txtIdNucleo.getText().isEmpty()){
+            
+            nucleo.setId(Integer.parseInt(txtIdNucleo.getText()));
+            nucleo.setNome(txtNomeNucleo.getText());
+            nucleo.setParentesco(txtParentescoNucleo.getText());
+            nucleo.setResponsabilidade(txtResponsabilidadeNucleo.getText());
+            nucleo.setEndereco(txtEnderecoNucleo.getText());
+            nucleo.setBairro(txtBairroNucleo.getText());
+            nucleo.setCelular(txtCelularNucleo.getText());
+            nucleo.setTelefone(txtTelefoneNucleo.getText());
+            nucleo.setAtendimento_Id(atendimento);
+     
+            try{
+                nucleoDAO.Salvar(nucleo);
+                JOptionPane.showMessageDialog(null, "Gravado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+               
+            }
+            // atualiza tabela nucleo
+             prepararSalvareCancelarNucleo();   
+            desativaCamposNucleo();
+            limparCamposNucleo();
+        }
+        
+         else{
+            nucleo.setId(Integer.parseInt(txtIdNucleo.getText()));
+            nucleo.setNome(txtNomeNucleo.getText());
+            nucleo.setParentesco(txtParentescoNucleo.getText());
+            nucleo.setResponsabilidade(txtResponsabilidadeNucleo.getText());
+            nucleo.setEndereco(txtEnderecoNucleo.getText());
+            nucleo.setBairro(txtBairroNucleo.getText());
+            nucleo.setCelular(txtCelularNucleo.getText());
+            nucleo.setTelefone(txtTelefoneNucleo.getText());
+            nucleo.setAtendimento_Id(atendimento);
+       
+            try{
+                nucleoDAO.Alterar(nucleo);
+                JOptionPane.showMessageDialog(null, "Alterado com sucesso!");  
+            }
+            catch (SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+            }
+        }
+       // atualiza tabela nucleo
+       prepararSalvareCancelarNucleo();
+       desativaCamposNucleo();
+    }//GEN-LAST:event_btnSalvarNucleoActionPerformed
+
+    private void tblBuscarConselheiro2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBuscarConselheiro2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblBuscarConselheiro2MouseClicked
+
+    private void txtBuscaConselheiro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaConselheiro2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscaConselheiro2ActionPerformed
+
+    private void btnBuscarConselheiro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConselheiro2ActionPerformed
+       listaConselheiro = null;
+        if(txtBuscaConselheiro2.getText().equals("") )
+        {
+            JOptionPane.showMessageDialog(null, "Preencha o campo corretamente! ", "erro", JOptionPane.WARNING_MESSAGE);
+            AtualizaTabelaConselheiro2();
+        }
+        else
+        {
+            try{
+                
+                listaConselheiro = conselheiroDao.FiltroBusca(txtBuscaConselheiro2.getText());
+                if(listaConselheiro == null){
+                    
+                    JOptionPane.showMessageDialog(null, "Nenhum contato encontrado!","", JOptionPane.WARNING_MESSAGE);
+                    AtualizaTabelaConselheiro2();
+                    
+                }else{
+                    
+                AtualizaTabelaConselheiroBusca2();
+                
+                }
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+            }
+            
+        }
+    }//GEN-LAST:event_btnBuscarConselheiro2ActionPerformed
+
+    private void btnLimparConselheiro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparConselheiro2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimparConselheiro2ActionPerformed
+
+    private void btnBuscarConselheiro3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarConselheiro3ActionPerformed
+    dlgBuscaConselheiro2.setVisible(true);
+    }//GEN-LAST:event_btnBuscarConselheiro3ActionPerformed
+
+    private void btnAlterarNucleoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarNucleoActionPerformed
+             prepararAlterarNucleo();
+        ativaCamposNucleo();
+        txtNomeNucleo.requestFocusInWindow(); 
+    }//GEN-LAST:event_btnAlterarNucleoActionPerformed
+
+    private void btnAlterarCriancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarCriancaActionPerformed
+     prepararAlterarCriança();
+     ativaCamposCriança();
+     txtNomeCrianca.requestFocusInWindow();
+    }//GEN-LAST:event_btnAlterarCriancaActionPerformed
+
+    private void btnExcluirNucleoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirNucleoActionPerformed
+        nucleo = new NucleoM();
+        if(tblNucleo.getValueAt(tblNucleo.getSelectedRow(),0).toString().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Selecione uma opção de Núcleo Familiar", "erro", JOptionPane.WARNING_MESSAGE);
+            }else{
+                nucleo.setId(Integer.parseInt(tblNucleo.getValueAt(tblNucleo.getSelectedRow(),0).toString()));
+                int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: "+ tblNucleo.getValueAt(tblNucleo.getSelectedRow(),1).toString());
+                if(confirma ==0){
+                    try{
+                    nucleoDAO.Excluir(nucleo);
+                    tblAtendimentos.clearSelection();
+                    }catch(SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+                    }
+                    //atualizaTabelaAtendimento();
+                }
+        }
+    }//GEN-LAST:event_btnExcluirNucleoActionPerformed
+
+    private void btnSalvarAcompanhanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAcompanhanteActionPerformed
+               acompanhante = new AcompanhanteM();
+        if(txtNomeAcompanhante.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha todos os obrigatórios !", "erro", JOptionPane.WARNING_MESSAGE);
+        }
+        else if(txtIdAcompanhante.getText().isEmpty()){
+            
+            acompanhante.setId(Integer.parseInt(txtIdAcompanhante.getText()));
+            acompanhante.setNome(txtNomeAcompanhante.getText());
+            acompanhante.setEndereco(txtEnderecoAcompanhante.getText());
+            acompanhante.setBairro(txtBairroAcompanhante.getText());
+            acompanhante.setNumero(txtNumeroAcompanhante.getText());
+            acompanhante.setCidade(txtCidadeAcompanhante.getText());
+            acompanhante.setEstado(txtEstadoAcompanhante.getText());
+            nucleo.setTelefone(txtTelefoneNucleo.getText());
+            nucleo.setAtendimento_Id(atendimento);
+     
+            try{
+                acompanhanteDAO.Salvar(acompanhante);
+                JOptionPane.showMessageDialog(null, "Gravado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+               
+            }
+            // atualiza tabela Acompanhante
+              prepararSalvareCancelarAcompanhante();
+              desativaCamposAcompanhante();
+              limparCamposAcompanhante();
+        }
+               else{
+            acompanhante.setId(Integer.parseInt(txtIdAcompanhante.getText()));
+            acompanhante.setNome(txtNomeAcompanhante.getText());
+            acompanhante.setEndereco(txtEnderecoAcompanhante.getText());
+            acompanhante.setBairro(txtBairroAcompanhante.getText());
+            acompanhante.setNumero(txtNumeroAcompanhante.getText());
+            acompanhante.setCidade(txtCidadeAcompanhante.getText());
+            acompanhante.setEstado(txtEstadoAcompanhante.getText());
+            nucleo.setTelefone(txtTelefoneNucleo.getText());
+            nucleo.setAtendimento_Id(atendimento);
+     
+       
+            try{
+                acompanhanteDAO.Alterar(acompanhante);
+                JOptionPane.showMessageDialog(null, "Alterado com sucesso!");  
+            }
+            catch (SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+            }
+        }
+       //AtualizaTabelaAcompanhante();
+       prepararSalvareCancelarAcompanhante();
+       desativaCamposAcompanhante();
+    }//GEN-LAST:event_btnSalvarAcompanhanteActionPerformed
+
+    private void btnExcluirAcompanhanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirAcompanhanteActionPerformed
+          acompanhante = new AcompanhanteM();
+        if(tblAcompanhante.getValueAt(tblAcompanhante.getSelectedRow(),0).toString().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Selecione um Acompanhante", "erro", JOptionPane.WARNING_MESSAGE);
+            }else{
+                acompanhante.setId(Integer.parseInt(tblAcompanhante.getValueAt(tblAcompanhante.getSelectedRow(),0).toString()));
+                int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: "+ tblAcompanhante.getValueAt(tblAcompanhante.getSelectedRow(),1).toString());
+                if(confirma ==0){
+                    try{
+                    acompanhanteDAO.Excluir(acompanhante);
+                    tblAtendimentos.clearSelection();
+                    }catch(SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+                    }
+                    //atualizaTabelaAtendimento();
+            }
+        }
+    }//GEN-LAST:event_btnExcluirAcompanhanteActionPerformed
+
+    private void btnCancelarCriancaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCriancaActionPerformed
+         limparCamposCriança();
+        prepararSalvareCancelarCriança();
+        desativaCamposCriança();
+    }//GEN-LAST:event_btnCancelarCriancaActionPerformed
+
+    private void btnNovoNucleoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoNucleoActionPerformed
+     limparCamposNucleo();
+    prepararNovoNucleo();
+    ativaCamposNucleo();
+    btnAlterarNucleo.setEnabled(false);
+    btnExcluirNucleo.setEnabled(false);
+    txtNomeNucleo.requestFocusInWindow(); 
+    }//GEN-LAST:event_btnNovoNucleoActionPerformed
+
+    private void btnCancelarNucleoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarNucleoActionPerformed
+          limparCamposNucleo();
+        prepararSalvareCancelarNucleo();
+        desativaCamposNucleo();
+    }//GEN-LAST:event_btnCancelarNucleoActionPerformed
+
+    private void btnNovoAcompanhanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoAcompanhanteActionPerformed
+     limparCamposAcompanhante();
+    prepararNovoAcompanhante();
+    ativaCamposAcompanhante();
+    btnAlterarAcompanhante.setEnabled(false);
+    btnExcluirAcompanhante.setEnabled(false);
+    txtNomeAcompanhante.requestFocusInWindow(); 
+    }//GEN-LAST:event_btnNovoAcompanhanteActionPerformed
+
+    private void btnAlterarAcompanhanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarAcompanhanteActionPerformed
+        prepararAlterarAcompanhante();
+        ativaCamposAcompanhante();
+        txtNomeAcompanhante.requestFocusInWindow(); 
+    }//GEN-LAST:event_btnAlterarAcompanhanteActionPerformed
+
+    private void btnCancelarAcompanhanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarAcompanhanteActionPerformed
+       limparCamposAcompanhante();
+        prepararSalvareCancelarAcompanhante();
+        desativaCamposAcompanhante();
+    }//GEN-LAST:event_btnCancelarAcompanhanteActionPerformed
+
+    private void btnSelecionarRequerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarRequerenteActionPerformed
+     txtRequerenteAtendimento.setText(tblBuscaRequerente.getValueAt(tblBuscaRequerente.getSelectedRow(),1).toString()); 
+     txtAtendimentoIdRequerente.setText(tblBuscaRequerente.getValueAt(tblBuscaRequerente.getSelectedRow(),0).toString()); 
+     //requerente.setId(Integer.parseInt(tblBuscaRequerente.getValueAt(tblBuscaRequerente.getSelectedRow(),0).toString()));
+     dlgBuscaRequerente.dispose();
+    }//GEN-LAST:event_btnSelecionarRequerenteActionPerformed
+
+    private void btnSelecionarConselheiro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarConselheiro1ActionPerformed
+    txtConselheiroAtendimento1.setText(tblBuscarConselheiro1.getValueAt(tblBuscarConselheiro1.getSelectedRow(),1).toString()); 
+    txtAtendimentoIdConselheiro1.setText(tblBuscarConselheiro1.getValueAt(tblBuscarConselheiro1.getSelectedRow(),0).toString()); 
+     //conselheiro.setId(Integer.parseInt(tblBuscarConselheiro1.getValueAt(tblBuscarConselheiro1.getSelectedRow(),0).toString()));
+     dlgBuscaConselheiro.dispose();
+    }//GEN-LAST:event_btnSelecionarConselheiro1ActionPerformed
+
+    private void btnSelecionarConselheiro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarConselheiro2ActionPerformed
+     txtConselheiroAtendimento2.setText(tblBuscarConselheiro2.getValueAt(tblBuscarConselheiro2.getSelectedRow(),1).toString()); 
+     txtAtendimentoIdConselheiro2.setText(tblBuscarConselheiro2.getValueAt(tblBuscarConselheiro2.getSelectedRow(),0).toString());
+     //conselheiro.setId(Integer.parseInt(tblBuscarConselheiro2.getValueAt(tblBuscarConselheiro2.getSelectedRow(),0).toString()));
+     dlgBuscaConselheiro2.dispose();
+    }//GEN-LAST:event_btnSelecionarConselheiro2ActionPerformed
+
+    private void btnSalvarAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAvancarActionPerformed
+        
+        RequerenteM requerente = new RequerenteM();
+        atendimento = new AtendimentoM();
+        requerente = new RequerenteM();
+        ConselheiroM conselheiro = new ConselheiroM();
+        if (txtRequerenteAtendimento.getText().isEmpty() || txtRelatoAtendimento.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!"); 
+                  
+        }
+        else if (txtIdAtendimento.getText().isEmpty()){
+            atendimento.setData(txtDataAtendimento.getText());
+            
+            requerente.setId(Integer.parseInt(txtAtendimentoIdRequerente.getText()));
+            atendimento.setRequerente_id(requerente);
+            
+            atendimento.setRelatoResumido(txtRelatoAtendimento.getText());
+            
+            conselheiro.setId(Integer.parseInt(txtAtendimentoIdConselheiro1.getText()));
+            atendimento.setConselheiro1_id(conselheiro);
+            
+            conselheiro.setId(Integer.parseInt(txtAtendimentoIdConselheiro2.getText()));
+            atendimento.setConselheiro2_id(conselheiro);
+            
+      
+            try{
+                txtIdAtendimento.setText(String.valueOf(AtendimentoDAO.Salvar(atendimento)));
+                JOptionPane.showMessageDialog(null, "Gravado com sucesso!");
+                jTabbedPane1.setSelectedIndex(2);
+                
+            }
+            catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+            }
+            atualizaTabelaAtendimento();
+       }
+        
+        
+    }//GEN-LAST:event_btnSalvarAvancarActionPerformed
+
+    private void btnEditarAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAtendimentoActionPerformed
+   
+    
+    }//GEN-LAST:event_btnEditarAtendimentoActionPerformed
+
+     public void AtualizaTabelaBuscaRequerente(){
+        requerente = new RequerenteM();
+        
+        try {
+            listaRequerente = requerenteDao.ListaTodos();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+        
+        String dados[][] = new String[listaRequerente.size()][7];
+            int i = 0;
+            for (RequerenteM setor : listaRequerente) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNome();
+                dados[i][2] = setor.getTelefone1();
+                dados[i][3] = setor.getEndereço();
+                dados[i][4] = setor.getCidade();
+                dados[i][5] = setor.getEstado();
+                dados[i][6] = setor.getEstadoCivil();
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Nome", "Telefone 1", "Endereço", "Cidade", "Estado","Estado Civil"};
+            DefaultTableModel tabelaRequerente = new DefaultTableModel();
+            tabelaRequerente.setDataVector(dados, tituloColuna);
+            tblBuscaRequerente.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, false,false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblBuscaRequerente.getColumnModel().getColumn(0).setPreferredWidth(10);
+            
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblBuscaRequerente.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblBuscaRequerente.setRowHeight(25);
+            tblBuscaRequerente.updateUI();     
+    }
+     
+     public void AtualizaTabelaRequerenteBusca(){
+        requerente = new RequerenteM();
+
+        
+        String dados[][] = new String[listaRequerente.size()][7];
+            int i = 0;
+            for (RequerenteM setor : listaRequerente) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNome();
+                dados[i][2] = setor.getTelefone1();
+                dados[i][3] = setor.getEndereço();
+                dados[i][4] = setor.getCidade();
+                dados[i][5] = setor.getEstado();
+                dados[i][6] = setor.getEstadoCivil();
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Nome", "Telefone 1", "Endereço", "Cidade", "Estado","Estado Civil"};
+            DefaultTableModel tabelaRequerente = new DefaultTableModel();
+            tabelaRequerente.setDataVector(dados, tituloColuna);
+            tblBuscaRequerente.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, false,false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblBuscaRequerente.getColumnModel().getColumn(0).setPreferredWidth(10);
+            
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblBuscaRequerente.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblBuscaRequerente.setRowHeight(25);
+            tblBuscaRequerente.updateUI();     
+    }
+     
+     
+     public void AtualizaTabelaConselheiro(){
+        conselheiro = new ConselheiroM();
+        
+        try {
+            listaConselheiro = conselheiroDao.ListaTodos();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+        
+        String dados[][] = new String[listaConselheiro.size()][5];
+            int i = 0;
+            for (ConselheiroM setor : listaConselheiro) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNome();
+                dados[i][2] = setor.getTelefone();
+                dados[i][3] = setor.getCelular();
+                dados[i][4] = setor.getLogin();
+
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Nome", "Telefone", "Celular", "Login"};
+            DefaultTableModel tabelaConselheiro = new DefaultTableModel();
+            tabelaConselheiro.setDataVector(dados, tituloColuna);
+            tblBuscarConselheiro1.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false,false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblBuscarConselheiro1.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblBuscarConselheiro1.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblBuscarConselheiro1.getColumnModel().getColumn(2).setPreferredWidth(15);
+      
+            
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblBuscarConselheiro1.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblBuscarConselheiro1.setRowHeight(25);
+            tblBuscarConselheiro1.updateUI();
+    }
+     
+      public void AtualizaTabelaConselheiroBusca(){
+        conselheiro = new ConselheiroM();
+
+        
+        String dados[][] = new String[listaConselheiro.size()][5];
+            int i = 0;
+            for (ConselheiroM setor : listaConselheiro) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNome();
+                dados[i][2] = setor.getTelefone();
+                dados[i][3] = setor.getCelular();
+                dados[i][4] = setor.getLogin();
+
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Nome", "Telefone", "Celular", "Login"};
+            DefaultTableModel tabelaConselheiro = new DefaultTableModel();
+            tabelaConselheiro.setDataVector(dados, tituloColuna);
+            tblBuscarConselheiro1.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false,false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblBuscarConselheiro1.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblBuscarConselheiro1.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblBuscarConselheiro1.getColumnModel().getColumn(2).setPreferredWidth(15);
+      
+            
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblBuscarConselheiro1.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblBuscarConselheiro1.setRowHeight(25);
+            tblBuscarConselheiro1.updateUI();  
+    }
+      
+      public void AtualizaTabelaConselheiro2(){
+        conselheiro = new ConselheiroM();
+        
+        try {
+            listaConselheiro = conselheiroDao.ListaTodos();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+        
+        String dados[][] = new String[listaConselheiro.size()][5];
+            int i = 0;
+            for (ConselheiroM setor : listaConselheiro) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNome();
+                dados[i][2] = setor.getTelefone();
+                dados[i][3] = setor.getCelular();
+                dados[i][4] = setor.getLogin();
+
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Nome", "Telefone", "Celular", "Login"};
+            DefaultTableModel tabelaConselheiro = new DefaultTableModel();
+            tabelaConselheiro.setDataVector(dados, tituloColuna);
+            tblBuscarConselheiro2.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false,false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblBuscarConselheiro2.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblBuscarConselheiro2.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblBuscarConselheiro2.getColumnModel().getColumn(2).setPreferredWidth(15);
+      
+            
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblBuscarConselheiro2.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblBuscarConselheiro2.setRowHeight(25);
+            tblBuscarConselheiro2.updateUI();
+    }
+      
+          public void AtualizaTabelaConselheiroBusca2(){
+        conselheiro = new ConselheiroM();
+
+        
+        String dados[][] = new String[listaConselheiro.size()][5];
+            int i = 0;
+            for (ConselheiroM setor : listaConselheiro) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNome();
+                dados[i][2] = setor.getTelefone();
+                dados[i][3] = setor.getCelular();
+                dados[i][4] = setor.getLogin();
+
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Nome", "Telefone", "Celular", "Login"};
+            DefaultTableModel tabelaConselheiro = new DefaultTableModel();
+            tabelaConselheiro.setDataVector(dados, tituloColuna);
+            tblBuscarConselheiro2.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false,false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblBuscarConselheiro2.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblBuscarConselheiro2.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblBuscarConselheiro2.getColumnModel().getColumn(2).setPreferredWidth(15);
+      
+            
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblBuscarConselheiro2.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblBuscarConselheiro2.setRowHeight(25);
+            tblBuscarConselheiro2.updateUI();  
+    }
+          
+      public void Data(){
+           txtDataAtendimento.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(System.currentTimeMillis())));
+      }
+      
+       public void limparCamposCriança(){
+        txtIdCrianca.setText("");
+        txtNascimentoCrianca.setText("");
+        txtTelefoneCrianca.setText("");
+        txtEnderecoCrianca.setText("");
+        txtBairroCrianca.setText("");
+        txtTelefoneCrianca.setText("");
+    }
+    
+    public void ativaCamposCriança(){
+        //txtIdCrianca.setEnabled(true);
+        txtNomeCrianca.setEnabled(true);
+        txtNascimentoCrianca.setEnabled(true);
+        txtTelefoneCrianca.setEnabled(true);
+        txtEnderecoCrianca.setEnabled(true);
+        txtNumeroCrianca.setEnabled(true);
+        txtBairroCrianca.setEnabled(true);
+    }
+    
+     public void desativaCamposCriança(){
+        //txtIdCrianca.setEnabled(false);
+        txtNomeCrianca.setEnabled(false);
+        txtNascimentoCrianca.setEnabled(false);
+        txtTelefoneCrianca.setEnabled(false);
+        txtEnderecoCrianca.setEnabled(false);
+        txtNumeroCrianca.setEnabled(false);
+        txtBairroCrianca.setEnabled(false);
+    }
+     
+       
+    public void prepararNovoCriança() {
+       btnNovoCrianca.setEnabled(false);
+       btnSalvarCrianca.setEnabled(true);
+       btnCancelarCrianca.setEnabled(true);
+       tblCrianca.setEnabled(false);
+       tblCrianca.clearSelection();
+    }
+   
+    public void prepararSalvareCancelarCriança() {
+       btnNovoCrianca.setEnabled(true);
+       btnSalvarCrianca.setEnabled(false);
+       btnCancelarCrianca.setEnabled(false);
+       tblCrianca.setEnabled(true);
+    }
+   
+    public void prepararSelecaoTabelaCriança(){
+       btnNovoCrianca.setEnabled(true);
+       btnExcluirCrianca.setEnabled(true);
+       btnAlterarCrianca.setEnabled(true);
+    }
+   
+    public void prepararAlterarCriança(){
+       btnNovoCrianca.setEnabled(false);
+       btnExcluirCrianca.setEnabled(false);
+       btnAlterarCrianca.setEnabled(false);
+       btnSalvarCrianca.setEnabled(true);
+       btnCancelarCrianca.setEnabled(true);
+       tblCrianca.setEnabled(false);
+       tblCrianca.clearSelection();
+    }
+   
+    public void prepararExcluirCriança(){
+       btnExcluirCrianca.setEnabled(false);
+       btnAlterarCrianca.setEnabled(false);
+    }
+    
+    public void limparCamposNucleo(){
+        txtIdNucleo.setText("");
+        txtNomeNucleo.setText("");
+        txtParentescoNucleo.setText("");
+        txtResponsabilidadeNucleo.setText("");
+        txtEnderecoNucleo.setText("");
+        txtNumeroNucleo.setText("");
+        txtBairroNucleo.setText("");
+        txtTelefoneNucleo.setText("");
+        txtCelularNucleo.setText("");
+    }
+    
+    public void ativaCamposNucleo(){
+        //txtIdNucleo.setEnabled(true);
+        txtNomeNucleo.setEnabled(true);
+        txtParentescoNucleo.setEnabled(true);
+        txtResponsabilidadeNucleo.setEnabled(true);
+        txtEnderecoNucleo.setEnabled(true);
+        txtNumeroNucleo.setEnabled(true);
+        txtBairroNucleo.setEnabled(true);
+        txtTelefoneNucleo.setEnabled(true);
+        txtCelularNucleo.setEnabled(true);
+    }
+    
+     public void desativaCamposNucleo(){
+        //txtIdNucleo.setEnabled(false);
+        txtNomeNucleo.setEnabled(false);
+        txtParentescoNucleo.setEnabled(false);
+        txtResponsabilidadeNucleo.setEnabled(false);
+        txtEnderecoNucleo.setEnabled(false);
+        txtNumeroNucleo.setEnabled(false);
+        txtBairroNucleo.setEnabled(false);
+        txtTelefoneNucleo.setEnabled(false);
+        txtCelularNucleo.setEnabled(false);
+    }
+     
+       
+    public void prepararNovoNucleo() {
+       btnNovoNucleo.setEnabled(false);
+       btnSalvarNucleo.setEnabled(true);
+       btnCancelarNucleo.setEnabled(true);
+       tblNucleo.setEnabled(false);
+       tblNucleo.clearSelection();
+    }
+   
+    public void prepararSalvareCancelarNucleo() {
+       btnNovoNucleo.setEnabled(true);
+       btnSalvarNucleo.setEnabled(false);
+       btnCancelarNucleo.setEnabled(false);
+       tblNucleo.setEnabled(true);
+    }
+   
+    public void prepararSelecaoTabelaNucleo(){
+       btnNovoNucleo.setEnabled(true);
+       btnExcluirNucleo.setEnabled(true);
+       btnAlterarNucleo.setEnabled(true);
+    }
+   
+    public void prepararAlterarNucleo(){
+       btnNovoNucleo.setEnabled(false);
+       btnExcluirNucleo.setEnabled(false);
+       btnAlterarNucleo.setEnabled(false);
+       btnSalvarNucleo.setEnabled(true);
+       btnCancelarNucleo.setEnabled(true);
+       tblNucleo.setEnabled(false);
+       tblNucleo.clearSelection();
+    }
+   
+    public void prepararExcluirNucleo(){
+       btnExcluirNucleo.setEnabled(false);
+       btnAlterarNucleo.setEnabled(false);
+    }
+    
+    public void limparCamposAcompanhante(){
+        txtIdAcompanhante.setText("");
+        txtNomeAcompanhante.setText("");
+        txtEnderecoAcompanhante.setText("");
+        txtNumeroAcompanhante.setText("");
+        txtBairroAcompanhante.setText("");
+        txtCidadeAcompanhante.setText("");
+        txtEstadoAcompanhante.setText("");
+        txtTelefoneAcompanhante.setText("");
+ 
+    }
+    
+    public void ativaCamposAcompanhante(){
+        //txtIdAcompanhante.setEnabled(true);
+        txtNomeAcompanhante.setEnabled(true);
+        txtEnderecoAcompanhante.setEnabled(true);
+        txtNumeroAcompanhante.setEnabled(true);
+        txtBairroAcompanhante.setEnabled(true);
+        txtCidadeAcompanhante.setEnabled(true);
+        txtEstadoAcompanhante.setEnabled(true);
+        txtTelefoneAcompanhante.setEnabled(true);
+    }
+    
+     public void desativaCamposAcompanhante(){
+        //txtIdAcompanhante.setEnabled(false);
+        txtNomeAcompanhante.setEnabled(false);
+        txtEnderecoAcompanhante.setEnabled(false);
+        txtNumeroAcompanhante.setEnabled(false);
+        txtBairroAcompanhante.setEnabled(false);
+        txtCidadeAcompanhante.setEnabled(false);
+        txtEstadoAcompanhante.setEnabled(false);
+        txtTelefoneAcompanhante.setEnabled(false);
+    }
+     
+       
+    public void prepararNovoAcompanhante() {
+       btnNovoAcompanhante.setEnabled(false);
+       btnSalvarAcompanhante.setEnabled(true);
+       btnCancelarAcompanhante.setEnabled(true);
+       tblAcompanhante.setEnabled(false);
+       tblAcompanhante.clearSelection();
+    }
+   
+    public void prepararSalvareCancelarAcompanhante() {
+       btnNovoAcompanhante.setEnabled(true);
+       btnSalvarAcompanhante.setEnabled(false);
+       btnCancelarAcompanhante.setEnabled(false);
+       tblAcompanhante.setEnabled(true);
+    }
+   
+    public void prepararSelecaoTabelaAcompanhante(){
+       btnNovoAcompanhante.setEnabled(true);
+       btnExcluirAcompanhante.setEnabled(true);
+       btnAlterarAcompanhante.setEnabled(true);
+    }
+   
+    public void prepararAlterarAcompanhante(){
+       btnNovoAcompanhante.setEnabled(false);
+       btnExcluirAcompanhante.setEnabled(false);
+       btnAlterarAcompanhante.setEnabled(false);
+       btnSalvarAcompanhante.setEnabled(true);
+       btnCancelarAcompanhante.setEnabled(true);
+       tblAcompanhante.setEnabled(false);
+       tblAcompanhante.clearSelection();
+    }
+   
+    public void prepararExcluirAcompanhante(){
+       btnExcluirAcompanhante.setEnabled(false);
+       btnAlterarAcompanhante.setEnabled(false);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarAcompanhante;
     private javax.swing.JButton btnAlterarCrianca;
     private javax.swing.JButton btnAlterarNucleo;
-    private javax.swing.JButton btnBusca;
+    private javax.swing.JButton btnBuscaRequerente;
+    private javax.swing.JButton btnBuscarConselheiro;
     private javax.swing.JButton btnBuscarConselheiro1;
     private javax.swing.JButton btnBuscarConselheiro2;
+    private javax.swing.JButton btnBuscarConselheiro3;
     private javax.swing.JButton btnBuscarDireitos;
     private javax.swing.JButton btnBuscarRequerente;
     private javax.swing.JButton btnCancelarAcompanhante;
@@ -1251,19 +2598,26 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnExcluirCrianca;
     private javax.swing.JButton btnExcluirNucleo;
     private javax.swing.JButton btnExlucirAtendimento;
+    private javax.swing.JButton btnLimparConselheiro;
+    private javax.swing.JButton btnLimparConselheiro2;
+    private javax.swing.JButton btnLimparRequerente;
     private javax.swing.JButton btnNovoAcompanhante;
     private javax.swing.JButton btnNovoAtendimento;
     private javax.swing.JButton btnNovoCrianca;
     private javax.swing.JButton btnNovoNucleo;
     private javax.swing.JButton btnSalvarAcompanhante;
     private javax.swing.JButton btnSalvarAtendimento;
+    private javax.swing.JButton btnSalvarAvancar;
     private javax.swing.JButton btnSalvarCrianca;
+    private javax.swing.JButton btnSalvarFato;
     private javax.swing.JButton btnSalvarNucleo;
-    private javax.swing.JDialog dlgBusca;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSelecionarConselheiro1;
+    private javax.swing.JButton btnSelecionarConselheiro2;
+    private javax.swing.JButton btnSelecionarRequerente;
+    private javax.swing.JDialog dlgBuscaConselheiro;
+    private javax.swing.JDialog dlgBuscaConselheiro2;
+    private javax.swing.JDialog dlgBuscaRequerente;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1289,6 +2643,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1300,10 +2656,11 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
-    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
@@ -1311,18 +2668,24 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
     private javax.swing.JPanel pnlAtendimento;
-    private javax.swing.JPanel pnlBusca;
+    private javax.swing.JPanel pnlCrianca;
     private javax.swing.JTable tblAcompanhante;
     private javax.swing.JTable tblAtendimentos;
-    private javax.swing.JTable tblBusca;
+    private javax.swing.JTable tblBuscaRequerente;
+    private javax.swing.JTable tblBuscarConselheiro1;
+    private javax.swing.JTable tblBuscarConselheiro2;
     private javax.swing.JTable tblCrianca;
     private javax.swing.JTable tblDireitos1;
-    private javax.swing.JTable tblDireitos2;
     private javax.swing.JTable tblNucleo;
+    private javax.swing.JTextField txtAtendimentoIdConselheiro1;
+    private javax.swing.JTextField txtAtendimentoIdConselheiro2;
+    private javax.swing.JTextField txtAtendimentoIdRequerente;
     private javax.swing.JTextField txtBairroAcompanhante;
     private javax.swing.JTextField txtBairroCrianca;
     private javax.swing.JTextField txtBairroNucleo;
-    private javax.swing.JTextField txtBusca;
+    private javax.swing.JTextField txtBuscaConselheiro;
+    private javax.swing.JTextField txtBuscaConselheiro2;
+    private javax.swing.JTextField txtBuscaRequerente;
     private javax.swing.JTextField txtBuscarDireitos;
     private javax.swing.JTextField txtCelularNucleo;
     private javax.swing.JTextField txtCidadeAcompanhante;

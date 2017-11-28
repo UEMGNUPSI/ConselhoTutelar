@@ -59,8 +59,8 @@ public class PrincipalView extends javax.swing.JFrame {
         pnlLayout.setVerticalGroup(
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLayout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 42, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 58, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnl);

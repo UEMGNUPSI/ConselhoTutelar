@@ -500,7 +500,6 @@ public class DireitosView extends javax.swing.JInternalFrame {
     
     public void limparCampos(){
         txtId.setText("");
-        txtId.setText("");
         txtArtigo.setText("");
         txtDescricao.setText("");
     }

@@ -12,18 +12,26 @@ import java.util.List;
 public class AtendimentoDAO {
     
     
-    public void Salvar (AtendimentoM atendimento) throws SQLException{
+    static public int Salvar (AtendimentoM atendimento) throws SQLException{
         PreparedStatement pst;
         String sql;
-        sql = "insert into Atendimento values (?,?,?,?)";
-        pst = Conexao.getInstance().prepareStatement(sql);
+        int idAtendimento = 0;
+        sql = "insert into Atendimento values (?,?,?,?,?,?)";
+        pst = pst = Conexao.getInstance().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         pst.setInt(1,0);
         pst.setString(2, atendimento.getData());
         pst.setString(3, atendimento.getRelatoResumido());
         pst.setInt(4, atendimento.getRequerente_id().getId());
-    
+        pst.setInt(5, atendimento.getConselheiro1_id().getId());
+        pst.setInt(6, atendimento.getConselheiro2_id().getId());
         pst.execute();
+        ResultSet rs = pst.getGeneratedKeys();
+        while (rs.next()) {
+            idAtendimento = rs.getInt(1);
+        }
         pst.close();
+        return idAtendimento;
+    
     }
     
      public void Excluir(AtendimentoM atendimento) throws SQLException{
@@ -68,7 +76,9 @@ public class AtendimentoDAO {
         listaTodos.add(new AtendimentoM(rs.getInt("ID"), 
                                    rs.getString("Data"),
                                    rs.getString("RelatoResumido"),
-                                   RequerenteDAO.busca(rs.getInt("Requerente_ID"))));
+                                   RequerenteDAO.busca(rs.getInt("Requerente_ID")),
+                                   ConselheiroDAO.busca(rs.getInt("Conselheiro1_ID")),
+                                   ConselheiroDAO.busca(rs.getInt("Conselheiro2_ID"))));
                           
           }
     pst.close();
@@ -86,7 +96,9 @@ public class AtendimentoDAO {
             atendimento = new AtendimentoM(rs.getInt("ID"), 
                                        rs.getString("Data"),
                                        rs.getString("RelatoResumido"),
-                                       RequerenteDAO.busca(rs.getInt("Requerente_ID")));
+                                       RequerenteDAO.busca(rs.getInt("Requerente_ID")),
+                                       ConselheiroDAO.busca(rs.getInt("Conselheiro1_ID")),
+                                       ConselheiroDAO.busca(rs.getInt("Conselheiro2_ID")));
               }
         pst.close();
         return atendimento;
