@@ -188,5 +188,5 @@ ENGINE = InnoDB;
 insert into conselheiro values (1, "Fernando", "000", "000", "root", "root");
 
 
-select * from atendimento;
+select * from crianca;
 

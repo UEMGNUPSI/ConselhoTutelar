@@ -1,6 +1,7 @@
 
 package dao;
 
+import MODEL.CriançaM;
 import MODEL.NucleoM;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,14 +20,13 @@ public class NucleoDAO {
         pst.setInt(1,0);
         pst.setString(2, nucleo.getNome());
         pst.setString(3, nucleo.getParentesco());
-        pst.setString(4, nucleo.getEndereco());
+        pst.setString(4, nucleo.getEndereco());        
         pst.setString(5, nucleo.getNumero());
-        pst.setString(6, nucleo.getBairro());
+        pst.setString(6, nucleo.getBairro());        
         pst.setString(7, nucleo.getTelefone());
         pst.setString(8, nucleo.getCelular());
         pst.setString(9, nucleo.getResponsabilidade());
-        pst.setInt(9, nucleo.getAtendimento_Id().getId());
-        pst.setInt(10, nucleo.getId());
+        pst.setInt(10, nucleo.getAtendimento_Id().getId());
         
         pst.execute();
         pst.close();
@@ -53,9 +53,10 @@ public class NucleoDAO {
                  + "Bairro = ?, "
                  + "Telefone = ?, "
                  + "Celular = ?, "
-                 + "Responsabilidade = ?, "
-                 + "Atendimento_ID = ?, "
+                 + "Responsabilidade = ? "                 
+                
                  + "where ID = ?";
+        
         
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setString(1, nucleo.getNome());
@@ -66,9 +67,9 @@ public class NucleoDAO {
         pst.setString(6, nucleo.getTelefone());
         pst.setString(7, nucleo.getCelular());
         pst.setString(8, nucleo.getResponsabilidade());
-        pst.setInt(9, nucleo.getAtendimento_Id().getId());
+        //pst.setInt(9, nucleo.getAtendimento_Id().getId());
         
-        pst.setInt(8, nucleo.getId());
+        pst.setInt(9, nucleo.getId());
         pst.execute();
         pst.close();
      }
@@ -76,7 +77,7 @@ public class NucleoDAO {
     public List<NucleoM> ListaTodos() throws SQLException{ 
     List<NucleoM> listaTodos = new ArrayList<>();
 
-        String sql = "select * from NucleoFamiliar where Atendimento_ID = ? ";
+        String sql = "select * from NucleoFamiliar order by Nome ";
         PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
     ResultSet rs = pst.executeQuery();
 
@@ -95,6 +96,34 @@ public class NucleoDAO {
           }
     pst.close();
     return listaTodos;
+    }
+    
+     static public NucleoM busca(int id) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        NucleoM nucleo = null;
+        
+        sql = "select * from NucleoFamiliar where id = ?";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           nucleo = new NucleoM(
+                   rs.getInt("ID"),
+                   rs.getString("Nome"),
+                   rs.getString("Parentesco"),                                     
+                   rs.getString("Endereco"),
+                   rs.getString("Numero"),
+                   rs.getString("Bairro"),
+                   rs.getString("Telefone"),
+                   rs.getString("Celular"),
+                   rs.getString("Responsabilidade"), 
+                   AtendimentoDAO.Busca(rs.getInt("Atendimento_ID")));
+                   
+        }
+        pst.close();
+        
+        return nucleo;
     }
     
 }

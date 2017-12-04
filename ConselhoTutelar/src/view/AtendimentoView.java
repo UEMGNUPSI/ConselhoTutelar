@@ -24,6 +24,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 
 public class AtendimentoView extends javax.swing.JInternalFrame {
@@ -50,27 +52,31 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     
     NucleoM nucleo = new NucleoM();
     NucleoDAO nucleoDAO = new NucleoDAO();
+    List<NucleoM> listaNucleo = new ArrayList<>();
     
     AcompanhanteM acompanhante = new AcompanhanteM();
     AcompanhanteDAO acompanhanteDAO = new AcompanhanteDAO();
     
     public AtendimentoView() {
         initComponents();
-        this.setVisible(true);
+        this.setVisible(true);        
         atualizaTabelaAtendimento();
+        atualizaTabelaCrianca();
         AtualizaTabelaDireitos();
+        atualizaTabelaNucleo();
+        
         dlgBuscaRequerente.setSize(941, 508);
         dlgBuscaConselheiro.setSize(941, 508);
         dlgBuscaConselheiro2.setSize(941, 508);
-        txtAtendimentoIdRequerente.setVisible(false);
-        txtAtendimentoIdConselheiro1.setVisible(false);
-        txtAtendimentoIdConselheiro2.setVisible(false);
+        //txtAtendimentoIdRequerente.setVisible(false);
+        //txtAtendimentoIdConselheiro1.setVisible(false);
+        //txtAtendimentoIdConselheiro2.setVisible(false);
+        txtIdCrianca.setVisible(false);
         Data();
         AtualizaTabelaBuscaRequerente();
         AtualizaTabelaConselheiro();
         AtualizaTabelaConselheiro2();
-        //atualizaTabelaCrianca();
-        
+       
         //jTabbedPane1.setEnabled(false);
     } 
     @SuppressWarnings("unchecked")
@@ -143,11 +149,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         txtNomeCrianca = new javax.swing.JTextField();
         txtIdCrianca = new javax.swing.JTextField();
-        txtNascimentoCrianca = new javax.swing.JTextField();
         txtEnderecoCrianca = new javax.swing.JTextField();
         txtNumeroCrianca = new javax.swing.JTextField();
         txtBairroCrianca = new javax.swing.JTextField();
-        txtTelefoneCrianca = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblCrianca = new javax.swing.JTable();
         btnSalvarCrianca = new javax.swing.JButton();
@@ -155,6 +159,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         btnExcluirCrianca = new javax.swing.JButton();
         btnCancelarCrianca = new javax.swing.JButton();
         btnNovoCrianca = new javax.swing.JButton();
+        txtTelefoneCrianca = new javax.swing.JFormattedTextField();
+        txtNascimentoCrianca = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         txtBuscarDireitos = new javax.swing.JTextField();
@@ -176,7 +182,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtBairroNucleo = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        txtTelefoneNucleo = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         txtResponsabilidadeNucleo = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -187,7 +192,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         btnExcluirNucleo = new javax.swing.JButton();
         btnCancelarNucleo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        txtCelularNucleo = new javax.swing.JTextField();
+        txtTelefoneNucleo = new javax.swing.JFormattedTextField();
+        txtCelularNucleo = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         txtIdAcompanhante = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
@@ -529,6 +535,11 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblAtendimentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAtendimentosMouseClicked(evt);
+            }
+        });
         jScrollPane8.setViewportView(tblAtendimentos);
 
         btnNovoAtendimento.setText("Novo Atendimento");
@@ -562,7 +573,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     .addComponent(btnNovoAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditarAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnExlucirAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -706,7 +717,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                         .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         pnlAtendimentoLayout.setVerticalGroup(
             pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -781,15 +792,11 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         txtIdCrianca.setEnabled(false);
 
-        txtNascimentoCrianca.setEnabled(false);
-
         txtEnderecoCrianca.setEnabled(false);
 
         txtNumeroCrianca.setEnabled(false);
 
         txtBairroCrianca.setEnabled(false);
-
-        txtTelefoneCrianca.setEnabled(false);
 
         tblCrianca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -802,6 +809,11 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblCrianca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCriancaMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tblCrianca);
 
         btnSalvarCrianca.setText("Salvar");
@@ -843,6 +855,12 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             }
         });
 
+        txtTelefoneCrianca.setFormatterFactory(setFormatoTelefone());
+        txtTelefoneCrianca.setEnabled(false);
+
+        txtNascimentoCrianca.setFormatterFactory(setFormatoNascimento());
+        txtNascimentoCrianca.setEnabled(false);
+
         javax.swing.GroupLayout pnlCriancaLayout = new javax.swing.GroupLayout(pnlCrianca);
         pnlCrianca.setLayout(pnlCriancaLayout);
         pnlCriancaLayout.setHorizontalGroup(
@@ -851,34 +869,35 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addGap(117, 117, 117)
                 .addComponent(txtIdCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
-                .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlCriancaLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(9, 9, 9)
-                        .addComponent(txtNomeCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNascimentoCrianca))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlCriancaLayout.createSequentialGroup()
+                .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCriancaLayout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtEnderecoCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNumeroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtNumeroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlCriancaLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(9, 9, 9)
+                        .addComponent(txtNomeCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNascimentoCrianca)))
+                .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCriancaLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
                         .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtBairroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlCriancaLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTelefoneCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(246, Short.MAX_VALUE))
+                        .addComponent(txtTelefoneCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(258, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCriancaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -894,7 +913,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addComponent(btnExcluirCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(btnCancelarCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
         pnlCriancaLayout.setVerticalGroup(
             pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -905,18 +924,20 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtNomeCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5)
-                        .addComponent(txtNascimentoCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel13)
-                        .addComponent(txtTelefoneCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtTelefoneCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNascimentoCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtEnderecoCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtNumeroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtBairroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtIdCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(txtEnderecoCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)
+                        .addComponent(txtNumeroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtIdCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtBairroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12)))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -961,7 +982,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addComponent(txtBuscarDireitos, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBuscarDireitos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 258, Short.MAX_VALUE))
+                .addGap(0, 284, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1023,13 +1044,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         jLabel21.setText("Telefone:");
 
-        txtTelefoneNucleo.setEnabled(false);
-        txtTelefoneNucleo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefoneNucleoActionPerformed(evt);
-            }
-        });
-
         jLabel22.setText("Responsabilidade:");
 
         txtResponsabilidadeNucleo.setEnabled(false);
@@ -1045,6 +1059,11 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblNucleo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblNucleoMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(tblNucleo);
 
         btnNovoNucleo.setText("Novo");
@@ -1088,6 +1107,10 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Celular:");
 
+        txtTelefoneNucleo.setFormatterFactory(setFormatoTelefone());
+        txtTelefoneNucleo.setEnabled(false);
+
+        txtCelularNucleo.setFormatterFactory(setFormatoCelular());
         txtCelularNucleo.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1097,7 +1120,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -1118,6 +1141,15 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                 .addGap(15, 15, 15)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtParentescoNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtResponsabilidadeNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(15, 15, 15)
                                 .addComponent(jLabel20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1125,21 +1157,12 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel21)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTelefoneNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                                .addComponent(txtTelefoneNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCelularNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtParentescoNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel22)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtResponsabilidadeNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)))))
+                                .addComponent(txtCelularNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(41, 41, 41))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1180,8 +1203,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel20)
                     .addComponent(txtBairroNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21)
-                    .addComponent(txtTelefoneNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
+                    .addComponent(txtTelefoneNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCelularNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1351,7 +1374,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addComponent(btnExcluirAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(btnCancelarAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1441,7 +1464,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                
                 i++;
             }
-            String tituloColuna[] = {"ID", "Requerente", "Data", "Requerente1", "Requerente2"};
+            String tituloColuna[] = {"ID", "Requerente", "Data", "Conselheiro 1", "Conselheiro 2"};
             DefaultTableModel tabelaFuncionario = new DefaultTableModel();
             tabelaFuncionario.setDataVector(dados, tituloColuna);
             tblAtendimentos.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -1485,7 +1508,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             String tituloColuna[] = {"ID", "Nome", "Nascimento","Telefone"};
             DefaultTableModel tabelaFuncionario = new DefaultTableModel();
             tabelaFuncionario.setDataVector(dados, tituloColuna);
-            tblAtendimentos.setModel(new DefaultTableModel(dados, tituloColuna) {
+            tblCrianca.setModel(new DefaultTableModel(dados, tituloColuna) {
                 boolean[] canEdit = new boolean[]{
                     false, false, false, false, false, false,
                 };
@@ -1496,13 +1519,13 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 }
             });
 
-            tblAtendimentos.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblCrianca.getColumnModel().getColumn(0).setPreferredWidth(10);
             
             DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
             centralizado.setHorizontalAlignment(SwingConstants.CENTER);
-            tblAtendimentos.getColumnModel().getColumn(0).setCellRenderer(centralizado);
-            tblAtendimentos.setRowHeight(25);
-            tblAtendimentos.updateUI();
+            tblCrianca.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblCrianca.setRowHeight(25);
+            tblCrianca.updateUI();
     }
     
        public void AtualizaTabelaDireitos(){
@@ -1549,6 +1572,55 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             tblDireitos1.setRowHeight(25);
             tblDireitos1.updateUI();
     }
+       
+       public void atualizaTabelaNucleo(){
+        nucleo = new NucleoM();
+        try {
+            listaNucleo = nucleoDAO.ListaTodos();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        String dados[][] = new String[listaNucleo.size()][6];
+            int i = 0;
+            for (NucleoM Nucleo : listaNucleo) {
+                dados[i][0] = String.valueOf(Nucleo.getId());
+                dados[i][1] = Nucleo.getNome();
+                dados[i][2] = Nucleo.getParentesco();
+                dados[i][3] = Nucleo.getResponsabilidade();
+                dados[i][4] = Nucleo.getTelefone();
+                dados[i][5] = Nucleo.getCelular();
+               
+                i++;
+            }
+            String tituloColuna[] = {"ID", "Nome", "Parentesco","Responsabilidade", "Telefone", "Celular"};
+            DefaultTableModel tabelaNucleo = new DefaultTableModel();
+            tabelaNucleo.setDataVector(dados, tituloColuna);
+            tblNucleo.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false,
+                };
+
+                
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblNucleo.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblNucleo.getColumnModel().getColumn(1).setPreferredWidth(10);
+            tblNucleo.getColumnModel().getColumn(2).setPreferredWidth(10);
+            tblNucleo.getColumnModel().getColumn(3).setPreferredWidth(10);
+            tblNucleo.getColumnModel().getColumn(4).setPreferredWidth(10);
+            tblNucleo.getColumnModel().getColumn(5).setPreferredWidth(10);
+            
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblNucleo.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblNucleo.setRowHeight(25);
+            tblNucleo.updateUI();
+    }
+       
     private void txtBuscaRequerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaRequerenteActionPerformed
        
     }//GEN-LAST:event_txtBuscaRequerenteActionPerformed
@@ -1561,10 +1633,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private void txtNumeroNucleoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroNucleoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroNucleoActionPerformed
-
-    private void txtTelefoneNucleoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneNucleoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefoneNucleoActionPerformed
 
     private void txtBairroNucleoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBairroNucleoActionPerformed
         // TODO add your handling code here:
@@ -1604,10 +1672,10 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             
             crianca.setNome(txtNomeCrianca.getText());
             crianca.setDataNascimento(txtNascimentoCrianca.getText());
-            crianca.setTelefone(txtTelefoneCrianca.getText()); 
             crianca.setEndereco(txtEnderecoCrianca.getText());  
             crianca.setNumero(txtNumeroCrianca.getText());  
             crianca.setBairro(txtBairroCrianca.getText()); 
+            crianca.setTelefone(txtTelefoneCrianca.getText());
             crianca.setAtendimento_Id(atendimento);
             
             
@@ -1622,15 +1690,18 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             prepararSalvareCancelarCriança();
             desativaCamposCriança();
             limparCamposCriança();
+            jTabbedPane1.setSelectedIndex(3);
             }
               else{
+            crianca.setId(Integer.parseInt(txtIdCrianca.getText()));
             crianca.setNome(txtNomeCrianca.getText());
             crianca.setDataNascimento(txtNascimentoCrianca.getText());
-            crianca.setTelefone(txtTelefoneCrianca.getText()); 
             crianca.setEndereco(txtEnderecoCrianca.getText());  
             crianca.setNumero(txtNumeroCrianca.getText());  
             crianca.setBairro(txtBairroCrianca.getText()); 
-       
+            crianca.setTelefone(txtTelefoneCrianca.getText()); 
+            //crianca.setAtendimento_Id(atendimento); não é viável alterar o id do atendimento mas apenas os dados da criança.
+            
             try{
                 criancaDAO.Alterar(crianca);
                 JOptionPane.showMessageDialog(null, "Alterado com sucesso!");  
@@ -1711,7 +1782,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     }catch(SQLException ex){
                     JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
                     }
-                    //atualizaTabelaAtendimento();
+                    atualizaTabelaCrianca();
+                    limparCamposCriança();
             }
         }    }//GEN-LAST:event_btnExcluirCriancaActionPerformed
 
@@ -1803,15 +1875,14 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Preencha todos os obrigatórios !", "erro", JOptionPane.WARNING_MESSAGE);
         }
         else if(txtIdNucleo.getText().isEmpty()){
-            
-            nucleo.setId(Integer.parseInt(txtIdNucleo.getText()));
             nucleo.setNome(txtNomeNucleo.getText());
-            nucleo.setParentesco(txtParentescoNucleo.getText());
-            nucleo.setResponsabilidade(txtResponsabilidadeNucleo.getText());
+            nucleo.setParentesco(txtParentescoNucleo.getText());            
             nucleo.setEndereco(txtEnderecoNucleo.getText());
-            nucleo.setBairro(txtBairroNucleo.getText());
-            nucleo.setCelular(txtCelularNucleo.getText());
+            nucleo.setNumero(txtNumeroNucleo.getText());
+            nucleo.setBairro(txtBairroNucleo.getText());           
             nucleo.setTelefone(txtTelefoneNucleo.getText());
+            nucleo.setCelular(txtCelularNucleo.getText());      
+            nucleo.setResponsabilidade(txtResponsabilidadeNucleo.getText());
             nucleo.setAtendimento_Id(atendimento);
      
             try{
@@ -1821,22 +1892,24 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
                
             }
-            // atualiza tabela nucleo
+             atualizaTabelaNucleo();
              prepararSalvareCancelarNucleo();   
             desativaCamposNucleo();
             limparCamposNucleo();
         }
         
          else{
+            
             nucleo.setId(Integer.parseInt(txtIdNucleo.getText()));
             nucleo.setNome(txtNomeNucleo.getText());
-            nucleo.setParentesco(txtParentescoNucleo.getText());
-            nucleo.setResponsabilidade(txtResponsabilidadeNucleo.getText());
+            nucleo.setParentesco(txtParentescoNucleo.getText());            
             nucleo.setEndereco(txtEnderecoNucleo.getText());
+            nucleo.setNumero(txtNumeroNucleo.getText());
             nucleo.setBairro(txtBairroNucleo.getText());
-            nucleo.setCelular(txtCelularNucleo.getText());
             nucleo.setTelefone(txtTelefoneNucleo.getText());
-            nucleo.setAtendimento_Id(atendimento);
+            nucleo.setCelular(txtCelularNucleo.getText());            
+            nucleo.setResponsabilidade(txtResponsabilidadeNucleo.getText());
+            //nucleo.setAtendimento_Id(atendimento);
        
             try{
                 nucleoDAO.Alterar(nucleo);
@@ -1846,7 +1919,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
             }
         }
-       // atualiza tabela nucleo
+       atualizaTabelaNucleo();
        prepararSalvareCancelarNucleo();
        desativaCamposNucleo();
     }//GEN-LAST:event_btnSalvarNucleoActionPerformed
@@ -1922,7 +1995,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     }catch(SQLException ex){
                     JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
                     }
-                    //atualizaTabelaAtendimento();
+                    limparCamposNucleo();
+                    atualizaTabelaNucleo();
+                    
                 }
         }
     }//GEN-LAST:event_btnExcluirNucleoActionPerformed
@@ -2064,7 +2139,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSelecionarConselheiro2ActionPerformed
 
     private void btnSalvarAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAvancarActionPerformed
-        
+       
         RequerenteM requerente = new RequerenteM();
         atendimento = new AtendimentoM();
         requerente = new RequerenteM();
@@ -2107,6 +2182,96 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
    
     
     }//GEN-LAST:event_btnEditarAtendimentoActionPerformed
+
+    private void tblAtendimentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAtendimentosMouseClicked
+      
+        atendimento = new AtendimentoM();
+
+        try{
+            atendimento = AtendimentoDAO.Busca(Integer.parseInt(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString()));
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+   
+        tblAtendimentos.getTableHeader().setReorderingAllowed(false);
+        txtIdAtendimento.setText(Integer.toString(atendimento.getId()));
+        txtDataAtendimento.setText(atendimento.getData());
+        txtRequerenteAtendimento.setText(String.valueOf(atendimento.getRequerente_id().getNome()));
+        txtConselheiroAtendimento1.setText(String.valueOf(atendimento.getConselheiro1_id().getNome()));
+        txtConselheiroAtendimento2.setText(String.valueOf(atendimento.getConselheiro2_id().getNome()));
+        txtAtendimentoIdRequerente.setText(String.valueOf(atendimento.getRequerente_id().getId()));
+        txtAtendimentoIdConselheiro1.setText(String.valueOf(atendimento.getConselheiro1_id().getId()));
+        txtAtendimentoIdConselheiro2.setText(String.valueOf(atendimento.getConselheiro2_id().getId()));
+        
+       
+    }//GEN-LAST:event_tblAtendimentosMouseClicked
+
+    private void tblCriancaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCriancaMouseClicked
+        limparCamposCriança();
+        crianca = new CriançaM();
+
+        try{
+            crianca = CriançaDAO.busca(Integer.parseInt(tblCrianca.getValueAt(tblCrianca.getSelectedRow(),0).toString()));
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+   
+        tblCrianca.getTableHeader().setReorderingAllowed(false);
+        txtIdCrianca.setText(Integer.toString(crianca.getId()));
+        txtNomeCrianca.setText(crianca.getNome());
+        txtNascimentoCrianca.setText(crianca.getDataNascimento());
+        txtTelefoneCrianca.setText(crianca.getTelefone());
+        txtEnderecoCrianca.setText(crianca.getEndereco());
+        txtNumeroCrianca.setText(crianca.getNumero());
+        txtBairroCrianca.setText(crianca.getBairro());
+        txtIdAtendimento.setText(String.valueOf(crianca.getAtendimento_Id().getId()));
+        
+        txtRequerenteAtendimento.setText("");
+        txtConselheiroAtendimento1.setText("");
+        txtConselheiroAtendimento2.setText("");
+        txtAtendimentoIdRequerente.setText("");
+        txtAtendimentoIdConselheiro1.setText("");
+        txtAtendimentoIdConselheiro2.setText("");
+        
+        btnAlterarCrianca.setEnabled(true);
+        btnExcluirCrianca.setEnabled(true);
+        
+     
+    }//GEN-LAST:event_tblCriancaMouseClicked
+
+    private void tblNucleoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNucleoMouseClicked
+        limparCamposNucleo();
+        nucleo = new NucleoM();
+
+        try{
+            nucleo = NucleoDAO.busca(Integer.parseInt(tblNucleo.getValueAt(tblNucleo.getSelectedRow(),0).toString()));
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+        }
+   
+        tblNucleo.getTableHeader().setReorderingAllowed(false);
+        txtIdNucleo.setText(Integer.toString(nucleo.getId()));
+        txtNomeNucleo.setText(nucleo.getNome());
+        txtParentescoNucleo.setText(nucleo.getParentesco());        
+        txtEnderecoNucleo.setText(nucleo.getEndereco());
+        txtNumeroNucleo.setText(nucleo.getNumero());
+        txtBairroNucleo.setText(nucleo.getBairro());
+        txtTelefoneNucleo.setText(nucleo.getTelefone());
+        txtCelularNucleo.setText(nucleo.getCelular());
+        txtResponsabilidadeNucleo.setText(nucleo.getResponsabilidade());
+        txtIdAtendimento.setText(String.valueOf(nucleo.getAtendimento_Id().getId()));
+        
+        txtRequerenteAtendimento.setText("");
+        txtConselheiroAtendimento1.setText("");
+        txtConselheiroAtendimento2.setText("");
+        txtAtendimentoIdRequerente.setText("");
+        txtAtendimentoIdConselheiro1.setText("");
+        txtAtendimentoIdConselheiro2.setText("");
+        
+        btnAlterarNucleo.setEnabled(true);
+        btnExcluirNucleo.setEnabled(true);
+        
+    }//GEN-LAST:event_tblNucleoMouseClicked
 
      public void AtualizaTabelaBuscaRequerente(){
         requerente = new RequerenteM();
@@ -2371,12 +2536,13 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
       }
       
        public void limparCamposCriança(){
-        txtIdCrianca.setText("");
+        txtNomeCrianca.setText("");
         txtNascimentoCrianca.setText("");
         txtTelefoneCrianca.setText("");
         txtEnderecoCrianca.setText("");
+        txtNumeroCrianca.setText("");
         txtBairroCrianca.setText("");
-        txtTelefoneCrianca.setText("");
+        
     }
     
     public void ativaCamposCriança(){
@@ -2579,6 +2745,46 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
        btnExcluirAcompanhante.setEnabled(false);
        btnAlterarAcompanhante.setEnabled(false);
     }
+    
+    
+         //Mascara que formata para regularizar como é inserido o telefone
+    public static DefaultFormatterFactory setFormatoTelefone(){  
+        MaskFormatter comFoco = null;  
+        try   
+        {   
+            comFoco = new MaskFormatter("(##)####-####"); 
+            comFoco.setPlaceholderCharacter('_');
+        }   
+        catch (Exception pe) { }  
+        DefaultFormatterFactory factory = new DefaultFormatterFactory(comFoco, comFoco);  
+        return factory;  
+    }
+    
+    //Mascara que formata para regularizar como é inserido o celular
+    public static DefaultFormatterFactory setFormatoCelular(){  
+        MaskFormatter comFoco = null;  
+        try   
+        {   
+            comFoco = new MaskFormatter("(##)9####-####"); 
+            comFoco.setPlaceholderCharacter('_');
+        }   
+        catch (Exception pe) { }  
+        DefaultFormatterFactory factory = new DefaultFormatterFactory(comFoco, comFoco);  
+        return factory;  
+    } 
+    
+       public static DefaultFormatterFactory setFormatoNascimento(){  
+        MaskFormatter comFoco = null;  
+        try   
+        {   
+            comFoco = new MaskFormatter("##/##/####"); 
+            comFoco.setPlaceholderCharacter('_');
+        }   
+        catch (Exception pe) { }  
+        DefaultFormatterFactory factory = new DefaultFormatterFactory(comFoco, comFoco);  
+        return factory;  
+    }
+       
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarAcompanhante;
     private javax.swing.JButton btnAlterarCrianca;
@@ -2687,7 +2893,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtBuscaConselheiro2;
     private javax.swing.JTextField txtBuscaRequerente;
     private javax.swing.JTextField txtBuscarDireitos;
-    private javax.swing.JTextField txtCelularNucleo;
+    private javax.swing.JFormattedTextField txtCelularNucleo;
     private javax.swing.JTextField txtCidadeAcompanhante;
     private javax.swing.JTextField txtConselheiroAtendimento1;
     private javax.swing.JTextField txtConselheiroAtendimento2;
@@ -2700,7 +2906,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtIdAtendimento;
     private javax.swing.JTextField txtIdCrianca;
     private javax.swing.JTextField txtIdNucleo;
-    private javax.swing.JTextField txtNascimentoCrianca;
+    private javax.swing.JFormattedTextField txtNascimentoCrianca;
     private javax.swing.JTextField txtNomeAcompanhante;
     private javax.swing.JTextField txtNomeCrianca;
     private javax.swing.JTextField txtNomeNucleo;
@@ -2712,7 +2918,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtRequerenteAtendimento;
     private javax.swing.JTextField txtResponsabilidadeNucleo;
     private javax.swing.JTextField txtTelefoneAcompanhante;
-    private javax.swing.JTextField txtTelefoneCrianca;
-    private javax.swing.JTextField txtTelefoneNucleo;
+    private javax.swing.JFormattedTextField txtTelefoneCrianca;
+    private javax.swing.JFormattedTextField txtTelefoneNucleo;
     // End of variables declaration//GEN-END:variables
 }

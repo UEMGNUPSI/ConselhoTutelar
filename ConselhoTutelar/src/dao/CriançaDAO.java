@@ -3,6 +3,7 @@ package dao;
 
 
 import MODEL.AtendimentoM;
+import MODEL.ConselheiroM;
 import MODEL.CriançaM;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,8 +52,9 @@ public class CriançaDAO {
                  + "Endereco = ?, "
                  + "Numero = ?, "
                  + "Bairro = ?, "
-                 + "Telefone = ?, "
-                 + "Atendimento_ID = ?, "
+                 + "Telefone = ? "
+                 //+ "Atendimento_ID = ?"
+                
                  + "where ID = ?";
         
         pst = Conexao.getInstance().prepareStatement(sql);
@@ -62,9 +64,8 @@ public class CriançaDAO {
         pst.setString(4, criança.getNumero());
         pst.setString(5, criança.getBairro());
         pst.setString(6, criança.getTelefone());
-        pst.setInt(7, criança.getAtendimento_Id().getId());
-        
-        pst.setInt(8, criança.getId());
+        //pst.setInt(7, criança.getAtendimento_Id().getId());        
+        pst.setInt(7, criança.getId());
         pst.execute();
         pst.close();
      }
@@ -73,7 +74,7 @@ public class CriançaDAO {
          public List<CriançaM> ListaTodos() throws SQLException{ 
     List<CriançaM> listaTodos = new ArrayList<>();
 
-        String sql = "select * from Crianca where Atendimento_ID = ? ";
+        String sql = "select * from Crianca order by Nome";
         PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
     ResultSet rs = pst.executeQuery();
 
@@ -92,6 +93,31 @@ public class CriançaDAO {
     return listaTodos;
     }
          
-                
-    
+                //"select * from Crianca where Atendimento_ID = ? 
+         
+    static public CriançaM busca(int id) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        CriançaM criança = null;
+        
+        sql = "select * from Crianca where id = ?";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           criança = new CriançaM(
+                   rs.getInt("ID"),
+                   rs.getString("Nome"),
+                   rs.getString("DataNascimento"),
+                   rs.getString("Endereco"),
+                   rs.getString("Numero"),
+                   rs.getString("Bairro"),
+                   rs.getString("Telefone"),
+                   AtendimentoDAO.Busca(rs.getInt("Atendimento_ID")));
+                   
+        }
+        pst.close();
+        
+        return criança;
+    }
 }
