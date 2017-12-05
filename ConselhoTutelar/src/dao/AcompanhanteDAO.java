@@ -3,6 +3,7 @@ package dao;
 
 import MODEL.AcompanhanteM;
 import MODEL.AtendimentoM;
+import MODEL.NucleoM;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,17 +16,18 @@ public class AcompanhanteDAO {
         public void Salvar (AcompanhanteM acompanhante) throws SQLException{
         PreparedStatement pst;
         String sql;
-        sql = "insert into Acompanhante values (?,?,?,?,?,?,?,?,?)";
+        sql = "insert into Acompanhante values (?,?,?,?,?,?,?,?,?,?)";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1,0);
         pst.setString(2, acompanhante.getNome());
         pst.setString(3, acompanhante.getTelefone());
-        pst.setString(4, acompanhante.getEndereco());
-        pst.setString(5, acompanhante.getNumero());
-        pst.setString(6, acompanhante.getBairro());
-        pst.setString(7, acompanhante.getCidade());
-        pst.setString(8, acompanhante.getEstado());
-        pst.setInt(9, acompanhante.getAtendimento_Id().getId());
+        pst.setString(4, acompanhante.getCelular());
+        pst.setString(5, acompanhante.getEndereco());
+        pst.setString(6, acompanhante.getNumero());
+        pst.setString(7, acompanhante.getBairro());
+        pst.setString(8, acompanhante.getCidade());
+        pst.setString(9, acompanhante.getEstado());
+        pst.setInt(10, acompanhante.getAtendimento_Id().getId());
         
         pst.execute();
         pst.close();
@@ -45,27 +47,28 @@ public class AcompanhanteDAO {
           public void Alterar(AcompanhanteM acompanhante) throws SQLException{
         PreparedStatement pst;
         String sql;
-        sql = "update Crianca set "
+        sql = "update Acompanhante set "
                  + "Nome = ?, "
                  + "Telefone = ?, "
-                 + "Endereco = ?, "
+                 + "Celular = ?, "
+                 + "Endereço = ?, "
                  + "Numero = ?, "
                  + "Bairro = ?, "
                  + "Cidade = ?, "
-                 + "Estado = ?, "
-                 + "Atendimento_ID = ?, "
+                 + "Estado = ? "
+                 //+ "Atendimento_ID = ?, "
                  + "where ID = ?";
         
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setString(1, acompanhante.getNome());
         pst.setString(2, acompanhante.getTelefone());
-        pst.setString(3, acompanhante.getEndereco());
-        pst.setString(4, acompanhante.getNumero());
-        pst.setString(5, acompanhante.getBairro());
-        pst.setString(6, acompanhante.getCidade());
-        pst.setString(7, acompanhante.getEstado());
-        pst.setInt(8, acompanhante.getAtendimento_Id().getId());
-        
+        pst.setString(3, acompanhante.getCelular());
+        pst.setString(4, acompanhante.getEndereco());
+        pst.setString(5, acompanhante.getNumero());
+        pst.setString(6, acompanhante.getBairro());
+        pst.setString(7, acompanhante.getCidade());
+        pst.setString(8, acompanhante.getEstado());
+        //pst.setInt(9, acompanhante.getAtendimento_Id().getId());        
         pst.setInt(9, acompanhante.getId());
         pst.execute();
         pst.close();
@@ -74,7 +77,7 @@ public class AcompanhanteDAO {
               public List<AcompanhanteM> ListaTodos() throws SQLException{ 
     List<AcompanhanteM> listaTodos = new ArrayList<>();
 
-        String sql = "select * from Acompanhante where Atendimento_ID = ? ";
+        String sql = "select * from Acompanhante order by Nome ";
         PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
     ResultSet rs = pst.executeQuery();
 
@@ -82,7 +85,8 @@ public class AcompanhanteDAO {
         listaTodos.add(new AcompanhanteM(rs.getInt("ID"), 
                                    rs.getString("Nome"),
                                    rs.getString("Telefone"),
-                                   rs.getString("Endereco"),
+                                   rs.getString("Celular"),
+                                   rs.getString("Endereço"),
                                    rs.getString("Numero"),
                                    rs.getString("Bairro"),
                                    rs.getString("Cidade"),
@@ -94,6 +98,33 @@ public class AcompanhanteDAO {
     return listaTodos;
     }
     
+                static public AcompanhanteM busca(int id) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        AcompanhanteM acompanhante = null;
+        
+        sql = "select * from Acompanhante where id = ?";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           acompanhante = new AcompanhanteM(
+                   rs.getInt("ID"),
+                   rs.getString("Nome"),
+                   rs.getString("Telefone"),                                     
+                   rs.getString("Celular"),
+                   rs.getString("Endereço"),
+                   rs.getString("Numero"),
+                   rs.getString("Bairro"),
+                   rs.getString("Cidade"),
+                   rs.getString("Estado"), 
+                   AtendimentoDAO.Busca(rs.getInt("Atendimento_ID")));
+                   
+        }
+        pst.close();
+        
+        return acompanhante;
+    }
     
         
 }

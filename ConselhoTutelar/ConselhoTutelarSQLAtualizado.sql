@@ -187,6 +187,6 @@ ENGINE = InnoDB;
 
 insert into conselheiro values (1, "Fernando", "000", "000", "root", "root");
 
-
-select * from crianca;
+use conselhotutelar;
+select * from nucleofamiliar;
 
