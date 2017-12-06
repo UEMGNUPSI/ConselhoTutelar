@@ -148,6 +148,7 @@ CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Acompanhante` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(45) NULL,
   `Telefone` VARCHAR(15) NULL,
+  `Celular` VARCHAR(17) NULL,
   `Endereço` VARCHAR(45) NULL,
   `Numero` VARCHAR(45) NULL,
   `Bairro` VARCHAR(45) NULL,
@@ -187,6 +188,9 @@ ENGINE = InnoDB;
 
 insert into conselheiro values (1, "Fernando", "000", "000", "root", "root");
 
-use conselhotutelar;
-select * from nucleofamiliar;
 
+use conselhotutelar;
+select * from acompanhante;
+
+delete from atendimento where id = 1;
+delete from atendimento where id = 2;
