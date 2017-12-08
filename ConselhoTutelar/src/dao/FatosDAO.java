@@ -2,14 +2,16 @@
 package dao;
 
 import MODEL.AtendimentoM;
+import MODEL.DireitosM;
 import MODEL.FatosM;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 
 public class FatosDAO {
     
-     public void Salvar (FatosM fatos) throws SQLException{
+     public void Salvar1 (FatosM fatos) throws SQLException{
         PreparedStatement pst;
         String sql;
         sql = "insert into Atendimento_has_Direitos values (?,?)";
@@ -21,6 +23,21 @@ public class FatosDAO {
         pst.execute();
         pst.close();
     }
+     public void Salvar (List<DireitosM> listafatos, int atendimento) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        for(DireitosM fatos : listafatos){
+            
+            sql = "insert into Atendimento_has_Direitos values (?,?)";
+            pst = Conexao.getInstance().prepareStatement(sql);
+            pst.setInt(1,0);
+            pst.setInt(2, atendimento);
+            pst.setInt(3, fatos.getId());
+            pst.execute();
+            pst.close();
+        }
+    }
+    
      
        public void Alterar(FatosM fatos) throws SQLException{
         PreparedStatement pst;
@@ -39,4 +56,5 @@ public class FatosDAO {
         pst.close();
      }
     
+       
 }

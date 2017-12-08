@@ -12,6 +12,7 @@ import dao.AtendimentoDAO;
 import dao.ConselheiroDAO;
 import dao.CriançaDAO;
 import dao.DireitosDAO;
+import dao.FatosDAO;
 import dao.NucleoDAO;
 import dao.RequerenteDAO;
 import java.sql.Date;
@@ -19,6 +20,8 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -51,6 +54,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     DireitosM direitos = new DireitosM();
     DireitosDAO direitosDao = new DireitosDAO();
     List<DireitosM> listaDireitos = new ArrayList<>();
+    List<DireitosM> listaDireitosGeral = new ArrayList<>();
+    List<DireitosM> listaDireitosSelecionados = new ArrayList<>();
     
     NucleoM nucleo = new NucleoM();
     NucleoDAO nucleoDAO = new NucleoDAO();
@@ -59,6 +64,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     AcompanhanteM acompanhante = new AcompanhanteM();
     AcompanhanteDAO acompanhanteDAO = new AcompanhanteDAO();
     List<AcompanhanteM> listaAcompanhante = new ArrayList<>(); 
+    
+    FatosDAO fatosdao = new FatosDAO();
     
     public AtendimentoView() {
         initComponents();
@@ -88,8 +95,10 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         AtualizaTabelaBuscaRequerente();
         AtualizaTabelaConselheiro();
         AtualizaTabelaConselheiro2();
+        AtualizaTabelaDireitosDireita();
        
         //jTabbedPane1.setEnabled(false);
+        listaDireitosGeral = listaDireitos;
     } 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -178,8 +187,12 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtBuscarDireitos = new javax.swing.JTextField();
         btnBuscarDireitos = new javax.swing.JButton();
         jScrollPane11 = new javax.swing.JScrollPane();
-        tblDireitos1 = new javax.swing.JTable();
+        tblDireitosGeral = new javax.swing.JTable();
         btnSalvarFato = new javax.swing.JButton();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        tblDireitosSelecionados = new javax.swing.JTable();
+        btnEsquerdaDireita = new javax.swing.JButton();
+        btnDireitaEsquerda = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         txtIdNucleo = new javax.swing.JTextField();
@@ -979,7 +992,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         btnBuscarDireitos.setText("Buscar");
 
-        tblDireitos1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDireitosGeral.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -990,12 +1003,39 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane11.setViewportView(tblDireitos1);
+        jScrollPane11.setViewportView(tblDireitosGeral);
 
         btnSalvarFato.setText("Salvar");
         btnSalvarFato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarFatoActionPerformed(evt);
+            }
+        });
+
+        tblDireitosSelecionados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane12.setViewportView(tblDireitosSelecionados);
+
+        btnEsquerdaDireita.setText(">>");
+        btnEsquerdaDireita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEsquerdaDireitaActionPerformed(evt);
+            }
+        });
+
+        btnDireitaEsquerda.setText("<<");
+        btnDireitaEsquerda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDireitaEsquerdaActionPerformed(evt);
             }
         });
 
@@ -1012,14 +1052,19 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addComponent(btnBuscarDireitos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 284, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(375, 375, 375)
-                        .addComponent(btnSalvarFato, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(375, 375, 375)
+                .addComponent(btnSalvarFato, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(448, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEsquerdaDireita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDireitaEsquerda))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1029,9 +1074,19 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel15)
                     .addComponent(txtBuscarDireitos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarDireitos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(btnEsquerdaDireita)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDireitaEsquerda)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(btnSalvarFato)
                 .addGap(9, 9, 9))
         );
@@ -1578,7 +1633,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             tblCrianca.updateUI();
     }
     
-       public void AtualizaTabelaDireitos(){
+    public void AtualizaTabelaDireitos(){
         direitos = new DireitosM();
         
         try {
@@ -1600,7 +1655,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
            String tituloColuna[] = {"ID", "Número", "Descrição"};
             DefaultTableModel tabelaDireitos = new DefaultTableModel();
             tabelaDireitos.setDataVector(dados, tituloColuna);
-            tblDireitos1.setModel(new DefaultTableModel(dados, tituloColuna) {
+            tblDireitosGeral.setModel(new DefaultTableModel(dados, tituloColuna) {
                 boolean[] canEdit = new boolean[]{
                     false, false, false
                 };
@@ -1610,20 +1665,92 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 }
             });
 
-            tblDireitos1.getColumnModel().getColumn(0).setPreferredWidth(10);
-            tblDireitos1.getColumnModel().getColumn(1).setPreferredWidth(15);
-            tblDireitos1.getColumnModel().getColumn(2).setPreferredWidth(15);
-      
-            
+            tblDireitosGeral.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblDireitosGeral.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblDireitosGeral.getColumnModel().getColumn(2).setPreferredWidth(15);
 
             DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
             centralizado.setHorizontalAlignment(SwingConstants.CENTER);
-            tblDireitos1.getColumnModel().getColumn(0).setCellRenderer(centralizado);
-            tblDireitos1.setRowHeight(25);
-            tblDireitos1.updateUI();
+            tblDireitosGeral.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblDireitosGeral.setRowHeight(25);
+            tblDireitosGeral.updateUI();
+    }
+    
+    public void AtualizaTabelaDireitosEsquerda(){
+        direitos = new DireitosM();
+
+        String dados[][] = new String[listaDireitosGeral.size()][3];
+            int i = 0;
+            for (DireitosM setor : listaDireitosGeral) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNumero();
+                dados[i][2] = setor.getDescrição();
+                
+               
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Número", "Descrição"};
+            DefaultTableModel tabelaDireitos = new DefaultTableModel();
+            tabelaDireitos.setDataVector(dados, tituloColuna);
+            tblDireitosGeral.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblDireitosGeral.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblDireitosGeral.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblDireitosGeral.getColumnModel().getColumn(2).setPreferredWidth(15);
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblDireitosGeral.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblDireitosGeral.setRowHeight(25);
+            tblDireitosGeral.updateUI();
+    }
+    
+    public void AtualizaTabelaDireitosDireita(){
+        direitos = new DireitosM();
+
+        String dados[][] = new String[listaDireitosSelecionados.size()][3];
+            int i = 0;
+            for (DireitosM setor : listaDireitosSelecionados) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNumero();
+                dados[i][2] = setor.getDescrição();
+                
+               
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Número", "Descrição"};
+            DefaultTableModel tabelaDireitos = new DefaultTableModel();
+            tabelaDireitos.setDataVector(dados, tituloColuna);
+            tblDireitosSelecionados.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblDireitosSelecionados.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblDireitosSelecionados.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblDireitosSelecionados.getColumnModel().getColumn(2).setPreferredWidth(15);
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblDireitosSelecionados.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblDireitosSelecionados.setRowHeight(25);
+            tblDireitosSelecionados.updateUI();
     }
        
-       public void atualizaTabelaNucleo(){
+    public void atualizaTabelaNucleo(){
         nucleo = new NucleoM();
         try {
             listaNucleo = nucleoDAO.ListaTodos();
@@ -2380,7 +2507,15 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblNucleoMouseClicked
 
     private void btnSalvarFatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarFatoActionPerformed
-     jTabbedPane1.setSelectedIndex(4);
+        try{
+            fatosdao.Salvar(listaDireitosSelecionados, Integer.valueOf(txtIdAtendimento.getText()));
+            JOptionPane.showMessageDialog(null, "Venda Salva com Sucesso!", "Sucesso!!!", JOptionPane.INFORMATION_MESSAGE);
+        }
+            catch(SQLException ex){
+                    Logger.getLogger(PrincipalView.class.getName()).log(Level.SEVERE, null, ex);
+                    
+            }
+        jTabbedPane1.setSelectedIndex(4);
     }//GEN-LAST:event_btnSalvarFatoActionPerformed
 
     private void tblAcompanhanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAcompanhanteMouseClicked
@@ -2419,6 +2554,71 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
 
     }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void btnEsquerdaDireitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsquerdaDireitaActionPerformed
+
+        /*if(tblDireitosGeral.getValueAt(tblAcompanhante.getSelectedRow(),0) == null){
+        JOptionPane.showMessageDialog(null, "Selecione a sala destino!");
+        }else{*/
+
+            try {
+                direitos = direitosDao.busca(Integer.parseInt(tblDireitosGeral.getValueAt(tblDireitosGeral.getSelectedRow(), 0).toString()));
+                listaDireitosSelecionados.add(direitos);
+
+                for(int i = 0; i < listaDireitosGeral.size(); i++)
+                {
+                    DireitosM d = listaDireitosGeral.get(i);
+
+                    if(d.getId() == direitos.getId())
+                    {
+                        listaDireitosGeral.remove(d);
+                        break;
+                    }
+                }
+                btnSalvarFato.setEnabled(true);
+                
+                AtualizaTabelaDireitosDireita();
+                AtualizaTabelaDireitosEsquerda();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(AtendimentoView.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        //}
+    }//GEN-LAST:event_btnEsquerdaDireitaActionPerformed
+
+    private void btnDireitaEsquerdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDireitaEsquerdaActionPerformed
+        /*if(tblDireitosSelecionados.getValueAt(tblDireitosSelecionados.getSelectedRow(),0) == null){
+        JOptionPane.showMessageDialog(null, "Selecione a sala destino!");
+        }else{*/
+
+            try {
+                direitos = direitosDao.busca(Integer.parseInt(tblDireitosSelecionados.getValueAt(tblDireitosSelecionados.getSelectedRow(), 0).toString()));
+                listaDireitosGeral.add(direitos);
+                
+                for(int i = 0; i < listaDireitosSelecionados.size(); i++)
+                {
+                    DireitosM d = listaDireitosSelecionados.get(i);
+
+                    if(d.getId() == direitos.getId())
+                    {
+                        listaDireitosSelecionados.remove(d);
+                        break;
+                    }
+                }
+                if(listaDireitosSelecionados.size() < 1){
+                    btnSalvarFato.setEnabled(false);
+                    //zera os cbx destino
+                    //cbxUnidadeDestino.setSelectedIndex(0);
+                }
+                AtualizaTabelaDireitosDireita();
+                AtualizaTabelaDireitosEsquerda();
+            } catch (SQLException ex) {
+                Logger.getLogger(AtendimentoView.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        //}
+    }//GEN-LAST:event_btnDireitaEsquerdaActionPerformed
 
      public void AtualizaTabelaBuscaRequerente(){
         requerente = new RequerenteM();
@@ -2949,7 +3149,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelarAcompanhante;
     private javax.swing.JButton btnCancelarCrianca;
     private javax.swing.JButton btnCancelarNucleo;
+    private javax.swing.JButton btnDireitaEsquerda;
     private javax.swing.JButton btnEditarAtendimento;
+    private javax.swing.JButton btnEsquerdaDireita;
     private javax.swing.JButton btnExcluirAcompanhante;
     private javax.swing.JButton btnExcluirCrianca;
     private javax.swing.JButton btnExcluirNucleo;
@@ -3015,6 +3217,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -3032,7 +3235,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblBuscarConselheiro1;
     private javax.swing.JTable tblBuscarConselheiro2;
     private javax.swing.JTable tblCrianca;
-    private javax.swing.JTable tblDireitos1;
+    private javax.swing.JTable tblDireitosGeral;
+    private javax.swing.JTable tblDireitosSelecionados;
     private javax.swing.JTable tblNucleo;
     private javax.swing.JTextField txtAtendimentoIdConselheiro1;
     private javax.swing.JTextField txtAtendimentoIdConselheiro2;
