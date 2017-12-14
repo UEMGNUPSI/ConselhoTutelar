@@ -19,7 +19,7 @@ public class RequerenteDAO {
         pst.setString(2, requerente.getNome());
         pst.setString(3, requerente.getNascimento());
         pst.setString(4, requerente.getTelefone1());
-        pst.setString(5, requerente.getTelefone2());
+        pst.setString(5, requerente.getTelefone2());        
         pst.setString(6, requerente.getCelular()); 
         pst.setString(7, requerente.getEndereço());
         pst.setString(8, requerente.getNumero());

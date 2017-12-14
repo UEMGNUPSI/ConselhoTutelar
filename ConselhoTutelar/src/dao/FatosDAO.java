@@ -11,26 +11,14 @@ import java.util.List;
 
 public class FatosDAO {
     
-     public void Salvar1 (FatosM fatos) throws SQLException{
-        PreparedStatement pst;
-        String sql;
-        sql = "insert into Atendimento_has_Direitos values (?,?)";
-        pst = Conexao.getInstance().prepareStatement(sql);
-        pst.setInt(1,0);
-        pst.setInt(2, fatos.getAtendimento_Id());
-        pst.setInt(3, fatos.getDireitos_Id());
-        
-        pst.execute();
-        pst.close();
-    }
-     public void Salvar (List<DireitosM> listafatos, int atendimento) throws SQLException{
+      public void Salvar (List<DireitosM> listafatos, int atendimento) throws SQLException{
         PreparedStatement pst;
         String sql;
         for(DireitosM fatos : listafatos){
             
-            sql = "insert into Atendimento_has_Direitos values (?,?)";
+            sql = "insert into Atendimento_has_Direitos values (?,?,?)";
             pst = Conexao.getInstance().prepareStatement(sql);
-            pst.setInt(1,0);
+            pst.setInt(1,0);            
             pst.setInt(2, atendimento);
             pst.setInt(3, fatos.getId());
             pst.execute();
@@ -43,14 +31,16 @@ public class FatosDAO {
         PreparedStatement pst;
         String sql;
         sql = "update Atendimento_has_Direitos set "
+                 + "ID = ?,"
                  + "Atendimento_ID = ?, "
-                 + "Direitos_ID = ?, "
+                 + "Direitos_ID = ? "
                  
                  + "where Atendimento_ID = ? and Direitos_ID = ? ";        
         
         pst = Conexao.getInstance().prepareStatement(sql);
-        pst.setInt(1, fatos.getAtendimento_Id());
-        pst.setInt(2, fatos.getDireitos_Id());
+        pst.setInt(1, fatos.getId());
+        pst.setInt(2, fatos.getAtendimento_Id());
+        pst.setInt(3, fatos.getDireitos_Id());
   
         pst.execute();
         pst.close();
