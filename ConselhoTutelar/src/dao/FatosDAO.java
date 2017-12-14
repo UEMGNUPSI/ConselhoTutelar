@@ -53,7 +53,7 @@ public class FatosDAO {
     
     public List<FatosM> ListaTodosAlterar(int id) throws SQLException{ 
         List<FatosM> listaTodos = new ArrayList<>();
-        String sql = "select * from Fatos where Atendimento_ID = ?";
+        String sql = "select * from atendimento_has_direitos where Atendimento_ID = ?";
         PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1, id);
         ResultSet rs = pst.executeQuery();

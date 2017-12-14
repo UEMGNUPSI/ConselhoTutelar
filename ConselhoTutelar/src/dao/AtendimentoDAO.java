@@ -52,14 +52,18 @@ public class AtendimentoDAO {
                  + "Data = ?, "
                  + "RelatoResumido = ?, "
                  + "Requerente_ID = ?, "
+                 + "Conselheiro1_ID = ?, "
+                 + "Conselheiro2_ID = ? "
     
                  + "where ID = ?";        
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setString(1, atendimento.getData());
         pst.setString(2, atendimento.getRelatoResumido());
         pst.setInt(3, atendimento.getRequerente_id().getId());
+        pst.setInt(4, atendimento.getConselheiro1_id().getId());
+        pst.setInt(5, atendimento.getConselheiro2_id().getId());
  
-        pst.setInt(4, atendimento.getId());
+        pst.setInt(6, atendimento.getId());
         pst.execute();
         pst.close();
      }

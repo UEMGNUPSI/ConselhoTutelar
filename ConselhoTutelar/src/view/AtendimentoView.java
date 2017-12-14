@@ -83,7 +83,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         dlgBuscaConselheiro.setSize(941, 508);
         dlgBuscaConselheiro2.setSize(941, 508);
         
-       jTabbedPane1.setSelectedIndex(3);
+       jTabbedPane1.setSelectedIndex(0);
         
         //txtAtendimentoIdRequerente.setVisible(false);
         //txtAtendimentoIdConselheiro1.setVisible(false);
@@ -743,9 +743,10 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                         .addComponent(txtConselheiroAtendimento2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlAtendimentoLayout.createSequentialGroup()
                         .addGap(244, 244, 244)
-                        .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnSalvarAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSalvarAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnSalvarAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAtendimentoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnSalvarAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
@@ -1086,7 +1087,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnEsquerdaDireita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDireitaEsquerda))
@@ -1104,13 +1105,13 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     .addComponent(btnBuscarDireitos))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
+                        .addGap(123, 123, 123)
                         .addComponent(btnEsquerdaDireita)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDireitaEsquerda)
@@ -1504,9 +1505,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtEstadoAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel7Layout.createSequentialGroup()
-                                    .addComponent(jLabel26)
-                                    .addGap(281, 281, 281))
+                                .addComponent(jLabel26)
                                 .addGroup(jPanel7Layout.createSequentialGroup()
                                     .addGap(51, 51, 51)
                                     .addComponent(txtNumeroAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1708,6 +1707,42 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             tblCrianca.updateUI();
     }
     
+        public void atualizaTabelaCriancaAlterar(){
+        crianca = new CriançaM();
+        
+            String dados[][] = new String[listaCrianca.size()][4];
+            int i = 0;
+            for (CriançaM Crianca : listaCrianca) {
+                dados[i][0] = String.valueOf(Crianca.getId());
+                dados[i][1] = Crianca.getNome();
+                dados[i][2] = Crianca.getDataNascimento();
+                dados[i][3] = Crianca.getTelefone();
+                 
+                i++;
+            }
+            String tituloColuna[] = {"ID", "Nome", "Nascimento","Telefone"};
+            DefaultTableModel tabelaFuncionario = new DefaultTableModel();
+            tabelaFuncionario.setDataVector(dados, tituloColuna);
+            tblCrianca.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false
+                };
+
+                
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblCrianca.getColumnModel().getColumn(0).setPreferredWidth(10);
+            
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblCrianca.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblCrianca.setRowHeight(25);
+            tblCrianca.updateUI();
+    }
+    
     public void AtualizaTabelaDireitos(){
         direitos = new DireitosM();
         
@@ -1824,7 +1859,43 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             tblDireitosSelecionados.setRowHeight(25);
             tblDireitosSelecionados.updateUI();
     }
+    
+        public void AtualizaTabelaDireitosAlterar(){
+        direitos = new DireitosM();
 
+        String dados[][] = new String[listaDireitosSelecionados.size()][3];
+            int i = 0;
+            for (DireitosM setor : listaDireitosSelecionados) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = setor.getNumero();
+                dados[i][2] = setor.getDescrição();
+                
+               
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Número", "Descrição"};
+            DefaultTableModel tabelaDireitos = new DefaultTableModel();
+            tabelaDireitos.setDataVector(dados, tituloColuna);
+            tblDireitosSelecionados.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblDireitosSelecionados.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblDireitosSelecionados.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblDireitosSelecionados.getColumnModel().getColumn(2).setPreferredWidth(15);
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblDireitosSelecionados.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblDireitosSelecionados.setRowHeight(25);
+            tblDireitosSelecionados.updateUI();
+    }
        
     public void atualizaTabelaNucleo(){
         nucleo = new NucleoM();
@@ -1873,6 +1944,49 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             tblNucleo.setRowHeight(25);
             tblNucleo.updateUI();
     }
+    
+        public void atualizaTabelaNucleoAlterar(){
+        nucleo = new NucleoM();
+                
+        String dados[][] = new String[listaNucleo.size()][6];
+            int i = 0;
+            for (NucleoM Nucleo : listaNucleo) {
+                dados[i][0] = String.valueOf(Nucleo.getId());
+                dados[i][1] = Nucleo.getNome();
+                dados[i][2] = Nucleo.getParentesco();
+                dados[i][3] = Nucleo.getResponsabilidade();
+                dados[i][4] = Nucleo.getTelefone();
+                dados[i][5] = Nucleo.getCelular();
+               
+                i++;
+            }
+            String tituloColuna[] = {"ID", "Nome", "Parentesco","Responsabilidade", "Telefone", "Celular"};
+            DefaultTableModel tabelaNucleo = new DefaultTableModel();
+            tabelaNucleo.setDataVector(dados, tituloColuna);
+            tblNucleo.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false,
+                };
+
+                
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblNucleo.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblNucleo.getColumnModel().getColumn(1).setPreferredWidth(10);
+            tblNucleo.getColumnModel().getColumn(2).setPreferredWidth(10);
+            tblNucleo.getColumnModel().getColumn(3).setPreferredWidth(10);
+            tblNucleo.getColumnModel().getColumn(4).setPreferredWidth(10);
+            tblNucleo.getColumnModel().getColumn(5).setPreferredWidth(10);
+            
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblNucleo.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblNucleo.setRowHeight(25);
+            tblNucleo.updateUI();
+    }
        
         public void atualizaTabelaAcompanhante(){
         acompanhante = new AcompanhanteM();
@@ -1881,6 +1995,46 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
         }
+        
+        String dados[][] = new String[listaAcompanhante.size()][4];
+            int i = 0;
+            for (AcompanhanteM Acompanhante : listaAcompanhante) {
+                dados[i][0] = String.valueOf(Acompanhante.getId());
+                dados[i][1] = Acompanhante.getNome();
+                dados[i][2] = Acompanhante.getTelefone();
+                dados[i][3] = Acompanhante.getCelular();
+               
+                i++;
+            }
+            String tituloColuna[] = {"ID", "Nome", "Telefone", "Celular"};
+            DefaultTableModel tabelaAcompanhante = new DefaultTableModel();
+            tabelaAcompanhante.setDataVector(dados, tituloColuna);
+            tblAcompanhante.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false,
+                };
+
+                
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblAcompanhante.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblAcompanhante.getColumnModel().getColumn(1).setPreferredWidth(10);
+            tblAcompanhante.getColumnModel().getColumn(2).setPreferredWidth(10);
+            tblAcompanhante.getColumnModel().getColumn(3).setPreferredWidth(10);
+        
+            
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblAcompanhante.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblAcompanhante.setRowHeight(25);
+            tblAcompanhante.updateUI();
+    }
+    
+             public void atualizaTabelaAcompanhanteAlterar(){
+        acompanhante = new AcompanhanteM();
         
         String dados[][] = new String[listaAcompanhante.size()][4];
             int i = 0;
@@ -2003,12 +2157,12 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             try{
                 criancaDAO.Alterar(crianca);
                 JOptionPane.showMessageDialog(null, "Alterado com sucesso!");  
+                jTabbedPane1.setSelectedIndex(3);
             }
             catch (SQLException ex){
                     JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
             }
         }
-         atualizaTabelaCrianca();
          prepararSalvareCancelarCriança();
          desativaCamposCriança();
         
@@ -2024,6 +2178,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtAtendimentoIdRequerente.setText("");
         txtAtendimentoIdConselheiro1.setText("");
         txtAtendimentoIdConselheiro2.setText("");
+        txtRelatoAtendimento.setEnabled(true);
         jTabbedPane1.setSelectedIndex(1);
         
     }//GEN-LAST:event_btnNovoAtendimentoActionPerformed
@@ -2220,6 +2375,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
        
             try{
                 nucleoDAO.Alterar(nucleo);
+                 jTabbedPane1.setSelectedIndex(5);
                 JOptionPane.showMessageDialog(null, "Alterado com sucesso!");  
             }
             catch (SQLException ex){
@@ -2328,6 +2484,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
      
             try{
                 acompanhanteDAO.Salvar(acompanhante);
+                 jTabbedPane1.setSelectedIndex(0);
                 JOptionPane.showMessageDialog(null, "Gravado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
@@ -2354,6 +2511,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             try{
                 acompanhanteDAO.Alterar(acompanhante);
                 JOptionPane.showMessageDialog(null, "Alterado com sucesso!");  
+                jTabbedPane1.setSelectedIndex(0);
             }
             catch (SQLException ex){
                     JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
@@ -2491,6 +2649,33 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             atualizaTabelaAtendimento();
        }
         
+            else{
+            
+            atendimento.setId(Integer.parseInt(txtIdAtendimento.getText()));
+            
+           atendimento.setData(txtDataAtendimento.getText());
+            
+            requerente.setId(Integer.parseInt(txtAtendimentoIdRequerente.getText()));
+            atendimento.setRequerente_id(requerente);
+            
+            atendimento.setRelatoResumido(txtRelatoAtendimento.getText());
+            
+            conselheiro.setId(Integer.parseInt(txtAtendimentoIdConselheiro1.getText()));
+            atendimento.setConselheiro1_id(c1);
+            
+            conselheiro.setId(Integer.parseInt(txtAtendimentoIdConselheiro2.getText()));
+            atendimento.setConselheiro2_id(c2);
+       
+            try{
+                atendimentoDAO.Alterar(atendimento);
+                 jTabbedPane1.setSelectedIndex(2);
+                JOptionPane.showMessageDialog(null, "Alterado com sucesso!");  
+            }
+            catch (SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+            }
+             atualizaTabelaAtendimento();
+        }
         
     }//GEN-LAST:event_btnSalvarAvancarActionPerformed
 
@@ -2504,10 +2689,14 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             listaFatos = fatosdao.ListaTodosAlterar(Integer.parseInt(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString()));
             listaNucleo = nucleoDAO.ListaTodosAlterar(Integer.parseInt(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString()));
             listaAcompanhante = acompanhanteDAO.ListaTodosAlterar(Integer.parseInt(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString()));
+            
         } catch (SQLException ex) {
             Logger.getLogger(AtendimentoView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        AtualizaTabelaDireitosDireita();
+        atualizaTabelaCriancaAlterar();
+        AtualizaTabelaDireitos();        
+        atualizaTabelaNucleoAlterar();
+        atualizaTabelaAcompanhanteAlterar();
         
     
     }//GEN-LAST:event_btnEditarAtendimentoActionPerformed
@@ -2537,6 +2726,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
     private void tblCriancaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCriancaMouseClicked
         limparCamposCriança();
+        btnNovoCrianca.setEnabled(false);
         crianca = new CriançaM();
         
         try{
@@ -2571,6 +2761,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
     private void tblNucleoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNucleoMouseClicked
         limparCamposNucleo();
+        btnNovoNucleo.setEnabled(false);
         nucleo = new NucleoM();
 
         try{
@@ -2618,7 +2809,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarFatoActionPerformed
 
     private void tblAcompanhanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAcompanhanteMouseClicked
-       limparCamposAcompanhante();
+        limparCamposAcompanhante();
+        btnNovoAcompanhante.setEnabled(false);
         acompanhante = new AcompanhanteM();
 
         try{

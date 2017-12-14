@@ -100,7 +100,7 @@ public class AcompanhanteDAO {
               
     public List<AcompanhanteM> ListaTodosAlterar(int id) throws SQLException{ 
         List<AcompanhanteM> listaTodos = new ArrayList<>();
-        String sql = "select * from Acompanhante Where Atendimento_ID = ? order by Nome ";
+        String sql = "select * from Acompanhante Where Atendimento_ID = ?  ";
         PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1, id);
         ResultSet rs = pst.executeQuery();
