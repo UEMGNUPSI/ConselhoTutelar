@@ -93,6 +93,27 @@ public class CriançaDAO {
     return listaTodos;
     }
          
+    public List<CriançaM> ListaTodosAlterar(int id) throws SQLException{ 
+        List<CriançaM> listaTodos = new ArrayList<>();
+        String sql = "select * from Crianca where Atendimento_ID = ? order by Nome";
+        PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()){
+            listaTodos.add(new CriançaM(
+                    rs.getInt("ID"), 
+                    rs.getString("Nome"),
+                    rs.getString("DataNascimento"),
+                    rs.getString("Endereco"),
+                    rs.getString("Numero"),
+                    rs.getString("Bairro"),
+                    rs.getString("Telefone"),
+                    AtendimentoDAO.Busca(rs.getInt("Atendimento_ID"))));      
+        }
+        pst.close();
+        return listaTodos;
+    }
+         
                 //"select * from Crianca where Atendimento_ID = ? 
          
     static public CriançaM busca(int id) throws SQLException{

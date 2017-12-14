@@ -1949,10 +1949,7 @@
                                           <Component id="txtEstadoAcompanhante" min="-2" pref="85" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="281" pref="281" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="jLabel26" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                                               <Component id="txtNumeroAcompanhante" min="-2" pref="60" max="-2" attributes="0"/>

@@ -97,6 +97,29 @@ public class AcompanhanteDAO {
     pst.close();
     return listaTodos;
     }
+              
+    public List<AcompanhanteM> ListaTodosAlterar(int id) throws SQLException{ 
+        List<AcompanhanteM> listaTodos = new ArrayList<>();
+        String sql = "select * from Acompanhante Where Atendimento_ID = ? order by Nome ";
+        PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()){
+            listaTodos.add(new AcompanhanteM(rs.getInt("ID"), 
+                                   rs.getString("Nome"),
+                                   rs.getString("Telefone"),
+                                   rs.getString("Celular"),
+                                   rs.getString("Endereço"),
+                                   rs.getString("Numero"),
+                                   rs.getString("Bairro"),
+                                   rs.getString("Cidade"),
+                                   rs.getString("Estado"),
+                                   AtendimentoDAO.Busca(rs.getInt("Atendimento_ID"))));
+                                  
+        }
+        pst.close();
+        return listaTodos;
+    }
     
                 static public AcompanhanteM busca(int id) throws SQLException{
         PreparedStatement pst;

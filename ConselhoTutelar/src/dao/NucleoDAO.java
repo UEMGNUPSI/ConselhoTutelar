@@ -98,6 +98,29 @@ public class NucleoDAO {
     return listaTodos;
     }
     
+    public List<NucleoM> ListaTodosAlterar(int id) throws SQLException{ 
+        List<NucleoM> listaTodos = new ArrayList<>();
+        String sql = "select * from NucleoFamiliar where Atendimento_ID = ? order by Nome ";
+        PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()){
+            listaTodos.add(new NucleoM(rs.getInt("ID"), 
+                                       rs.getString("Nome"),
+                                       rs.getString("Parentesco"),
+                                       rs.getString("Endereco"),
+                                       rs.getString("Numero"),
+                                       rs.getString("Bairro"),
+                                       rs.getString("Telefone"),
+                                       rs.getString("Celular"),
+                                       rs.getString("Responsabilidade"),
+                                       AtendimentoDAO.Busca(rs.getInt("Atendimento_ID"))));
+
+            }
+        pst.close();
+        return listaTodos;
+    }
+    
      static public NucleoM busca(int id) throws SQLException{
         PreparedStatement pst;
         String sql;
@@ -125,5 +148,6 @@ public class NucleoDAO {
         
         return nucleo;
     }
+     
     
 }

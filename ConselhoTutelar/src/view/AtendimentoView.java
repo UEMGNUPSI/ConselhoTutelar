@@ -5,6 +5,7 @@ import MODEL.AtendimentoM;
 import MODEL.ConselheiroM;
 import MODEL.CriançaM;
 import MODEL.DireitosM;
+import MODEL.FatosM;
 import MODEL.NucleoM;
 import MODEL.RequerenteM;
 import dao.AcompanhanteDAO;
@@ -56,6 +57,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     List<DireitosM> listaDireitos = new ArrayList<>();
     List<DireitosM> listaDireitosGeral = new ArrayList<>();
     List<DireitosM> listaDireitosSelecionados = new ArrayList<>();
+    
+    List<FatosM> listaFatos = new ArrayList<>();
     
     NucleoM nucleo = new NucleoM();
     NucleoDAO nucleoDAO = new NucleoDAO();
@@ -1821,43 +1824,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             tblDireitosSelecionados.setRowHeight(25);
             tblDireitosSelecionados.updateUI();
     }
-    
-        public void AtualizaTabelaDireitosSalvos(){
-        direitos = new DireitosM();
 
-        String dados[][] = new String[listaDireitosSelecionados.size()][3];
-            int i = 0;
-            for (DireitosM setor : listaDireitosSelecionados) {
-                dados[i][0] = String.valueOf(setor.getId());
-                dados[i][1] = setor.getNumero();
-                dados[i][2] = setor.getDescrição();
-                
-               
-                i++;
-            }
-           String tituloColuna[] = {"ID", "Número", "Descrição"};
-            DefaultTableModel tabelaDireitos = new DefaultTableModel();
-            tabelaDireitos.setDataVector(dados, tituloColuna);
-            tblDireitosSelecionados.setModel(new DefaultTableModel(dados, tituloColuna) {
-                boolean[] canEdit = new boolean[]{
-                    false, false, false
-                };
-
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return canEdit[columnIndex];
-                }
-            });
-
-            tblDireitosSelecionados.getColumnModel().getColumn(0).setPreferredWidth(10);
-            tblDireitosSelecionados.getColumnModel().getColumn(1).setPreferredWidth(15);
-            tblDireitosSelecionados.getColumnModel().getColumn(2).setPreferredWidth(15);
-
-            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
-            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
-            tblDireitosSelecionados.getColumnModel().getColumn(0).setCellRenderer(centralizado);
-            tblDireitosSelecionados.setRowHeight(25);
-            tblDireitosSelecionados.updateUI();
-    }
        
     public void atualizaTabelaNucleo(){
         nucleo = new NucleoM();
@@ -2530,6 +2497,17 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private void btnEditarAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarAtendimentoActionPerformed
         jTabbedPane1.setSelectedIndex(1);
         txtRelatoAtendimento.setEnabled(true);
+        
+        try {
+            atendimento = atendimentoDAO.Busca(Integer.parseInt(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString()));
+            listaCrianca = criancaDAO.ListaTodosAlterar(Integer.parseInt(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString()));
+            listaFatos = fatosdao.ListaTodosAlterar(Integer.parseInt(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString()));
+            listaNucleo = nucleoDAO.ListaTodosAlterar(Integer.parseInt(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString()));
+            listaAcompanhante = acompanhanteDAO.ListaTodosAlterar(Integer.parseInt(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString()));
+        } catch (SQLException ex) {
+            Logger.getLogger(AtendimentoView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        AtualizaTabelaDireitosDireita();
         
     
     }//GEN-LAST:event_btnEditarAtendimentoActionPerformed

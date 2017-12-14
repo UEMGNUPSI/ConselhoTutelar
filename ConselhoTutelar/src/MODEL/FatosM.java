@@ -5,10 +5,10 @@ package MODEL;
 public class FatosM {
     
     private int id;
-    private int Atendimento_Id;
-    private int Direitos_Id;
+    private AtendimentoM Atendimento_Id;
+    private DireitosM Direitos_Id;
 
-    public FatosM(int id, int Atendimento_Id, int Direitos_Id) {
+    public FatosM(int id, AtendimentoM Atendimento_Id, DireitosM Direitos_Id) {
         this.id = id;
         this.Atendimento_Id = Atendimento_Id;
         this.Direitos_Id = Direitos_Id;
@@ -25,24 +25,22 @@ public class FatosM {
         this.id = id;
     }
 
-    public int getAtendimento_Id() {
+    public AtendimentoM getAtendimento_Id() {
         return Atendimento_Id;
     }
 
-    public void setAtendimento_Id(int Atendimento_Id) {
+    public void setAtendimento_Id(AtendimentoM Atendimento_Id) {
         this.Atendimento_Id = Atendimento_Id;
     }
 
-    public int getDireitos_Id() {
+    public DireitosM getDireitos_Id() {
         return Direitos_Id;
     }
 
-    public void setDireitos_Id(int Direitos_Id) {
+    public void setDireitos_Id(DireitosM Direitos_Id) {
         this.Direitos_Id = Direitos_Id;
     }
-    
-    
-   
+
     
     
 }

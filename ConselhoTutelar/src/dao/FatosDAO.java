@@ -5,11 +5,16 @@ import MODEL.AtendimentoM;
 import MODEL.DireitosM;
 import MODEL.FatosM;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class FatosDAO {
+    
+    AtendimentoDAO atendimentodao = new AtendimentoDAO();
+    DireitosDAO direitosdao = new DireitosDAO();
     
       public void Salvar (List<DireitosM> listafatos, int atendimento) throws SQLException{
         PreparedStatement pst;
@@ -39,12 +44,27 @@ public class FatosDAO {
         
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1, fatos.getId());
-        pst.setInt(2, fatos.getAtendimento_Id());
-        pst.setInt(3, fatos.getDireitos_Id());
+        pst.setInt(2, fatos.getAtendimento_Id().getId());
+        pst.setInt(3, fatos.getDireitos_Id().getId());
   
         pst.execute();
         pst.close();
      }
     
+    public List<FatosM> ListaTodosAlterar(int id) throws SQLException{ 
+        List<FatosM> listaTodos = new ArrayList<>();
+        String sql = "select * from Fatos where Atendimento_ID = ?";
+        PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()){
+            listaTodos.add(new FatosM(
+                    rs.getInt("ID"), 
+                    atendimentodao.Busca(rs.getInt("Atendimento_ID")),
+                    direitosdao.busca(rs.getInt("Direitos_ID"))));      
+        }
+        pst.close();
+        return listaTodos;
+    }
        
 }
