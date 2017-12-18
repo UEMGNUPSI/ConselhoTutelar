@@ -189,6 +189,5 @@ ENGINE = InnoDB;
 
 insert into conselheiro values (1, "Fernando", "000", "000", "root", "root");
 
-DROP TABLE ACOMPANHANTE;
-select * from direitos;
-drop schema conselhotutelar;
+
+
