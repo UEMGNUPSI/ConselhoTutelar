@@ -35,16 +35,18 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         limparCampos();
         
         txtNome.setDocument(new LimiteDigitos(50));
-        txtNascimento.setDocument(new LimiteDigitos(15));
-        txtTel1.setDocument(new LimiteDigitos(15));
-        txtTel2.setDocument(new LimiteDigitos(15));
-        txtCelular.setDocument(new LimiteDigitos(15));
+        //txtNascimento.setDocument(new LimiteDigitos(15));
+        //txtTel1.setDocument(new LimiteDigitos(15));
+        //txtTel2.setDocument(new LimiteDigitos(15));
+        //txtCelular.setDocument(new LimiteDigitos(15));
         txtEndereco.setDocument(new LimiteDigitos(45));
         txtNumero.setDocument(new LimiteDigitos(10));
         txtBairro.setDocument(new LimiteDigitos(45));
         txtCidade.setDocument(new LimiteDigitos(20));
-        txtEstado.setDocument(new LimiteDigitos(15));
         txtObs.setDocument(new LimiteDigitos(100));
+        
+        
+        
 
     }
     
@@ -62,6 +64,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
         btnNovo = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
@@ -94,15 +97,17 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
-        txtEstado = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtTel2 = new javax.swing.JFormattedTextField();
         txtTel1 = new javax.swing.JFormattedTextField();
         txtCelular = new javax.swing.JFormattedTextField();
+        txtEstado = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtObs = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setBackground(new java.awt.Color(211, 211, 211));
         setClosable(true);
@@ -248,7 +253,11 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         txtId.setEnabled(false);
 
         txtNascimento.setBackground(new java.awt.Color(231, 233, 237));
-        txtNascimento.setFormatterFactory(setFormatoNascimento());
+        try {
+            txtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtNascimento.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -326,17 +335,22 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         txtCidade.setBackground(new java.awt.Color(231, 233, 237));
         txtCidade.setEnabled(false);
 
-        txtEstado.setBackground(new java.awt.Color(231, 233, 237));
-        txtEstado.setEnabled(false);
-
         jLabel11.setText("Estado:");
 
         txtTel2.setBackground(new java.awt.Color(231, 233, 237));
-        txtTel2.setFormatterFactory(setFormatoTelefone());
+        try {
+            txtTel2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) ####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtTel2.setEnabled(false);
 
         txtTel1.setBackground(new java.awt.Color(231, 233, 237));
-        txtTel1.setFormatterFactory(setFormatoTelefone());
+        try {
+            txtTel1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) ####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtTel1.setEnabled(false);
         txtTel1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -345,8 +359,15 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         });
 
         txtCelular.setBackground(new java.awt.Color(231, 233, 237));
-        txtCelular.setFormatterFactory(setFormatoCelular());
+        try {
+            txtCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtCelular.setEnabled(false);
+
+        txtEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC \t ", "AL \t ", "AP \t ", "AM \t ", "BA \t ", "CE \t ", "DF \t ", "ES \t ", "GO \t ", "MA \t ", "MT \t ", "MS \t ", "MG \t ", "PA \t ", "PB \t ", "PR \t ", "PE \t ", "PI \t ", "RJ \t ", "RN \t ", "RS \t ", "RO \t ", "RR \t ", "SC \t ", "SP \t ", "SE \t ", "TO" }));
+        txtEstado.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -387,10 +408,11 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel10)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(txtCidade))
-                        .addGap(18, 18, 18)
+                        .addGap(28, 28, 28)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
-                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -548,7 +570,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             requerente.setNumero(txtNumero.getText());
             requerente.setBairro(txtBairro.getText());
             requerente.setCidade(txtCidade.getText());
-            requerente.setEstado(txtEstado.getText());
+            requerente.setEstado(String.valueOf(txtEstado.getSelectedItem()));
             requerente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedItem()));
             requerente.setObservação(txtObs.getText());
       
@@ -576,7 +598,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             requerente.setNumero(txtNumero.getText());
             requerente.setBairro(txtBairro.getText());
             requerente.setCidade(txtCidade.getText());
-            requerente.setEstado(txtEstado.getText());
+            requerente.setEstado(String.valueOf(txtEstado.getSelectedItem()));
             requerente.setEstadoCivil(String.valueOf(cbxEstadoCivil.getSelectedItem()));
             requerente.setObservação(txtObs.getText());
        
@@ -651,7 +673,12 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                    txtNome.requestFocusInWindow();
                }
                catch (SQLException ex){
-                   JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+                     Logger.getLogger(RequerenteView.class.getName()).log(Level.SEVERE, null, ex);
+                   if (ex.getErrorCode() == 1451) {
+                        JOptionPane.showMessageDialog(null, "Impossível excluir requerente que possua atendimento cadastrado.", "Erro", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+                    }
                }
                AtualizaTabelaRequerente();
                prepararExcluir();
@@ -680,7 +707,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         txtNumero.setText(requerente.getNumero());
         txtBairro.setText(requerente.getBairro());
         txtCidade.setText(requerente.getCidade());
-        txtEstado.setText(requerente.getEstado());
+        txtEstado.setSelectedItem(tblRequerente.getValueAt(tblRequerente.getSelectedRow(),5).toString());
         cbxEstadoCivil.setSelectedItem(tblRequerente.getValueAt(tblRequerente.getSelectedRow(),6).toString());
         txtObs.setText(requerente.getObservação());
         btnAlterar.setEnabled(true);
@@ -787,7 +814,8 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             tblRequerente.setRowHeight(25);
             tblRequerente.updateUI();     
     }
-    
+   
+    /*
             //Mascara que formata para regularizar como é inserido o telefone
     public static DefaultFormatterFactory setFormatoTelefone(){  
         MaskFormatter comFoco = null;  
@@ -826,7 +854,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         return factory;  
     }
 
-    
+    */
     
     public void limparCampos(){
         txtId.setText("");
@@ -838,7 +866,6 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         txtBairro.setText("");
         txtNumero.setText("");
         txtCidade.setText("");
-        txtEstado.setText("");
         txtTel1.setText("");
         txtTel2.setText("");
         txtCelular.setText("");
@@ -921,6 +948,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbxEstadoCivil;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -945,7 +973,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtCelular;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtEndereco;
-    private javax.swing.JTextField txtEstado;
+    private javax.swing.JComboBox<String> txtEstado;
     private javax.swing.JTextField txtId;
     private javax.swing.JFormattedTextField txtNascimento;
     private javax.swing.JTextField txtNome;

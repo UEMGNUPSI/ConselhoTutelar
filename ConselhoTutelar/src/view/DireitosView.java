@@ -6,6 +6,8 @@ import dao.DireitosDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -350,7 +352,12 @@ public class DireitosView extends javax.swing.JInternalFrame {
                    txtDescricao.requestFocusInWindow();
                }
                catch (SQLException ex){
-                   JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+                    Logger.getLogger(DireitosView.class.getName()).log(Level.SEVERE, null, ex);
+                   if (ex.getErrorCode() == 1451) {
+                        JOptionPane.showMessageDialog(null, "Impossível excluir direito que esteja em uso.", "Erro", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+                    }
                }
                AtualizaTabelaDireitos();
                prepararExcluir();

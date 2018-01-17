@@ -5,6 +5,8 @@ import dao.ConselheiroDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -86,12 +88,20 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
         jLabel4.setText("Celular:");
 
         txtTelefone.setBackground(new java.awt.Color(231, 233, 237));
-        txtTelefone.setFormatterFactory(setFormatoTelefone());
+        try {
+            txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) ####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtTelefone.setEnabled(false);
         txtTelefone.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
 
         txtCelular.setBackground(new java.awt.Color(231, 233, 237));
-        txtCelular.setFormatterFactory(setFormatoCelular());
+        try {
+            txtCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtCelular.setEnabled(false);
         txtCelular.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
 
@@ -470,7 +480,12 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
                    txtNome.requestFocusInWindow();
                }
                catch (SQLException ex){
-                   JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
+                    Logger.getLogger(ConselheiroView.class.getName()).log(Level.SEVERE, null, ex);
+                   if (ex.getErrorCode() == 1451) {
+                        JOptionPane.showMessageDialog(null, "Impossível excluir conselheiro que possua atendimento cadastrado.", "Erro", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+                    }
                }
                AtualizaTabelaConselheiro();
                prepararExcluir();
