@@ -450,8 +450,9 @@ public class DireitosView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblDireitos.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblDireitos.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblDireitos.getColumnModel().getColumn(0).setMinWidth(0);
+            tblDireitos.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblDireitos.getColumnModel().getColumn(1).setPreferredWidth(15);
             tblDireitos.getColumnModel().getColumn(2).setPreferredWidth(15);
       

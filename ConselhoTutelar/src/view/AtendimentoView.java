@@ -69,6 +69,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     List<AcompanhanteM> listaAcompanhante = new ArrayList<>(); 
     
     FatosDAO fatosdao = new FatosDAO();
+    FatosM fatos = new FatosM();
     
     public AtendimentoView() {
         initComponents();
@@ -978,12 +979,13 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9)
                     .addComponent(txtEnderecoCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBairroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
-                        .addComponent(txtNumeroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNumeroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtBairroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel12)))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
@@ -1990,6 +1992,43 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             tblDireitosGeral.updateUI();
  
     }
+        
+    public void AtualizaTabelaDireitosDoEditarAtendimento(){
+        fatos = new FatosM();
+
+        String dados[][] = new String[listaFatos.size()][3];
+            int i = 0;
+            for (FatosM setor : listaFatos) {
+                dados[i][0] = String.valueOf(setor.getId());
+                dados[i][1] = String.valueOf(setor.getDireitos_Id().getNumero());
+                dados[i][2] = String.valueOf(setor.getDireitos_Id().getDescrição());
+                
+               
+                i++;
+            }
+           String tituloColuna[] = {"ID", "Número", "Descrição"};
+            DefaultTableModel tabelaDireitos = new DefaultTableModel();
+            tabelaDireitos.setDataVector(dados, tituloColuna);
+            tblDireitosSelecionados.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false
+                };
+
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblDireitosSelecionados.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblDireitosSelecionados.getColumnModel().getColumn(1).setPreferredWidth(15);
+            tblDireitosSelecionados.getColumnModel().getColumn(2).setPreferredWidth(15);
+
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblDireitosSelecionados.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblDireitosSelecionados.setRowHeight(25);
+            tblDireitosSelecionados.updateUI();
+    }
        
     public void atualizaTabelaNucleo(){
         nucleo = new NucleoM();
@@ -2792,7 +2831,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             Logger.getLogger(AtendimentoView.class.getName()).log(Level.SEVERE, null, ex);
         }
         atualizaTabelaCriancaAlterar();
-        AtualizaTabelaDireitosDireita();        
+        AtualizaTabelaDireitosDoEditarAtendimento();        
         atualizaTabelaNucleoAlterar();
         atualizaTabelaAcompanhanteAlterar();
         

@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Crianca` (
   CONSTRAINT `fk_Crianca_Atendimento1`
     FOREIGN KEY (`Atendimento_ID`)
     REFERENCES `ConselhoTutelar`.`Atendimento` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`NucleoFamiliar` (
   CONSTRAINT `fk_NucleoFamiliar_Atendimento1`
     FOREIGN KEY (`Atendimento_ID`)
     REFERENCES `ConselhoTutelar`.`Atendimento` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Acompanhante` (
   CONSTRAINT `fk_Acompanhante_Atendimento1`
     FOREIGN KEY (`Atendimento_ID`)
     REFERENCES `ConselhoTutelar`.`Atendimento` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -178,12 +178,12 @@ CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Atendimento_has_Direitos` (
   CONSTRAINT `fk_Atendimento_has_Direitos_Atendimento1`
     FOREIGN KEY (`Atendimento_ID`)
     REFERENCES `ConselhoTutelar`.`Atendimento` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Atendimento_has_Direitos_Direitos1`
     FOREIGN KEY (`Direitos_ID`)
     REFERENCES `ConselhoTutelar`.`Direitos` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
