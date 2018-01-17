@@ -75,11 +75,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         initComponents();
         this.setVisible(true);        
         atualizaTabelaAtendimento();
-        atualizaTabelaCrianca();
         AtualizaTabelaDireitos();
         AtualizaTabelaDireitosDireita();
-        atualizaTabelaNucleo();
-        atualizaTabelaAcompanhante();
+        
         
         dlgBuscaRequerente.setSize(941, 508);
         dlgBuscaConselheiro.setSize(941, 508);
@@ -1761,7 +1759,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     public void atualizaTabelaCrianca(){
         crianca = new CriançaM();
         try {
-            listaCrianca = criancaDAO.ListaTodos();
+            listaCrianca = criancaDAO.ListaTodos(Integer.valueOf(txtIdAtendimento.getText()));
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
         }

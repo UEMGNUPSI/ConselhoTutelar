@@ -71,11 +71,12 @@ public class CriançaDAO {
      }
         
      
-         public List<CriançaM> ListaTodos() throws SQLException{ 
+         public List<CriançaM> ListaTodos(int id) throws SQLException{ 
     List<CriançaM> listaTodos = new ArrayList<>();
 
-        String sql = "select * from Crianca order by Nome";
+        String sql = "select * from Crianca where Atendimento_id = ? order by Nome";
         PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, id);
     ResultSet rs = pst.executeQuery();
 
     while (rs.next()){
