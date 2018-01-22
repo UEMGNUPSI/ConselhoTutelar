@@ -33,10 +33,11 @@ public class PrincipalView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        mnuRequerente = new javax.swing.JMenuItem();
-        mnuConselheiro = new javax.swing.JMenuItem();
-        mnuDireitos = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenu2 = new javax.swing.JMenu();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenu3 = new javax.swing.JMenu();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         mnuAtendimento = new javax.swing.JMenu();
         mnuSair = new javax.swing.JMenu();
 
@@ -60,48 +61,48 @@ public class PrincipalView extends javax.swing.JFrame {
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 58, Short.MAX_VALUE))
+                .addGap(0, 61, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnl);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/folder.png"))); // NOI18N
-        jMenu1.setText("Arquivo     ");
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/if_kuser_1400.png"))); // NOI18N
+        jMenu1.setText("Requerente");
         jMenu1.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-
-        mnuRequerente.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        mnuRequerente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/pilha.png"))); // NOI18N
-        mnuRequerente.setText("Requerente");
-        mnuRequerente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuRequerenteActionPerformed(evt);
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
             }
         });
-        jMenu1.add(mnuRequerente);
-
-        mnuConselheiro.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        mnuConselheiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/people.png"))); // NOI18N
-        mnuConselheiro.setText("Conselheiro");
-        mnuConselheiro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuConselheiroActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mnuConselheiro);
-
-        mnuDireitos.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        mnuDireitos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/book.png"))); // NOI18N
-        mnuDireitos.setText("Direitos");
-        mnuDireitos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuDireitosActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mnuDireitos);
         jMenu1.add(jSeparator1);
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/if_administrator_43663.png"))); // NOI18N
+        jMenu2.setText("Conselheiro");
+        jMenu2.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jSeparator2);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/if_Rules of Fight Club_27667.png"))); // NOI18N
+        jMenu3.setText("Direitos");
+        jMenu3.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
+        jMenu3.add(jSeparator3);
+
+        jMenuBar1.add(jMenu3);
+
+        mnuAtendimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/if_Application_46710.png"))); // NOI18N
         mnuAtendimento.setText("Atendimento");
         mnuAtendimento.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         mnuAtendimento.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,7 +117,7 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jMenuBar1.add(mnuAtendimento);
 
-        mnuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/close.png"))); // NOI18N
+        mnuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/if_Gnome-Application-Exit-48_55222.png"))); // NOI18N
         mnuSair.setText("Sair");
         mnuSair.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         mnuSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -131,27 +132,6 @@ public class PrincipalView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mnuRequerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRequerenteActionPerformed
-        RequerenteView req = new RequerenteView();
-        pnl.removeAll();
-        pnl.add(req);
-        pnl.updateUI();
-    }//GEN-LAST:event_mnuRequerenteActionPerformed
-
-    private void mnuConselheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConselheiroActionPerformed
-       ConselheiroView cons = new ConselheiroView();
-       pnl.removeAll();
-       pnl.add(cons);
-       pnl.updateUI();
-    }//GEN-LAST:event_mnuConselheiroActionPerformed
-
-    private void mnuDireitosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDireitosActionPerformed
-       DireitosView dir = new DireitosView();
-       pnl.removeAll();
-       pnl.add(dir);
-       pnl.updateUI();
-    }//GEN-LAST:event_mnuDireitosActionPerformed
-
     private void mnuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuSairMouseClicked
         this.dispose();
     }//GEN-LAST:event_mnuSairMouseClicked
@@ -163,10 +143,31 @@ public class PrincipalView extends javax.swing.JFrame {
 
     private void mnuAtendimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuAtendimentoMouseClicked
     AtendimentoView ate = new AtendimentoView();
-         pnl.removeAll();
+        pnl.removeAll();
         pnl.add(ate);
         pnl.updateUI();
     }//GEN-LAST:event_mnuAtendimentoMouseClicked
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        RequerenteView requerente = new RequerenteView();
+        pnl.removeAll(); 
+        pnl.add(requerente); 
+        pnl.updateUI();
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        ConselheiroView conselheiro = new ConselheiroView();
+        pnl.removeAll(); 
+        pnl.add(conselheiro); 
+        pnl.updateUI();
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        DireitosView direitos = new DireitosView();
+        pnl.removeAll(); 
+        pnl.add(direitos); 
+        pnl.updateUI();
+    }//GEN-LAST:event_jMenu3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -176,13 +177,14 @@ public class PrincipalView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JMenu mnuAtendimento;
-    private javax.swing.JMenuItem mnuConselheiro;
-    private javax.swing.JMenuItem mnuDireitos;
-    private javax.swing.JMenuItem mnuRequerente;
     private javax.swing.JMenu mnuSair;
     private javax.swing.JPanel pnl;
     // End of variables declaration//GEN-END:variables
