@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class PrincipalView extends javax.swing.JFrame {
@@ -65,6 +66,8 @@ public class PrincipalView extends javax.swing.JFrame {
         );
 
         getContentPane().add(pnl);
+
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/if_kuser_1400.png"))); // NOI18N
         jMenu1.setText("Requerente");
@@ -133,7 +136,11 @@ public class PrincipalView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuSairMouseClicked
-        this.dispose();
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Atenção", JOptionPane.YES_OPTION);
+    
+        if(opcao == JOptionPane.YES_OPTION){
+        System.exit(0);
+        }
     }//GEN-LAST:event_mnuSairMouseClicked
 
     private void mnuAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAtendimentoActionPerformed

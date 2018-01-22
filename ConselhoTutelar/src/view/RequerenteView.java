@@ -35,10 +35,6 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         limparCampos();
         
         txtNome.setDocument(new LimiteDigitos(50));
-        //txtNascimento.setDocument(new LimiteDigitos(15));
-        //txtTel1.setDocument(new LimiteDigitos(15));
-        //txtTel2.setDocument(new LimiteDigitos(15));
-        //txtCelular.setDocument(new LimiteDigitos(15));
         txtEndereco.setDocument(new LimiteDigitos(45));
         txtNumero.setDocument(new LimiteDigitos(10));
         txtBairro.setDocument(new LimiteDigitos(45));
@@ -746,14 +742,14 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             for (RequerenteM setor : listaRequerente) {
                 dados[i][0] = String.valueOf(setor.getId());
                 dados[i][1] = setor.getNome();
-                dados[i][2] = setor.getTelefone1();
+                dados[i][2] = setor.getCelular();
                 dados[i][3] = setor.getEndereço();
                 dados[i][4] = setor.getCidade();
                 dados[i][5] = setor.getEstado();
                 dados[i][6] = setor.getEstadoCivil();
                 i++;
             }
-           String tituloColuna[] = {"ID", "Nome", "Telefone 1", "Endereço", "Cidade", "Estado","Estado Civil"};
+           String tituloColuna[] = {"ID", "Nome", "Celular", "Endereço", "Cidade", "Estado","Estado Civil"};
             DefaultTableModel tabelaRequerente = new DefaultTableModel();
             tabelaRequerente.setDataVector(dados, tituloColuna);
             tblRequerente.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -786,14 +782,14 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             for (RequerenteM setor : listaRequerente) {
                 dados[i][0] = String.valueOf(setor.getId());
                 dados[i][1] = setor.getNome();
-                dados[i][2] = setor.getTelefone1();
+                dados[i][2] = setor.getCelular();
                 dados[i][3] = setor.getEndereço();
                 dados[i][4] = setor.getCidade();
                 dados[i][5] = setor.getEstado();
                 dados[i][6] = setor.getEstadoCivil();
                 i++;
             }
-           String tituloColuna[] = {"ID", "Nome", "Telefone 1", "Endereço", "Cidade", "Estado","Estado Civil"};
+           String tituloColuna[] = {"ID", "Nome", "Celular", "Endereço", "Cidade", "Estado","Estado Civil"};
             DefaultTableModel tabelaRequerente = new DefaultTableModel();
             tabelaRequerente.setDataVector(dados, tituloColuna);
             tblRequerente.setModel(new DefaultTableModel(dados, tituloColuna) {

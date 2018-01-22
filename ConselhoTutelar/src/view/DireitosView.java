@@ -28,7 +28,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
         AtualizaTabelaDireitos();
         
         txtArtigo.setDocument(new LimiteDigitos(10));
-        txtDescricao.setDocument(new LimiteDigitos(100));
+        txtDescricao.setDocument(new LimiteDigitos(300));
     }
 
     
@@ -40,9 +40,9 @@ public class DireitosView extends javax.swing.JInternalFrame {
         txtArtigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtDescricao = new javax.swing.JTextArea();
         txtId = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtDescricao = new javax.swing.JTextArea();
         btnExcluir = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -79,13 +79,13 @@ public class DireitosView extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Descrição:");
 
-        txtDescricao.setBackground(new java.awt.Color(231, 233, 237));
+        txtId.setEnabled(false);
+
         txtDescricao.setColumns(20);
         txtDescricao.setRows(5);
+        txtDescricao.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtDescricao.setEnabled(false);
-        jScrollPane1.setViewportView(txtDescricao);
-
-        txtId.setEnabled(false);
+        jScrollPane3.setViewportView(txtDescricao);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,7 +94,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -119,7 +119,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
                 .addGap(11, 11, 11)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -242,14 +242,14 @@ public class DireitosView extends javax.swing.JInternalFrame {
                                 .addGap(60, 60, 60))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(147, 147, 147)
-                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72)
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(73, 73, 73)
-                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -270,7 +270,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
                     .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -282,7 +282,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
     ativaCampos();
     btnAlterar.setEnabled(false);
     btnExcluir.setEnabled(false);
-    txtDescricao.requestFocusInWindow(); 
+    txtArtigo.requestFocusInWindow(); 
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -344,7 +344,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
        }
        else {
            direitos.setId(Integer.parseInt(txtId.getText()));
-           int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: " + txtDescricao.getText());
+           int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir artigo " + txtArtigo.getText() + "?");
            if (confirma == 0){
                try{
                    direitosdao.Excluir(direitos);
@@ -574,8 +574,8 @@ public class DireitosView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblDireitos;
     private javax.swing.JTextField txtArtigo;
     private javax.swing.JTextField txtBusca;
