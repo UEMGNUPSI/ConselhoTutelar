@@ -120,7 +120,7 @@ public class AtendimentoDAO {
         int cont = 0;
         String nome = "%"+Name+"%";
 
-        sql = "select Atendimento.ID, Atendimento.Data, Atendimento.RelatoResumido, Atendimento.Requerente_ID, Atendimento.Conselheiro1_ID, Atendimento.Conselheiro2_ID from Atendimento, Requerente where Atendimento.Requerente_ID = Requerente.ID and Requerente.Nome like ?";
+        sql = "select Atendimento.ID, Atendimento.Data, Atendimento.Pasta, Atendimento.RelatoResumido, Atendimento.Requerente_ID, Atendimento.Conselheiro1_ID, Atendimento.Conselheiro2_ID from Atendimento, Requerente where Atendimento.Requerente_ID = Requerente.ID and Requerente.Nome like ?";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setString(1, nome);
         ResultSet rs = pst.executeQuery();
