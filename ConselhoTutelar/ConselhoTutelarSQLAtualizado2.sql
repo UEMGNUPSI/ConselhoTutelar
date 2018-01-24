@@ -82,17 +82,17 @@ CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Atendimento` (
     FOREIGN KEY (`Requerente_ID`)
     REFERENCES `ConselhoTutelar`.`Requerente` (`ID`)
     ON DELETE NO ACTION
-    ON UPDATE  restrict,
+    ON UPDATE  NO ACTION,
   CONSTRAINT `fk_Atendimento_Conselheiro1`
     FOREIGN KEY (`Conselheiro1_ID`)
     REFERENCES `ConselhoTutelar`.`Conselheiro` (`ID`)
     ON DELETE NO ACTION
-    ON UPDATE  restrict,
+    ON UPDATE  NO ACTION,
   CONSTRAINT `fk_Atendimento_Conselheiro2`
     FOREIGN KEY (`Conselheiro2_ID`)
     REFERENCES `ConselhoTutelar`.`Conselheiro` (`ID`)
     ON DELETE NO ACTION
-    ON UPDATE restrict)
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -189,6 +189,8 @@ CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Atendimento_has_Direitos` (
 ENGINE = InnoDB;
 
 insert into conselheiro values (1, "Fernando", "000", "000", "root", "root");
-
-select * from atendimento;
+insert into conselheiro values (2, "Danilo", "000", "000", "root", "root");
+INSERT INTO `conselhotutelar`.`requerente` (`ID`, `Nome`) VALUES ('1', 'leonardo1');
+INSERT INTO `conselhotutelar`.`requerente` (`ID`, `Nome`) VALUES ('2', 'leonardo2');
+INSERT INTO `conselhotutelar`.`requerente` (`ID`, `Nome`) VALUES ('3', 'leonardo3');
 

@@ -76,7 +76,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         initComponents();
         this.setVisible(true);
         jTabbedPane1.setSelectedIndex(0);
-        jTabbedPane1.setEnabledAt(1, false);jTabbedPane1.setEnabledAt(2, false);jTabbedPane1.setEnabledAt(3, false);jTabbedPane1.setEnabledAt(4, false);jTabbedPane1.setEnabledAt(5, false);
+        //jTabbedPane1.setEnabledAt(1, false);jTabbedPane1.setEnabledAt(2, false);jTabbedPane1.setEnabledAt(3, false);jTabbedPane1.setEnabledAt(4, false);jTabbedPane1.setEnabledAt(5, false);
         
         
         dlgBuscaRequerente.setSize(941, 508);
