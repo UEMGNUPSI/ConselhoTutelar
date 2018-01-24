@@ -82,17 +82,17 @@ CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Atendimento` (
     FOREIGN KEY (`Requerente_ID`)
     REFERENCES `ConselhoTutelar`.`Requerente` (`ID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE  restrict,
   CONSTRAINT `fk_Atendimento_Conselheiro1`
     FOREIGN KEY (`Conselheiro1_ID`)
     REFERENCES `ConselhoTutelar`.`Conselheiro` (`ID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE  restrict,
   CONSTRAINT `fk_Atendimento_Conselheiro2`
     FOREIGN KEY (`Conselheiro2_ID`)
     REFERENCES `ConselhoTutelar`.`Conselheiro` (`ID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE restrict)
 ENGINE = InnoDB;
 
 
