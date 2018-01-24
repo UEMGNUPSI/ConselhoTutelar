@@ -6,14 +6,17 @@ public class AtendimentoM {
     
     private int Id;
     private String Data;
+    private String Pasta;
     private String RelatoResumido;
     private RequerenteM Requerente_id;
     private ConselheiroM Conselheiro1_id;
     private ConselheiroM Conselheiro2_id;
+    
 
-    public AtendimentoM(int Id, String Data, String RelatoResumido, RequerenteM Requerente_id, ConselheiroM Conselheiro1_id, ConselheiroM Conselheiro2_id) {
+    public AtendimentoM(int Id, String Data, String Pasta, String RelatoResumido, RequerenteM Requerente_id, ConselheiroM Conselheiro1_id, ConselheiroM Conselheiro2_id) {
         this.Id = Id;
         this.Data = Data;
+        this.Pasta = Pasta;
         this.RelatoResumido = RelatoResumido;
         this.Requerente_id = Requerente_id;
         this.Conselheiro1_id = Conselheiro1_id;
@@ -37,6 +40,14 @@ public class AtendimentoM {
 
     public void setData(String Data) {
         this.Data = Data;
+    }
+    
+    public String getPasta() {
+        return Pasta;
+    }
+    
+    public void setPasta(String Pasta){
+        this.Pasta = Pasta;
     }
 
     public String getRelatoResumido() {

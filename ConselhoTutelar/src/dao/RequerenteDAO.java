@@ -174,4 +174,44 @@ public class RequerenteDAO {
         
         return ListaBusca;
     }
+    
+    public RequerenteM BuscaparaAtendimento(String Nome) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        RequerenteM requerente = new RequerenteM();
+        int cont = 0;
+        
+        String name = "%"+Nome+"%";
+        
+        sql = "select * from Requerente where Nome like ? order by nome";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setString(1, name);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           requerente = new RequerenteM(
+                   rs.getInt("ID"),
+                   rs.getString("Nome"),
+                   rs.getString("Nascimento"),
+                   rs.getString("Telefone1"),
+                   rs.getString("Telefone2"),
+                   rs.getString("Celular"),
+                   rs.getString("Endereco"),
+                   rs.getString("Numero"),
+                   rs.getString("Bairro"),
+                   rs.getString("Cidade"),
+                   rs.getString("Estado"),                   
+                   rs.getString("EstadoCivil"),
+                   rs.getString("Observacao"));
+                   cont++;
+                   
+        }
+        if(cont == 0){
+            return null;
+        }
+            
+        pst.execute();
+        pst.close();                           
+        
+        return requerente;
+    }
 }

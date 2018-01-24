@@ -3,6 +3,7 @@ package dao;
 
 
 import MODEL.AtendimentoM;
+import MODEL.RequerenteM;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,14 +17,15 @@ public class AtendimentoDAO {
         PreparedStatement pst;
         String sql;
         int idAtendimento = 0;
-        sql = "insert into Atendimento values (?,?,?,?,?,?)";
+        sql = "insert into Atendimento values (?,?,?,?,?,?,?)";
         pst = pst = Conexao.getInstance().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         pst.setInt(1,0);
         pst.setString(2, atendimento.getData());
-        pst.setString(3, atendimento.getRelatoResumido());
-        pst.setInt(4, atendimento.getRequerente_id().getId());
-        pst.setInt(5, atendimento.getConselheiro1_id().getId());
-        pst.setInt(6, atendimento.getConselheiro2_id().getId());
+        pst.setString(3, atendimento.getPasta());
+        pst.setString(4, atendimento.getRelatoResumido());
+        pst.setInt(5, atendimento.getRequerente_id().getId());
+        pst.setInt(6, atendimento.getConselheiro1_id().getId());
+        pst.setInt(7, atendimento.getConselheiro2_id().getId());
         pst.execute();
         ResultSet rs = pst.getGeneratedKeys();
         while (rs.next()) {
@@ -50,6 +52,7 @@ public class AtendimentoDAO {
         String sql;
         sql = "update Atendimento set "
                  + "Data = ?, "
+                 + "Pasta = ?, "
                  + "RelatoResumido = ?, "
                  + "Requerente_ID = ?, "
                  + "Conselheiro1_ID = ?, "
@@ -79,6 +82,7 @@ public class AtendimentoDAO {
     while (rs.next()){
         listaTodos.add(new AtendimentoM(rs.getInt("ID"), 
                                    rs.getString("Data"),
+                                   rs.getString("Pasta"),
                                    rs.getString("RelatoResumido"),
                                    RequerenteDAO.busca(rs.getInt("Requerente_ID")),
                                    ConselheiroDAO.busca(rs.getInt("Conselheiro1_ID")),
@@ -99,6 +103,7 @@ public class AtendimentoDAO {
             while (rs.next()){
             atendimento = new AtendimentoM(rs.getInt("ID"), 
                                        rs.getString("Data"),
+                                       rs.getString("Pasta"),
                                        rs.getString("RelatoResumido"),
                                        RequerenteDAO.busca(rs.getInt("Requerente_ID")),
                                        ConselheiroDAO.busca(rs.getInt("Conselheiro1_ID")),
@@ -108,7 +113,34 @@ public class AtendimentoDAO {
         return atendimento;
     }
         
+        public List<AtendimentoM> FiltroBuscaRequerente(int id) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        List<AtendimentoM> ListaBusca = new ArrayList<>();
+        int cont = 0;
+
+        sql = "select * from Atendimento where Requerente_ID = ?";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           ListaBusca.add(new AtendimentoM(rs.getInt("ID"), 
+                                   rs.getString("Data"),
+                                   rs.getString("Pasta"),
+                                   rs.getString("RelatoResumido"),
+                                   RequerenteDAO.busca(rs.getInt("Requerente_ID")),
+                                   ConselheiroDAO.busca(rs.getInt("Conselheiro1_ID")),
+                                   ConselheiroDAO.busca(rs.getInt("Conselheiro2_ID"))));      
+                   cont++;    
+        }
+        if(cont == 0){
+            return null;
+        }
+        pst.execute();
+        pst.close();                           
         
+        return ListaBusca;
+    }
     
     
 }

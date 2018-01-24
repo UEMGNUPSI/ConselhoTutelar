@@ -177,7 +177,7 @@ public class RequerenteView extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tblRequerente);
 
         jPanel2.setBackground(new java.awt.Color(211, 211, 211));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 129, 164)), "Mais Informação"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 129, 164)), "Buscar Requerente"));
 
         txtBusca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
