@@ -159,7 +159,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         btnExlucirAtendimento = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         txtBusca1 = new javax.swing.JTextField();
-        BtnBuscar = new javax.swing.JButton();
         btnLimpar1 = new javax.swing.JButton();
         txtlabelbusca = new javax.swing.JLabel();
         pnlAtendimento = new javax.swing.JPanel();
@@ -613,6 +612,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         });
         jScrollPane8.setViewportView(tblAtendimentos);
 
+        btnNovoAtendimento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnNovoAtendimento.setText("Novo Atendimento");
         btnNovoAtendimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -620,6 +620,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             }
         });
 
+        btnEditarAtendimento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEditarAtendimento.setText("Editar Atendimento");
         btnEditarAtendimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -627,6 +628,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             }
         });
 
+        btnExlucirAtendimento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnExlucirAtendimento.setText("Excluir Atendimento");
         btnExlucirAtendimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -637,19 +639,14 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jPanel8.setBackground(new java.awt.Color(211, 211, 211));
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 129, 164)), "Buscar Requerente"));
 
-        txtBusca1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBusca1ActionPerformed(evt);
+        txtBusca1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtBusca1.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtBusca1CaretUpdate(evt);
             }
         });
 
-        BtnBuscar.setText("Buscar");
-        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBuscarActionPerformed(evt);
-            }
-        });
-
+        btnLimpar1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnLimpar1.setText("Limpar");
         btnLimpar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -657,6 +654,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             }
         });
 
+        txtlabelbusca.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtlabelbusca.setText("Nome:");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -665,21 +663,18 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtlabelbusca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtBusca1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(BtnBuscar)
+                .addComponent(txtlabelbusca, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBusca1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnLimpar1)
-                .addGap(104, 104, 104))
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBusca1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnBuscar)
                     .addComponent(btnLimpar1)
                     .addComponent(txtlabelbusca))
                 .addGap(0, 7, Short.MAX_VALUE))
@@ -691,32 +686,33 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnNovoAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditarAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnExlucirAtendimento)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 819, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnNovoAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnEditarAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnExlucirAtendimento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane8)
                 .addContainerGap())
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(288, 288, 288)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(337, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(94, 94, 94)
                 .addComponent(btnNovoAtendimento)
                 .addGap(32, 32, 32)
                 .addComponent(btnEditarAtendimento)
                 .addGap(32, 32, 32)
                 .addComponent(btnExlucirAtendimento)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(369, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane8))
         );
 
         jTabbedPane1.addTab("Lista de Atendimentos", jPanel4);
@@ -863,20 +859,17 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel30)))
                         .addGap(20, 20, 20)
                         .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlAtendimentoLayout.createSequentialGroup()
-                                .addGap(0, 0, 0)
-                                .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtRequerenteAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6)
-                                        .addComponent(txtDataAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtIdAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtAtendimentoIdRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtAtendimentoIdConselheiro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtAtendimentoIdConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel4)
-                                        .addComponent(txtPasta, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel7)
+                            .addGroup(pnlAtendimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtRequerenteAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6)
+                                .addComponent(txtDataAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtIdAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAtendimentoIdRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAtendimentoIdConselheiro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAtendimentoIdConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)
+                                .addComponent(txtPasta, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnBuscarRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(jLabel8)
@@ -3257,22 +3250,22 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jTabbedPane1.setSelectedIndex(0);
     }//GEN-LAST:event_jButton9ActionPerformed
 
-    private void txtBusca1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusca1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBusca1ActionPerformed
+    private void btnLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpar1ActionPerformed
+        txtBusca.setText("");
+        atualizaTabelaAtendimento();
+        txtBusca.requestFocusInWindow();
+    }//GEN-LAST:event_btnLimpar1ActionPerformed
 
-    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+    private void txtBusca1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBusca1CaretUpdate
         listaAtendimento = null;
         if(txtBusca1.getText().equals("") )
         {
-            JOptionPane.showMessageDialog(null, "Preencha o campo corretamente! ", "erro", JOptionPane.WARNING_MESSAGE);
             atualizaTabelaAtendimento();
         }
         else
         {
             try{
-                requerente = requerenteDao.BuscaparaAtendimento(txtBusca1.getText());
-                listaAtendimento = atendimentoDAO.FiltroBuscaRequerente(requerente.getId());
+                listaAtendimento = atendimentoDAO.FiltroBuscaRequerente(txtBusca1.getText());
                 if(listaAtendimento == null){
 
                     JOptionPane.showMessageDialog(null, "Nenhum contato encontrado!","", JOptionPane.WARNING_MESSAGE);
@@ -3288,13 +3281,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             }
 
         }
-    }//GEN-LAST:event_BtnBuscarActionPerformed
-
-    private void btnLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpar1ActionPerformed
-        txtBusca.setText("");
-        atualizaTabelaAtendimento();
-        txtBusca.requestFocusInWindow();
-    }//GEN-LAST:event_btnLimpar1ActionPerformed
+    }//GEN-LAST:event_txtBusca1CaretUpdate
 
      public void AtualizaTabelaBuscaRequerente(){
         requerente = new RequerenteM();
@@ -3780,7 +3767,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }
        
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnBuscar;
     private javax.swing.JButton btnAlterarAcompanhante;
     private javax.swing.JButton btnAlterarCrianca;
     private javax.swing.JButton btnAlterarNucleo;
