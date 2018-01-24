@@ -3029,6 +3029,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         tblAtendimentos.getTableHeader().setReorderingAllowed(false);
         txtIdAtendimento.setText(Integer.toString(atendimento.getId()));
         txtDataAtendimento.setText(atendimento.getData());
+        txtPasta.setText(atendimento.getPasta());
         txtRequerenteAtendimento.setText(String.valueOf(atendimento.getRequerente_id().getNome()));
         txtConselheiroAtendimento1.setText(String.valueOf(atendimento.getConselheiro1_id().getNome()));
         txtConselheiroAtendimento2.setText(String.valueOf(atendimento.getConselheiro2_id().getNome()));
@@ -3057,7 +3058,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtEnderecoCrianca.setText(crianca.getEndereco());
         txtNumeroCrianca.setText(crianca.getNumero());
         txtBairroCrianca.setText(crianca.getBairro());
-        txtIdAtendimento.setText(String.valueOf(crianca.getAtendimento_Id().getId()));
+        //txtIdAtendimento.setText(String.valueOf(crianca.getAtendimento_Id().getId()));
         
         
         txtRequerenteAtendimento.setText("");
