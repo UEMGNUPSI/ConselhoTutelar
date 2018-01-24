@@ -70,6 +70,7 @@ public class AtendimentoDAO {
         pst.setInt(7, atendimento.getId());
         pst.execute();
         pst.close();
+        
      }
        
           
