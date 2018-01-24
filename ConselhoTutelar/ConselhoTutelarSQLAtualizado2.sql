@@ -69,6 +69,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Atendimento` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Data` VARCHAR(11) NULL,
+  `Pasta` VARCHAR(8) NULL,
   `RelatoResumido` VARCHAR(400) NULL,
   `Requerente_ID` INT NOT NULL,
   `Conselheiro1_ID` INT NOT NULL,
@@ -189,4 +190,5 @@ ENGINE = InnoDB;
 
 insert into conselheiro values (1, "Fernando", "000", "000", "root", "root");
 
+select * from atendimento;
 

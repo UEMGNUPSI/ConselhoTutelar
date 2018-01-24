@@ -85,6 +85,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtAtendimentoIdRequerente.setVisible(false);
         txtAtendimentoIdConselheiro1.setVisible(false);
         txtAtendimentoIdConselheiro2.setVisible(false);
+        txtIdAtendimento.setVisible(false);
         txtIdCrianca.setVisible(false);
         txtIdNucleo.setVisible(false);
         txtIdAcompanhante.setVisible(false);
@@ -96,9 +97,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         AtualizaTabelaConselheiro();
         AtualizaTabelaConselheiro2();
         AtualizaTabelaDireitosDireita();
-        listaDireitosGeral = listaDireitos;
-        jPanel8.setVisible(false);
-       
+        listaDireitosGeral = listaDireitos;       
         
         txtRelatoAtendimento.setDocument(new LimiteDigitos(400));
         txtNomeCrianca.setDocument(new LimiteDigitos(45));
@@ -636,7 +635,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel8.setBackground(new java.awt.Color(211, 211, 211));
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(104, 129, 164)), "Buscar Requerente"));
 
         txtBusca1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -707,12 +705,13 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addComponent(btnEditarAtendimento)
                 .addGap(32, 32, 32)
                 .addComponent(btnExlucirAtendimento)
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addContainerGap(373, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8))
+                .addComponent(jScrollPane8)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Lista de Atendimentos", jPanel4);
@@ -791,7 +790,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel4.setText("Pasta:");
 
-        txtPasta.setEnabled(false);
         txtPasta.setMinimumSize(new java.awt.Dimension(6, 23));
 
         javax.swing.GroupLayout pnlAtendimentoLayout = new javax.swing.GroupLayout(pnlAtendimento);
@@ -833,9 +831,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                 .addComponent(txtDataAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtPasta, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(68, 68, 68)
+                                .addGap(74, 74, 74)
                                 .addComponent(txtIdAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtAtendimentoIdRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -885,7 +883,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel31)
                                         .addComponent(txtConselheiroAtendimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(95, 95, 95)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSalvarAvancar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
@@ -1894,19 +1892,58 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
         }
         
-        String dados[][] = new String[listaAtendimento.size()][5];
+        String dados[][] = new String[listaAtendimento.size()][6];
             int i = 0;
             for (AtendimentoM atendimento : listaAtendimento) {
                 dados[i][0] = String.valueOf(atendimento.getId());
                 dados[i][1] = String.valueOf(atendimento.getRequerente_id().getNome());
                 dados[i][2] = atendimento.getData();
-                dados[i][3] = String.valueOf(atendimento.getConselheiro1_id().getNome());
-                dados[i][4] = String.valueOf(atendimento.getConselheiro2_id().getNome());
+                dados[i][3] = atendimento.getPasta();
+                dados[i][4] = String.valueOf(atendimento.getConselheiro1_id().getNome());
+                dados[i][5] = String.valueOf(atendimento.getConselheiro2_id().getNome());
                 
                
                 i++;
             }
-            String tituloColuna[] = {"ID", "Requerente", "Data", "Conselheiro 1", "Conselheiro 2"};
+            String tituloColuna[] = {"ID", "Requerente", "Data", "Pasta", "Conselheiro 1", "Conselheiro 2"};
+            DefaultTableModel tabelaFuncionario = new DefaultTableModel();
+            tabelaFuncionario.setDataVector(dados, tituloColuna);
+            tblAtendimentos.setModel(new DefaultTableModel(dados, tituloColuna) {
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false,
+                };
+
+                
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return canEdit[columnIndex];
+                }
+            });
+
+            tblAtendimentos.getColumnModel().getColumn(0).setPreferredWidth(10);
+            
+            DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+            centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+            tblAtendimentos.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tblAtendimentos.setRowHeight(25);
+            tblAtendimentos.updateUI();
+    }
+    
+     public void atualizaTabelaAtendimentoBusca(){
+         
+      String dados[][] = new String[listaAtendimento.size()][6];
+            int i = 0;
+            for (AtendimentoM atendimento : listaAtendimento) {
+                dados[i][0] = String.valueOf(atendimento.getId());
+                dados[i][1] = String.valueOf(atendimento.getRequerente_id().getNome());
+                dados[i][2] = atendimento.getData();
+                dados[i][3] = atendimento.getPasta();
+                dados[i][4] = String.valueOf(atendimento.getConselheiro1_id().getNome());
+                dados[i][5] = String.valueOf(atendimento.getConselheiro2_id().getNome());
+                
+               
+                i++;
+            }
+            String tituloColuna[] = {"ID", "Requerente", "Data", "Pasta", "Conselheiro 1", "Conselheiro 2"};
             DefaultTableModel tabelaFuncionario = new DefaultTableModel();
             tabelaFuncionario.setDataVector(dados, tituloColuna);
             tblAtendimentos.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -2899,6 +2936,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         else if (txtIdAtendimento.getText().isEmpty()){
             atendimento.setData(txtDataAtendimento.getText());
             
+            atendimento.setPasta(txtPasta.getText());
+            
             requerente.setId(Integer.parseInt(txtAtendimentoIdRequerente.getText()));
             atendimento.setRequerente_id(requerente);
             
@@ -2928,6 +2967,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             atendimento.setId(Integer.parseInt(txtIdAtendimento.getText()));
             
            atendimento.setData(txtDataAtendimento.getText());
+           
+           atendimento.setPasta(txtPasta.getText());
            
            atendimento.setRelatoResumido(txtRelatoAtendimento.getText());
             
@@ -3273,7 +3314,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
                 }else{
 
-                    AtualizaTabelaRequerenteBusca();
+                    atualizaTabelaAtendimentoBusca();
 
                 }
             }catch(SQLException ex){
