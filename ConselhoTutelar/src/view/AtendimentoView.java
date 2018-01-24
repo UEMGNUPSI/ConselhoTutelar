@@ -76,7 +76,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         initComponents();
         this.setVisible(true);
         jTabbedPane1.setSelectedIndex(0);
-        //jTabbedPane1.setEnabledAt(1, false);jTabbedPane1.setEnabledAt(2, false);jTabbedPane1.setEnabledAt(3, false);jTabbedPane1.setEnabledAt(4, false);jTabbedPane1.setEnabledAt(5, false);
+        jTabbedPane1.setEnabledAt(1, false);jTabbedPane1.setEnabledAt(2, false);jTabbedPane1.setEnabledAt(3, false);jTabbedPane1.setEnabledAt(4, false);jTabbedPane1.setEnabledAt(5, false);
         
         
         dlgBuscaRequerente.setSize(941, 508);
@@ -2651,6 +2651,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
     private void btnSalvarNucleoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarNucleoActionPerformed
          nucleo = new NucleoM();
+         atendimento.setId(Integer.parseInt(txtIdAtendimento.getText()));
         if(txtNomeNucleo.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Preencha todos os obrigatórios !", "erro", JOptionPane.WARNING_MESSAGE);
         }
@@ -2782,6 +2783,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
     private void btnSalvarAcompanhanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAcompanhanteActionPerformed
          acompanhante = new AcompanhanteM();
+         atendimento.setId(Integer.parseInt(txtIdAtendimento.getText()));
         if(txtNomeAcompanhante.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Preencha todos os obrigatórios !", "erro", JOptionPane.WARNING_MESSAGE);
         }
@@ -2964,16 +2966,16 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         
             else{
             
-            atendimento.setId(Integer.parseInt(txtIdAtendimento.getText()));
+           atendimento.setId(Integer.parseInt(txtIdAtendimento.getText()));
             
-           atendimento.setData(txtDataAtendimento.getText());
-           
-           atendimento.setPasta(txtPasta.getText());
-           
-           atendimento.setRelatoResumido(txtRelatoAtendimento.getText());
+            atendimento.setData(txtDataAtendimento.getText());
+            
+            atendimento.setPasta(txtPasta.getText());
             
             requerente.setId(Integer.parseInt(txtAtendimentoIdRequerente.getText()));
             atendimento.setRequerente_id(requerente);
+            
+            atendimento.setRelatoResumido(txtRelatoAtendimento.getText());
             
             conselheiro.setId(Integer.parseInt(txtAtendimentoIdConselheiro1.getText()));
             atendimento.setConselheiro1_id(c1);

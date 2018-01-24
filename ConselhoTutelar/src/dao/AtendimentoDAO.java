@@ -66,7 +66,6 @@ public class AtendimentoDAO {
         pst.setInt(4, atendimento.getRequerente_id().getId());
         pst.setInt(5, atendimento.getConselheiro1_id().getId());
         pst.setInt(6, atendimento.getConselheiro2_id().getId());
- 
         pst.setInt(7, atendimento.getId());
         pst.execute();
         pst.close();
