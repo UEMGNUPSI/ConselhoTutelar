@@ -913,7 +913,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         btnSalvarCrianca.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         btnSalvarCrianca.setText("Salvar");
-        btnSalvarCrianca.setEnabled(false);
         btnSalvarCrianca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarCriancaActionPerformed(evt);
@@ -1326,7 +1325,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         btnSalvarNucleo.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         btnSalvarNucleo.setText("Salvar");
-        btnSalvarNucleo.setEnabled(false);
         btnSalvarNucleo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarNucleoActionPerformed(evt);
@@ -1613,7 +1611,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         btnSalvarAcompanhante.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         btnSalvarAcompanhante.setText("Salvar");
-        btnSalvarAcompanhante.setEnabled(false);
         btnSalvarAcompanhante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarAcompanhanteActionPerformed(evt);
@@ -2926,11 +2923,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSelecionarConselheiro2ActionPerformed
 
     private void btnSalvarAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAvancarActionPerformed
-        
-        RequerenteM requerente = new RequerenteM();
-        atendimento = new AtendimentoM();
         requerente = new RequerenteM();
-        ConselheiroM conselheiro = new ConselheiroM();
+        atendimento = new AtendimentoM();
+        conselheiro = new ConselheiroM();
         if (txtRequerenteAtendimento.getText().isEmpty() || txtRelatoAtendimento.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!"); 
                   
@@ -2945,10 +2940,10 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             
             atendimento.setRelatoResumido(txtRelatoAtendimento.getText());
             
-            conselheiro.setId(Integer.parseInt(txtAtendimentoIdConselheiro1.getText()));
+            c1.setId(Integer.parseInt(txtAtendimentoIdConselheiro1.getText()));
             atendimento.setConselheiro1_id(c1);
             
-            conselheiro.setId(Integer.parseInt(txtAtendimentoIdConselheiro2.getText()));
+            c2.setId(Integer.parseInt(txtAtendimentoIdConselheiro2.getText()));
             atendimento.setConselheiro2_id(c2);
             
       
@@ -2977,10 +2972,10 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             
             atendimento.setRelatoResumido(txtRelatoAtendimento.getText());
             
-            conselheiro.setId(Integer.parseInt(txtAtendimentoIdConselheiro1.getText()));
+            c1.setId(Integer.parseInt(txtAtendimentoIdConselheiro1.getText()));
             atendimento.setConselheiro1_id(c1);
             
-            conselheiro.setId(Integer.parseInt(txtAtendimentoIdConselheiro2.getText()));
+            c2.setId(Integer.parseInt(txtAtendimentoIdConselheiro2.getText()));
             atendimento.setConselheiro2_id(c2);
        
             try{
@@ -3621,7 +3616,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
    
     public void prepararSalvareCancelarCriança() {
        btnNovoCrianca.setEnabled(true);
-       btnSalvarCrianca.setEnabled(false);
        btnCancelarCrianca.setEnabled(false);
        tblCrianca.setEnabled(true);
     }
@@ -3683,7 +3677,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
    
     public void prepararSalvareCancelarNucleo() {
        btnNovoNucleo.setEnabled(true);
-       btnSalvarNucleo.setEnabled(false);
        btnCancelarNucleo.setEnabled(false);
        tblNucleo.setEnabled(true);
     }
@@ -3745,7 +3738,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
    
     public void prepararSalvareCancelarAcompanhante() {
        btnNovoAcompanhante.setEnabled(true);
-       btnSalvarAcompanhante.setEnabled(false);
        btnCancelarAcompanhante.setEnabled(false);
        tblAcompanhante.setEnabled(true);
     }

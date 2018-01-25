@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Atendimento` (
     FOREIGN KEY (`Conselheiro1_ID`)
     REFERENCES `ConselhoTutelar`.`Conselheiro` (`ID`)
     ON DELETE NO ACTION
-    ON UPDATE  NO ACTION,
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Atendimento_Conselheiro2`
     FOREIGN KEY (`Conselheiro2_ID`)
     REFERENCES `ConselhoTutelar`.`Conselheiro` (`ID`)
