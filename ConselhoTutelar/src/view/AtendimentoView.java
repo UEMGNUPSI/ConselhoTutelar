@@ -245,10 +245,10 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jLabel20 = new javax.swing.JLabel();
         txtBairroNucleo = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        txtTelefoneNucleo = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
-        txtCelularNucleo = new javax.swing.JFormattedTextField();
         txtIdNucleo = new javax.swing.JTextField();
+        txtTelefoneNucleo = new javax.swing.JFormattedTextField();
+        txtCelularNucleo = new javax.swing.JFormattedTextField();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -261,7 +261,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         btnCancelarAcompanhante = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
-        txtCelularAcompanhante = new javax.swing.JFormattedTextField();
         jLabel28 = new javax.swing.JLabel();
         txtTelefoneAcompanhante = new javax.swing.JFormattedTextField();
         jLabel23 = new javax.swing.JLabel();
@@ -277,6 +276,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtNomeAcompanhante = new javax.swing.JTextField();
         txtEstadoAcompanhante = new javax.swing.JComboBox<>();
         txtIdAcompanhante = new javax.swing.JTextField();
+        txtCelularAcompanhante = new javax.swing.JFormattedTextField();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
 
@@ -694,7 +694,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(288, 288, 288)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addContainerGap(365, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -792,7 +792,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jLabel4.setText("Pasta:");
 
         txtPasta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtPasta.setMinimumSize(new java.awt.Dimension(6, 23));
 
         javax.swing.GroupLayout pnlAtendimentoLayout = new javax.swing.GroupLayout(pnlAtendimento);
         pnlAtendimento.setLayout(pnlAtendimentoLayout);
@@ -834,8 +833,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                 .addGap(26, 26, 26)
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPasta, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(74, 74, 74)
+                                .addComponent(txtPasta, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(81, 81, 81)
                                 .addComponent(txtIdAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtAtendimentoIdRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -869,7 +868,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                 .addComponent(txtAtendimentoIdConselheiro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtAtendimentoIdConselheiro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel4)
-                                .addComponent(txtPasta, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtPasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnBuscarRequerente, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(jLabel8)
@@ -1026,7 +1025,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtTelefoneCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 416, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 444, Short.MAX_VALUE)
                         .addComponent(txtIdCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -1055,7 +1054,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     .addComponent(txtIdCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(txtTelefoneCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
@@ -1065,7 +1064,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                         .addComponent(txtEnderecoCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtBairroCrianca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel12)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1120,7 +1119,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnlCriancaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarCrianca)
@@ -1231,7 +1230,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addComponent(btnBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLimpar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 351, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 379, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1254,7 +1253,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSalvarFato, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1411,28 +1410,27 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel21.setText("Telefone:");
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel1.setText("Celular:");
+
+        txtIdNucleo.setEnabled(false);
+
         try {
-            txtTelefoneNucleo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) ####-####")));
+            txtTelefoneNucleo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtTelefoneNucleo.setDisabledTextColor(new java.awt.Color(51, 51, 51));
-        txtTelefoneNucleo.setFocusable(false);
         txtTelefoneNucleo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel1.setText("Celular:");
+        txtTelefoneNucleo.setMinimumSize(new java.awt.Dimension(6, 23));
+        txtTelefoneNucleo.setPreferredSize(new java.awt.Dimension(6, 23));
 
         try {
             txtCelularNucleo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtCelularNucleo.setDisabledTextColor(new java.awt.Color(51, 51, 51));
-        txtCelularNucleo.setFocusable(false);
         txtCelularNucleo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        txtIdNucleo.setEnabled(false);
+        txtCelularNucleo.setPreferredSize(new java.awt.Dimension(6, 23));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -1440,44 +1438,44 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTelefoneNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCelularNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNomeNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtResponsabilidadeNucleo, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtParentescoNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtIdNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(238, 238, 238))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
+                        .addComponent(txtResponsabilidadeNucleo))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel21)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTelefoneNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCelularNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtEnderecoNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNumeroNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel20)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEnderecoNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNumeroNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBairroNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(txtBairroNucleo, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtParentescoNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtIdNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(238, 238, 238))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1500,12 +1498,13 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel20)
                     .addComponent(txtBairroNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(txtTelefoneNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel21)
+                        .addComponent(jLabel1)
+                        .addComponent(txtTelefoneNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtCelularNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1651,14 +1650,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jLabel34.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel34.setText("Celular:");
 
-        try {
-            txtCelularAcompanhante.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtCelularAcompanhante.setDisabledTextColor(new java.awt.Color(51, 51, 51));
-        txtCelularAcompanhante.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jLabel28.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel28.setText("Telefone:");
 
@@ -1723,6 +1714,14 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             }
         });
 
+        try {
+            txtCelularAcompanhante.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCelularAcompanhante.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCelularAcompanhante.setPreferredSize(new java.awt.Dimension(65, 23));
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -1731,31 +1730,28 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtEnderecoAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel26)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel25)
+                                .addGap(51, 51, 51)
+                                .addComponent(txtNumeroAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel27)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtEnderecoAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel26)
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addGap(51, 51, 51)
-                                        .addComponent(txtNumeroAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel27)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtBairroAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel28)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtTelefoneAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel34)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCelularAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                                .addComponent(txtBairroAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtTelefoneAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel34)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCelularAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel24)
                         .addGap(18, 18, 18)
                         .addComponent(txtNomeAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1767,9 +1763,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                         .addComponent(jLabel23)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtEstadoAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 470, Short.MAX_VALUE)
-                        .addComponent(txtIdAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(117, 117, 117))))
+                        .addGap(34, 34, 34)
+                        .addComponent(txtIdAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(581, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1796,7 +1792,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel28)
                     .addComponent(txtTelefoneAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel34)
-                    .addComponent(txtCelularAcompanhante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCelularAcompanhante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2510,6 +2506,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarCriancaActionPerformed
 
     private void btnNovoAtendimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoAtendimentoActionPerformed
+        txtPasta.requestFocusInWindow();
         txtIdAtendimento.setText("");
         txtRequerenteAtendimento.setText("");
         txtConselheiroAtendimento1.setText("");
@@ -2517,7 +2514,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtAtendimentoIdRequerente.setText("");
         txtAtendimentoIdConselheiro1.setText("");
         txtAtendimentoIdConselheiro2.setText("");
-        txtRelatoAtendimento.setText("");
+        txtPasta.setText("");
+        txtRelatoAtendimento.setText("");        
         txtRelatoAtendimento.setEnabled(true);
         jTabbedPane1.setSelectedIndex(1);
         
@@ -2876,7 +2874,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarNucleoActionPerformed
 
     private void btnNovoAcompanhanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoAcompanhanteActionPerformed
-     limparCamposAcompanhante();
+    limparCamposAcompanhante();
     prepararNovoAcompanhante();
     ativaCamposAcompanhante();
     btnAlterarAcompanhante.setEnabled(false);
@@ -2982,8 +2980,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
        
             try{
                 atendimentoDAO.Alterar(atendimento);
-                 jTabbedPane1.setSelectedIndex(2);
+                 
                 JOptionPane.showMessageDialog(null, "Alterado com sucesso!");  
+                jTabbedPane1.setSelectedIndex(2);
             }
             catch (SQLException ex){
                     JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage());
@@ -3651,8 +3650,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtEnderecoNucleo.setText("");
         txtNumeroNucleo.setText("");
         txtBairroNucleo.setText("");
-        txtTelefoneNucleo.setText("");
-        txtCelularNucleo.setText("");
+        
     }
     
     public void ativaCamposNucleo(){
@@ -3663,8 +3661,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtEnderecoNucleo.setEnabled(true);
         txtNumeroNucleo.setEnabled(true);
         txtBairroNucleo.setEnabled(true);
-        txtTelefoneNucleo.setEnabled(true);
-        txtCelularNucleo.setEnabled(true);
     }
     
      
@@ -3711,9 +3707,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtNumeroAcompanhante.setText("");
         txtBairroAcompanhante.setText("");
         txtCidadeAcompanhante.setText("");
-        txtTelefoneAcompanhante.setText("");
         txtCelularAcompanhante.setText("");
- 
+        txtTelefoneAcompanhante.setText("");
     }
     
     public void ativaCamposAcompanhante(){
