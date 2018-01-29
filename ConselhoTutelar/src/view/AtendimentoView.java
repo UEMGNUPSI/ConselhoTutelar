@@ -2942,7 +2942,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             
             c1.setId(Integer.parseInt(txtAtendimentoIdConselheiro1.getText()));
             atendimento.setConselheiro1_id(c1);
-            
+
             c2.setId(Integer.parseInt(txtAtendimentoIdConselheiro2.getText()));
             atendimento.setConselheiro2_id(c2);
             

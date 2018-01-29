@@ -69,7 +69,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Atendimento` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Data` VARCHAR(11) NULL,
-  `Pasta` VARCHAR(8) NULL,
+  `Pasta` VARCHAR(8) ,
   `RelatoResumido` VARCHAR(400) NULL,
   `Requerente_ID` INT NOT NULL,
   `Conselheiro1_ID` INT NOT NULL,
@@ -77,6 +77,7 @@ CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Atendimento` (
   PRIMARY KEY (`ID`),
   INDEX `fk_Atendimento_Requerente_idx` (`Requerente_ID` ASC),
   INDEX `fk_Atendimento_Conselheiro1_idx` (`Conselheiro1_ID` ASC),
+  UNIQUE INDEX `Pasta_UNIQUE` (`Pasta` ASC),
   INDEX `fk_Atendimento_Conselheiro2_idx` (`Conselheiro2_ID` ASC),
   CONSTRAINT `fk_Atendimento_Requerente`
     FOREIGN KEY (`Requerente_ID`)
