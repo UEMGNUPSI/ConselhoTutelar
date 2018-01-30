@@ -1887,7 +1887,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
         }
         
-        String dados[][] = new String[listaAtendimento.size()][6];
+        String dados[][] = new String[listaAtendimento.size()][5];
             int i = 0;
             for (AtendimentoM atendimento : listaAtendimento) {
                 dados[i][0] = String.valueOf(atendimento.getId());
@@ -1895,12 +1895,11 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 dados[i][2] = atendimento.getData();
                 dados[i][3] = atendimento.getPasta();
                 dados[i][4] = String.valueOf(atendimento.getConselheiro1_id().getNome());
-                dados[i][5] = String.valueOf(atendimento.getConselheiro2_id().getNome());
                 
                
                 i++;
             }
-            String tituloColuna[] = {"ID", "Requerente", "Data", "Pasta", "Conselheiro 1", "Conselheiro 2"};
+            String tituloColuna[] = {"ID", "Requerente", "Data", "Pasta", "Conselheiro 1"};
             DefaultTableModel tabelaFuncionario = new DefaultTableModel();
             tabelaFuncionario.setDataVector(dados, tituloColuna);
             tblAtendimentos.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -1925,7 +1924,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     
      public void atualizaTabelaAtendimentoBusca(){
          
-      String dados[][] = new String[listaAtendimento.size()][6];
+      String dados[][] = new String[listaAtendimento.size()][5];
             int i = 0;
             for (AtendimentoM atendimento : listaAtendimento) {
                 dados[i][0] = String.valueOf(atendimento.getId());
@@ -1933,12 +1932,11 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 dados[i][2] = atendimento.getData();
                 dados[i][3] = atendimento.getPasta();
                 dados[i][4] = String.valueOf(atendimento.getConselheiro1_id().getNome());
-                dados[i][5] = String.valueOf(atendimento.getConselheiro2_id().getNome());
                 
                
                 i++;
             }
-            String tituloColuna[] = {"ID", "Requerente", "Data", "Pasta", "Conselheiro 1", "Conselheiro 2"};
+            String tituloColuna[] = {"ID", "Requerente", "Data", "Pasta", "Conselheiro 1"};
             DefaultTableModel tabelaFuncionario = new DefaultTableModel();
             tabelaFuncionario.setDataVector(dados, tituloColuna);
             tblAtendimentos.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -2942,13 +2940,21 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             
             c1.setId(Integer.parseInt(txtAtendimentoIdConselheiro1.getText()));
             atendimento.setConselheiro1_id(c1);
-
-            c2.setId(Integer.parseInt(txtAtendimentoIdConselheiro2.getText()));
-            atendimento.setConselheiro2_id(c2);
+            
+            if(!txtAtendimentoIdConselheiro2.getText().isEmpty()){
+                c2.setId(Integer.parseInt(txtAtendimentoIdConselheiro2.getText()));
+                atendimento.setConselheiro2_id(c2);
+            }
+            
             
       
             try{
-                txtIdAtendimento.setText(String.valueOf(AtendimentoDAO.Salvar(atendimento)));
+                if(!txtAtendimentoIdConselheiro2.getText().isEmpty()){
+                    txtIdAtendimento.setText(String.valueOf(AtendimentoDAO.Salvar(atendimento)));
+                }else{
+                    txtIdAtendimento.setText(String.valueOf(AtendimentoDAO.Salvar2(atendimento)));
+                }
+                
                 JOptionPane.showMessageDialog(null, "Gravado com sucesso!");
                 jTabbedPane1.setSelectedIndex(2);
                 

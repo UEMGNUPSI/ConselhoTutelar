@@ -33,7 +33,27 @@ public class AtendimentoDAO {
         }
         pst.close();
         return idAtendimento;
+    }
     
+    static public int Salvar2 (AtendimentoM atendimento) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        int idAtendimento = 0;
+        sql = "INSERT INTO `conselhotutelar`.`atendimento` (`ID`, `Data`, `Pasta`, `RelatoResumido`, `Requerente_ID`, `Conselheiro1_ID`) VALUES(?,?,?,?,?,?)";
+        pst = pst = Conexao.getInstance().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+        pst.setInt(1,0);
+        pst.setString(2, atendimento.getData());
+        pst.setString(3, atendimento.getPasta());
+        pst.setString(4, atendimento.getRelatoResumido());
+        pst.setInt(5, atendimento.getRequerente_id().getId());
+        pst.setInt(6, atendimento.getConselheiro1_id().getId());
+        pst.execute();
+        ResultSet rs = pst.getGeneratedKeys();
+        while (rs.next()) {
+            idAtendimento = rs.getInt(1);
+        }
+        pst.close();
+        return idAtendimento;
     }
     
      public void Excluir(AtendimentoM atendimento) throws SQLException{
