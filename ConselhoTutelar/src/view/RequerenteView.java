@@ -51,9 +51,8 @@ public class RequerenteView extends javax.swing.JInternalFrame {
             cbxEstadoCivil.addItem("Casado(a)");
             cbxEstadoCivil.addItem("Viúvo(a)");
             cbxEstadoCivil.addItem("Divorciado(a)");
-
+            cbxEstadoCivil.addItem("Outros");
     }
-    
 
 
     @SuppressWarnings("unchecked")
