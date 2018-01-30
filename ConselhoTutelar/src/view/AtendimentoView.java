@@ -2527,13 +2527,16 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 atendimento.setId(Integer.parseInt(tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),0).toString()));
                 int confirma = JOptionPane.showConfirmDialog(null, "Deseja excluir: "+ tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),1).toString());
                 if(confirma ==0){
-                    try{
-                    atendimentoDAO.Excluir(atendimento);
-                    tblAtendimentos.clearSelection();
-                    }catch(SQLException ex){
-                    JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
-                    }
-                    atualizaTabelaAtendimento();
+                    int confirma2 = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja excluir: "+ tblAtendimentos.getValueAt(tblAtendimentos.getSelectedRow(),1).toString());
+                        if(confirma2 ==0){
+                            try{
+                            atendimentoDAO.Excluir(atendimento);
+                            tblAtendimentos.clearSelection();
+                            }catch(SQLException ex){
+                            JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+                            }
+                            atualizaTabelaAtendimento();
+                        }
             }
         }
     }//GEN-LAST:event_btnExlucirAtendimentoActionPerformed
