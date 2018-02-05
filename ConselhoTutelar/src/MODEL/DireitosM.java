@@ -14,14 +14,16 @@ public class DireitosM {
     private int Id;
     private String Numero;
     private String Descricao;
+    private String Comentario;
 
     public DireitosM() {
     }
 
-    public DireitosM(int Id, String Numero, String Descrição) {
+    public DireitosM(int Id, String Numero, String Descricao, String Comentario) {
         this.Id = Id;
         this.Numero = Numero;
-        this.Descricao = Descrição;
+        this.Descricao = Descricao;
+        this.Comentario = Comentario;
     }
 
     public int getId() {
@@ -40,12 +42,22 @@ public class DireitosM {
         this.Numero = Numero;
     }
 
-    public String getDescrição() {
+    public String getDescricao() {
         return Descricao;
     }
 
-    public void setDescrição(String Descrição) {
-        this.Descricao = Descrição;
+    public void setDescricao(String Descricao) {
+        this.Descricao = Descricao;
     }
+
+    public String getComentario() {
+        return Comentario;
+    }
+
+    public void setComentario(String Comentario) {
+        this.Comentario = Comentario;
+    }
+
+   
     
 }

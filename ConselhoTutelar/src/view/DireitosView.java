@@ -291,7 +291,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
             txtDescricao.requestFocusInWindow();          
         }
         else if (txtId.getText().isEmpty()){
-            direitos.setDescrição(txtDescricao.getText());
+            direitos.setDescricao(txtDescricao.getText());
             direitos.setNumero(txtArtigo.getText());
       
             try{
@@ -309,7 +309,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
        }
         else{
             direitos.setId(Integer.parseInt(txtId.getText()));
-            direitos.setDescrição(txtDescricao.getText());
+            direitos.setDescricao(txtDescricao.getText());
             direitos.setNumero(txtArtigo.getText());
        
             try{
@@ -406,7 +406,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
         tblDireitos.getTableHeader().setReorderingAllowed(false);
         txtId.setText(Integer.toString(direitos.getId()));
         txtArtigo.setText(direitos.getNumero());
-        txtDescricao.setText(direitos.getDescrição());
+        txtDescricao.setText(direitos.getDescricao());
         btnAlterar.setEnabled(true);
         btnExcluir.setEnabled(true);
     }//GEN-LAST:event_tblDireitosMouseClicked
@@ -432,7 +432,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
             for (DireitosM setor : listaDireitos) {
                 dados[i][0] = String.valueOf(setor.getId());
                 dados[i][1] = setor.getNumero();
-                dados[i][2] = setor.getDescrição();
+                dados[i][2] = setor.getDescricao();
                 
                
                 i++;
@@ -472,7 +472,7 @@ public class DireitosView extends javax.swing.JInternalFrame {
             for (DireitosM setor : listaDireitos) {
                 dados[i][0] = String.valueOf(setor.getId());
                 dados[i][1] = setor.getNumero();
-                dados[i][2] = setor.getDescrição();
+                dados[i][2] = setor.getDescricao();
                 
                
                 i++;

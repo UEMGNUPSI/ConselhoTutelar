@@ -16,7 +16,7 @@ public class DireitosDAO {
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1,0);
         pst.setString(2, direitos.getNumero());
-        pst.setString(3, direitos.getDescrição());   
+        pst.setString(3, direitos.getDescricao());   
         pst.execute();
         pst.close();
     }
@@ -41,7 +41,7 @@ public class DireitosDAO {
                  + "where ID = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setString(1, direitos.getNumero());
-        pst.setString(2, direitos.getDescrição());  
+        pst.setString(2, direitos.getDescricao());  
         pst.setInt(3, direitos.getId());
         pst.execute();
         pst.close();
@@ -58,7 +58,8 @@ public class DireitosDAO {
       while (rs.next()){
         listaTodos.add(new DireitosM(rs.getInt("ID"), 
                                    rs.getString("Numero"),
-                                   rs.getString("Descricao")));
+                                   rs.getString("Descricao"),
+                                   rs.getString("")));
                                    
           }
      pst.close();
@@ -78,7 +79,8 @@ public class DireitosDAO {
            direito = new DireitosM(
                    rs.getInt("ID"),
                    rs.getString("Numero"),
-                   rs.getString("Descricao"));
+                   rs.getString("Descricao"),
+                   rs.getString(""));
                    
         }
         pst.close();
@@ -102,7 +104,8 @@ public class DireitosDAO {
            ListaBusca.add(new DireitosM(
                    rs.getInt("ID"),
                    rs.getString("Numero"),
-                   rs.getString("Descricao")));
+                   rs.getString("Descricao"),
+                   rs.getString("")));
                    cont++;
                    
         }

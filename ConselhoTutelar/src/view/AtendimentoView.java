@@ -2051,7 +2051,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             for (DireitosM setor : listaDireitos) {
                 dados[i][0] = String.valueOf(setor.getId());
                 dados[i][1] = setor.getNumero();
-                dados[i][2] = setor.getDescrição();
+                dados[i][2] = setor.getDescricao();
                 
                
                 i++;
@@ -2088,7 +2088,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             for (DireitosM setor : listaDireitosGeral) {
                 dados[i][0] = String.valueOf(setor.getId());
                 dados[i][1] = setor.getNumero();
-                dados[i][2] = setor.getDescrição();
+                dados[i][2] = setor.getDescricao();
                 
                
                 i++;
@@ -2125,7 +2125,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             for (DireitosM setor : listaDireitosSelecionados) {
                 dados[i][0] = String.valueOf(setor.getId());
                 dados[i][1] = setor.getNumero();
-                dados[i][2] = setor.getDescrição();
+                dados[i][2] = setor.getDescricao();
                 
                
                 i++;
@@ -2162,7 +2162,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             for (DireitosM setor : listaDireitos) {
                 dados[i][0] = String.valueOf(setor.getId());
                 dados[i][1] = setor.getNumero();
-                dados[i][2] = setor.getDescrição();
+                dados[i][2] = setor.getDescricao();
                 
                
                 i++;
@@ -2202,7 +2202,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             for (FatosM setor : listaFatos) {
                 dados[i][0] = String.valueOf(setor.getId());
                 dados[i][1] = String.valueOf(setor.getDireitos_Id().getNumero());
-                dados[i][2] = String.valueOf(setor.getDireitos_Id().getDescrição());
+                dados[i][2] = String.valueOf(setor.getDireitos_Id().getDescricao());
                 
                
                 i++;

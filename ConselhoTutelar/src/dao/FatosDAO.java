@@ -26,6 +26,7 @@ public class FatosDAO {
             pst.setInt(1,0);            
             pst.setInt(2, atendimento);
             pst.setInt(3, fatos.getId());
+            pst.setString(4, fatos.getComentario());
             pst.execute();
             pst.close();
         }

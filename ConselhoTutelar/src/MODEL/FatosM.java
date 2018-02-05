@@ -8,13 +8,13 @@ public class FatosM {
     private AtendimentoM Atendimento_Id;
     private DireitosM Direitos_Id;
 
+    public FatosM() {
+    }
+
     public FatosM(int id, AtendimentoM Atendimento_Id, DireitosM Direitos_Id) {
         this.id = id;
         this.Atendimento_Id = Atendimento_Id;
         this.Direitos_Id = Direitos_Id;
-    }
-
-    public FatosM() {
     }
 
     public int getId() {
@@ -41,6 +41,5 @@ public class FatosM {
         this.Direitos_Id = Direitos_Id;
     }
 
-    
     
 }
