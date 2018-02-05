@@ -40,6 +40,7 @@ public class FatosDAO {
                  + "ID = ?,"
                  + "Atendimento_ID = ?, "
                  + "Direitos_ID = ? "
+                 + "Comentario = ? "
                  
                  + "where Atendimento_ID = ? and Direitos_ID = ? ";        
         
