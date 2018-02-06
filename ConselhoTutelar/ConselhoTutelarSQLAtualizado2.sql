@@ -37,7 +37,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Direitos` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Numero` VARCHAR(10) NULL,
-  `Descricao` VARCHAR(300) NULL,
+  `Descricao` VARCHAR(1000) NULL,
   PRIMARY KEY (`ID`))
 ENGINE = InnoDB;
 
@@ -174,6 +174,7 @@ CREATE TABLE IF NOT EXISTS `ConselhoTutelar`.`Atendimento_has_Direitos` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Atendimento_ID` INT NOT NULL,
   `Direitos_ID` INT NOT NULL,
+  `Comentario` VARCHAR(500) NULL, 
   INDEX `fk_Atendimento_has_Direitos_Direitos1_idx` (`Direitos_ID` ASC),
   INDEX `fk_Atendimento_has_Direitos_Atendimento1_idx` (`Atendimento_ID` ASC),
   PRIMARY KEY (`ID`),
@@ -194,4 +195,6 @@ insert into conselheiro values (2, "Danilo", "000", "000", "root", "root");
 INSERT INTO `conselhotutelar`.`requerente` (`ID`, `Nome`) VALUES ('1', 'leonardo1');
 INSERT INTO `conselhotutelar`.`requerente` (`ID`, `Nome`) VALUES ('2', 'leonardo2');
 INSERT INTO `conselhotutelar`.`requerente` (`ID`, `Nome`) VALUES ('3', 'leonardo3');
+
+select * from direitos;
 

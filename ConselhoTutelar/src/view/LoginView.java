@@ -40,8 +40,6 @@ public class LoginView extends javax.swing.JFrame {
         
         txtUsuario.setDocument(new LimiteDigitos(20));
         txtSenha.setDocument(new LimiteDigitos(20));
-        txtUsuario.setText("root");
-        txtSenha.setText("root");
     }
 
     

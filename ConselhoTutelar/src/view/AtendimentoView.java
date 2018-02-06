@@ -81,7 +81,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         
         dlgBuscaRequerente.setSize(941, 508);
         dlgBuscaConselheiro.setSize(941, 508);
-        dlgBuscaConselheiro2.setSize(941, 508);        
+        dlgBuscaConselheiro2.setSize(941, 508);  
+        dlgComentario.setSize(600, 500);
         txtAtendimentoIdRequerente.setVisible(false);
         txtAtendimentoIdConselheiro1.setVisible(false);
         txtAtendimentoIdConselheiro2.setVisible(false);
@@ -149,6 +150,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtBuscaConselheiro2 = new javax.swing.JTextField();
         btnBuscarConselheiro2 = new javax.swing.JButton();
         btnLimparConselheiro2 = new javax.swing.JButton();
+        dlgComentario = new javax.swing.JDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -582,6 +584,19 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        dlgComentario.setTitle("Comentário ");
+
+        javax.swing.GroupLayout dlgComentarioLayout = new javax.swing.GroupLayout(dlgComentario.getContentPane());
+        dlgComentario.getContentPane().setLayout(dlgComentarioLayout);
+        dlgComentarioLayout.setHorizontalGroup(
+            dlgComentarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        dlgComentarioLayout.setVerticalGroup(
+            dlgComentarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setBackground(new java.awt.Color(204, 204, 204));
         setClosable(true);
         setTitle("Atendimento");
@@ -727,7 +742,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         txtDataAtendimento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtDataAtendimento.setDisabledTextColor(new java.awt.Color(51, 51, 51));
-        txtDataAtendimento.setEnabled(false);
 
         btnBuscarRequerente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/lupa.png"))); // NOI18N
         btnBuscarRequerente.addActionListener(new java.awt.event.ActionListener() {
@@ -1421,7 +1435,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
         txtTelefoneNucleo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtTelefoneNucleo.setMinimumSize(new java.awt.Dimension(6, 23));
         txtTelefoneNucleo.setPreferredSize(new java.awt.Dimension(6, 23));
 
         try {
@@ -3164,7 +3177,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void btnEsquerdaDireitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsquerdaDireitaActionPerformed
-
+        dlgComentario.setVisible(true);
         /*if(tblDireitosGeral.getValueAt(tblAcompanhante.getSelectedRow(),0) == null){
         JOptionPane.showMessageDialog(null, "Selecione a sala destino!");
         }else{*/
@@ -3849,6 +3862,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JDialog dlgBuscaConselheiro;
     private javax.swing.JDialog dlgBuscaConselheiro2;
     private javax.swing.JDialog dlgBuscaRequerente;
+    private javax.swing.JDialog dlgComentario;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
