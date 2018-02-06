@@ -82,7 +82,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         dlgBuscaRequerente.setSize(941, 508);
         dlgBuscaConselheiro.setSize(941, 508);
         dlgBuscaConselheiro2.setSize(941, 508);  
-        dlgComentario.setSize(600, 500);
+        dlgComentario.setSize(600, 327);
         txtAtendimentoIdRequerente.setVisible(false);
         txtAtendimentoIdConselheiro1.setVisible(false);
         txtAtendimentoIdConselheiro2.setVisible(false);
@@ -151,6 +151,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         btnBuscarConselheiro2 = new javax.swing.JButton();
         btnLimparConselheiro2 = new javax.swing.JButton();
         dlgComentario = new javax.swing.JDialog();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtComentario = new javax.swing.JTextArea();
+        btnSalvarComentario = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -464,7 +467,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                         .addGap(0, 351, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(dlgBuscaConselheiroLayout.createSequentialGroup()
-                .addGap(426, 426, 426)
+                .addGap(410, 410, 410)
                 .addComponent(btnSelecionarConselheiro1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -586,15 +589,39 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
         dlgComentario.setTitle("Comentário ");
 
+        txtComentario.setColumns(20);
+        txtComentario.setLineWrap(true);
+        txtComentario.setRows(5);
+        jScrollPane2.setViewportView(txtComentario);
+
+        btnSalvarComentario.setText("Salvar");
+        btnSalvarComentario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarComentarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout dlgComentarioLayout = new javax.swing.GroupLayout(dlgComentario.getContentPane());
         dlgComentario.getContentPane().setLayout(dlgComentarioLayout);
         dlgComentarioLayout.setHorizontalGroup(
             dlgComentarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(dlgComentarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(dlgComentarioLayout.createSequentialGroup()
+                .addGap(218, 218, 218)
+                .addComponent(btnSalvarComentario, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(341, Short.MAX_VALUE))
         );
         dlgComentarioLayout.setVerticalGroup(
             dlgComentarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(dlgComentarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSalvarComentario)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setBackground(new java.awt.Color(204, 204, 204));
@@ -3345,6 +3372,10 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtBusca1CaretUpdate
 
+    private void btnSalvarComentarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarComentarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvarComentarioActionPerformed
+
      public void AtualizaTabelaBuscaRequerente(){
         requerente = new RequerenteM();
         
@@ -3853,6 +3884,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNovoNucleo;
     private javax.swing.JButton btnSalvarAcompanhante;
     private javax.swing.JButton btnSalvarAvancar;
+    private javax.swing.JButton btnSalvarComentario;
     private javax.swing.JButton btnSalvarCrianca;
     private javax.swing.JButton btnSalvarFato;
     private javax.swing.JButton btnSalvarNucleo;
@@ -3920,6 +3952,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -3954,6 +3987,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtCelularAcompanhante;
     private javax.swing.JFormattedTextField txtCelularNucleo;
     private javax.swing.JTextField txtCidadeAcompanhante;
+    private javax.swing.JTextArea txtComentario;
     private javax.swing.JTextField txtConselheiroAtendimento1;
     private javax.swing.JTextField txtConselheiroAtendimento2;
     private javax.swing.JTextField txtDataAtendimento;
