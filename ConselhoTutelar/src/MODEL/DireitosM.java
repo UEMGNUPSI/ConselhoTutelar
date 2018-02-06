@@ -19,6 +19,12 @@ public class DireitosM {
     public DireitosM() {
     }
 
+    public DireitosM(int Id, String Numero, String Descricao) {
+        this.Id = Id;
+        this.Numero = Numero;
+        this.Descricao = Descricao;
+    }
+
     public DireitosM(int Id, String Numero, String Descricao, String Comentario) {
         this.Id = Id;
         this.Numero = Numero;

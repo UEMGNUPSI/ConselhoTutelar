@@ -58,8 +58,7 @@ public class DireitosDAO {
       while (rs.next()){
         listaTodos.add(new DireitosM(rs.getInt("ID"), 
                                    rs.getString("Numero"),
-                                   rs.getString("Descricao"),
-                                   rs.getString("")));
+                                   rs.getString("Descricao")));
                                    
           }
      pst.close();
@@ -79,8 +78,7 @@ public class DireitosDAO {
            direito = new DireitosM(
                    rs.getInt("ID"),
                    rs.getString("Numero"),
-                   rs.getString("Descricao"),
-                   rs.getString(""));
+                   rs.getString("Descricao"));
                    
         }
         pst.close();
@@ -104,8 +102,7 @@ public class DireitosDAO {
            ListaBusca.add(new DireitosM(
                    rs.getInt("ID"),
                    rs.getString("Numero"),
-                   rs.getString("Descricao"),
-                   rs.getString("")));
+                   rs.getString("Descricao")));
                    cont++;
                    
         }
