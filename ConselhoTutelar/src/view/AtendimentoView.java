@@ -3228,6 +3228,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
     private void btnEsquerdaDireitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsquerdaDireitaActionPerformed
         dlgComentario.setVisible(true);
+        dlgComentario.setLocationRelativeTo(null);
 
     }//GEN-LAST:event_btnEsquerdaDireitaActionPerformed
 
