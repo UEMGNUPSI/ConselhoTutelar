@@ -71,7 +71,7 @@ public class CriançaDAO {
      }
         
      
-         public List<CriançaM> ListaTodos(int id) throws SQLException{ 
+    public List<CriançaM> ListaTodos(int id) throws SQLException{ 
     List<CriançaM> listaTodos = new ArrayList<>();
 
         String sql = "select * from Crianca where Atendimento_id = ? order by Nome";
@@ -125,6 +125,32 @@ public class CriançaDAO {
         sql = "select * from Crianca where id = ?";
         pst = Conexao.getInstance().prepareStatement(sql);
         pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next()){
+           criança = new CriançaM(
+                   rs.getInt("ID"),
+                   rs.getString("Nome"),
+                   rs.getString("DataNascimento"),
+                   rs.getString("Endereco"),
+                   rs.getString("Numero"),
+                   rs.getString("Bairro"),
+                   rs.getString("Telefone"),
+                   AtendimentoDAO.Busca(rs.getInt("Atendimento_ID")));
+                   
+        }
+        pst.close();
+        
+        return criança;
+    }
+    
+    static public CriançaM buscaNome(String Nome) throws SQLException{
+        PreparedStatement pst;
+        String sql;
+        CriançaM criança = null;
+        String name = "%"+Nome+"%";
+        sql = "select * from Crianca where Nome like ?";
+        pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setString(1, name);
         ResultSet rs = pst.executeQuery();
         while(rs.next()){
            criança = new CriançaM(

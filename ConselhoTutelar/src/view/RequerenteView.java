@@ -800,7 +800,9 @@ public class RequerenteView extends javax.swing.JInternalFrame {
                 }
             });
 
-            tblRequerente.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblRequerente.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblRequerente.getColumnModel().getColumn(0).setMinWidth(0);
+            tblRequerente.getColumnModel().getColumn(0).setPreferredWidth(0);
             
 
             DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();

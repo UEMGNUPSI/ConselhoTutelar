@@ -90,6 +90,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtIdCrianca.setVisible(false);
         txtIdNucleo.setVisible(false);
         txtIdAcompanhante.setVisible(false);
+        txtID.setVisible(false);
         Data();
         atualizaTabelaAtendimento();
         AtualizaTabelaDireitos();
@@ -164,7 +165,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jPanel8 = new javax.swing.JPanel();
         txtBusca1 = new javax.swing.JTextField();
         btnLimpar1 = new javax.swing.JButton();
-        txtlabelbusca = new javax.swing.JLabel();
+        cbxBusca = new javax.swing.JComboBox<>();
+        txtID = new javax.swing.JTextField();
         pnlAtendimento = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -694,8 +696,13 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             }
         });
 
-        txtlabelbusca.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtlabelbusca.setText("Nome:");
+        cbxBusca.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        cbxBusca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Requerente", "Criança", "Data do Atendimento" }));
+        cbxBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxBuscaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -703,9 +710,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtlabelbusca, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxBusca, 0, 153, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBusca1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                .addComponent(txtBusca1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnLimpar1)
                 .addContainerGap())
@@ -716,7 +723,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBusca1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpar1)
-                    .addComponent(txtlabelbusca))
+                    .addComponent(cbxBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
@@ -725,18 +732,25 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnNovoAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnEditarAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnExlucirAtendimento))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane8)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnNovoAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnEditarAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnExlucirAtendimento))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 1129, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(246, 246, 246)
+                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(288, 288, 288)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(365, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -754,7 +768,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Lista de Atendimentos", jPanel4);
@@ -1261,29 +1277,23 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton5)
-                .addGap(216, 216, 216)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLimpar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 379, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton5)
+                        .addGap(216, 216, 216)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(jLabel35)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(71, 71, 71)
@@ -1294,47 +1304,45 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSalvarFato, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel36)
-                        .addGap(208, 208, 208))))
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(jLabel35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel36)
+                .addGap(232, 232, 232))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15)
+                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBuscar)
+                        .addComponent(btnLimpar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel35))
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel15)
-                                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnBuscar)
-                                .addComponent(btnLimpar)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(182, 182, 182)
-                                .addComponent(btnEsquerdaDireita)
-                                .addGap(26, 26, 26)
-                                .addComponent(btnDireitaEsquerda)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSalvarFato, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel35))
+                    .addComponent(jLabel36, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jLabel36)
-                        .addGap(9, 9, 9)
-                        .addComponent(jScrollPane12)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addGap(182, 182, 182)
+                        .addComponent(btnEsquerdaDireita)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnDireitaEsquerda)
+                        .addGap(192, 192, 192)
+                        .addComponent(btnSalvarFato, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Fatos", jPanel1);
@@ -1952,8 +1960,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblAtendimentos.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblAtendimentos.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblAtendimentos.getColumnModel().getColumn(0).setMinWidth(0);
+            tblAtendimentos.getColumnModel().getColumn(0).setPreferredWidth(0);
             
             DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
             centralizado.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1989,8 +1998,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblAtendimentos.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblAtendimentos.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblAtendimentos.getColumnModel().getColumn(0).setMinWidth(0);
+            tblAtendimentos.getColumnModel().getColumn(0).setPreferredWidth(0);
             
             DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
             centralizado.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2031,8 +2041,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblCrianca.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblCrianca.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblCrianca.getColumnModel().getColumn(0).setMinWidth(0);
+            tblCrianca.getColumnModel().getColumn(0).setPreferredWidth(0);
             
             DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
             centralizado.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2067,8 +2078,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblCrianca.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblCrianca.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblCrianca.getColumnModel().getColumn(0).setMinWidth(0);
+            tblCrianca.getColumnModel().getColumn(0).setPreferredWidth(0);
             
             DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
             centralizado.setHorizontalAlignment(SwingConstants.CENTER);
@@ -2108,8 +2120,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblDireitosGeral.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblDireitosGeral.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblDireitosGeral.getColumnModel().getColumn(0).setMinWidth(0);
+            tblDireitosGeral.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblDireitosGeral.getColumnModel().getColumn(1).setPreferredWidth(15);
             tblDireitosGeral.getColumnModel().getColumn(2).setPreferredWidth(15);
 
@@ -2145,8 +2158,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblDireitosGeral.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblDireitosGeral.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblDireitosGeral.getColumnModel().getColumn(0).setMinWidth(0);
+            tblDireitosGeral.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblDireitosGeral.getColumnModel().getColumn(1).setPreferredWidth(15);
             tblDireitosGeral.getColumnModel().getColumn(2).setPreferredWidth(15);
 
@@ -2160,17 +2174,18 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     public void AtualizaTabelaDireitosDireita(){
         direitos = new DireitosM();
 
-        String dados[][] = new String[listaDireitosSelecionados.size()][3];
+        String dados[][] = new String[listaDireitosSelecionados.size()][4];
             int i = 0;
             for (DireitosM setor : listaDireitosSelecionados) {
                 dados[i][0] = String.valueOf(setor.getId());
                 dados[i][1] = setor.getNumero();
                 dados[i][2] = setor.getDescricao();
+                dados[i][3] = setor.getComentario();
                 
                
                 i++;
             }
-           String tituloColuna[] = {"ID", "Número", "Descrição"};
+           String tituloColuna[] = {"ID", "Número", "Descrição","Comentário"};
             DefaultTableModel tabelaDireitos = new DefaultTableModel();
             tabelaDireitos.setDataVector(dados, tituloColuna);
             tblDireitosSelecionados.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -2182,8 +2197,10 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblDireitosSelecionados.getColumnModel().getColumn(0).setPreferredWidth(10);
+            
+            tblDireitosSelecionados.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblDireitosSelecionados.getColumnModel().getColumn(0).setMinWidth(0);
+            tblDireitosSelecionados.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblDireitosSelecionados.getColumnModel().getColumn(1).setPreferredWidth(15);
             tblDireitosSelecionados.getColumnModel().getColumn(2).setPreferredWidth(15);
 
@@ -2219,8 +2236,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblDireitosGeral.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblDireitosGeral.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblDireitosGeral.getColumnModel().getColumn(0).setMinWidth(0);
+            tblDireitosGeral.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblDireitosGeral.getColumnModel().getColumn(1).setPreferredWidth(15);
             tblDireitosGeral.getColumnModel().getColumn(2).setPreferredWidth(15);
       
@@ -2237,17 +2255,17 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     public void AtualizaTabelaDireitosDoEditarAtendimento(){
         fatos = new FatosM();
 
-        String dados[][] = new String[listaFatos.size()][3];
+        String dados[][] = new String[listaFatos.size()][4];
             int i = 0;
             for (FatosM setor : listaFatos) {
                 dados[i][0] = String.valueOf(setor.getId());
                 dados[i][1] = String.valueOf(setor.getDireitos_Id().getNumero());
                 dados[i][2] = String.valueOf(setor.getDireitos_Id().getDescricao());
-                
+                dados[i][3] = String.valueOf(setor.getDireitos_Id().getComentario());
                
                 i++;
             }
-           String tituloColuna[] = {"ID", "Número", "Descrição"};
+           String tituloColuna[] = {"ID", "Número", "Descrição", "Comentário"};
             DefaultTableModel tabelaDireitos = new DefaultTableModel();
             tabelaDireitos.setDataVector(dados, tituloColuna);
             tblDireitosSelecionados.setModel(new DefaultTableModel(dados, tituloColuna) {
@@ -2259,8 +2277,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblDireitosSelecionados.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblDireitosSelecionados.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblDireitosSelecionados.getColumnModel().getColumn(0).setMinWidth(0);
+            tblDireitosSelecionados.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblDireitosSelecionados.getColumnModel().getColumn(1).setPreferredWidth(15);
             tblDireitosSelecionados.getColumnModel().getColumn(2).setPreferredWidth(15);
 
@@ -2304,8 +2323,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblNucleo.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblNucleo.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblNucleo.getColumnModel().getColumn(0).setMinWidth(0);
+            tblNucleo.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblNucleo.getColumnModel().getColumn(1).setPreferredWidth(10);
             tblNucleo.getColumnModel().getColumn(2).setPreferredWidth(10);
             tblNucleo.getColumnModel().getColumn(3).setPreferredWidth(10);
@@ -2347,8 +2367,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblNucleo.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblNucleo.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblNucleo.getColumnModel().getColumn(0).setMinWidth(0);
+            tblNucleo.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblNucleo.getColumnModel().getColumn(1).setPreferredWidth(10);
             tblNucleo.getColumnModel().getColumn(2).setPreferredWidth(10);
             tblNucleo.getColumnModel().getColumn(3).setPreferredWidth(10);
@@ -2394,8 +2415,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblAcompanhante.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblAcompanhante.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblAcompanhante.getColumnModel().getColumn(0).setMinWidth(0);
+            tblAcompanhante.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblAcompanhante.getColumnModel().getColumn(1).setPreferredWidth(10);
             tblAcompanhante.getColumnModel().getColumn(2).setPreferredWidth(10);
             tblAcompanhante.getColumnModel().getColumn(3).setPreferredWidth(10);
@@ -2435,8 +2457,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblAcompanhante.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblAcompanhante.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblAcompanhante.getColumnModel().getColumn(0).setMinWidth(0);
+            tblAcompanhante.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblAcompanhante.getColumnModel().getColumn(1).setPreferredWidth(10);
             tblAcompanhante.getColumnModel().getColumn(2).setPreferredWidth(10);
             tblAcompanhante.getColumnModel().getColumn(3).setPreferredWidth(10);
@@ -3205,40 +3228,13 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
     private void btnEsquerdaDireitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsquerdaDireitaActionPerformed
         dlgComentario.setVisible(true);
-        /*if(tblDireitosGeral.getValueAt(tblAcompanhante.getSelectedRow(),0) == null){
-        JOptionPane.showMessageDialog(null, "Selecione a sala destino!");
-        }else{*/
 
-            try {
-                direitos = direitosDao.busca(Integer.parseInt(tblDireitosGeral.getValueAt(tblDireitosGeral.getSelectedRow(), 0).toString()));
-                listaDireitosSelecionados.add(direitos);
-
-                for(int i = 0; i < listaDireitosGeral.size(); i++)
-                {
-                    DireitosM d = listaDireitosGeral.get(i);
-
-                    if(d.getId() == direitos.getId())
-                    {
-                        listaDireitosGeral.remove(d);
-                        break;
-                    }
-                }
-                btnSalvarFato.setEnabled(true);
-                
-                AtualizaTabelaDireitosDireita();
-                AtualizaTabelaDireitosEsquerda();
-
-            } catch (SQLException ex) {
-                Logger.getLogger(AtendimentoView.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(null, ex.getMessage());
-            }
-        //}
     }//GEN-LAST:event_btnEsquerdaDireitaActionPerformed
 
     private void btnDireitaEsquerdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDireitaEsquerdaActionPerformed
-        /*if(tblDireitosSelecionados.getValueAt(tblDireitosSelecionados.getSelectedRow(),0) == null){
+        if(tblDireitosSelecionados.getValueAt(tblDireitosSelecionados.getSelectedRow(),0) == null){
         JOptionPane.showMessageDialog(null, "Selecione a sala destino!");
-        }else{*/
+        }else{
 
             try {
                 direitos = direitosDao.busca(Integer.parseInt(tblDireitosSelecionados.getValueAt(tblDireitosSelecionados.getSelectedRow(), 0).toString()));
@@ -3265,7 +3261,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 Logger.getLogger(AtendimentoView.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
-        //}
+        }
     }//GEN-LAST:event_btnDireitaEsquerdaActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -3340,9 +3336,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void btnLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpar1ActionPerformed
-        txtBusca.setText("");
+        txtBusca1.setText("");
         atualizaTabelaAtendimento();
-        txtBusca.requestFocusInWindow();
+        txtBusca1.requestFocusInWindow();
     }//GEN-LAST:event_btnLimpar1ActionPerformed
 
     private void txtBusca1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBusca1CaretUpdate
@@ -3351,13 +3347,11 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         {
             atualizaTabelaAtendimento();
         }
-        else
-        {
+        else if(cbxBusca.getSelectedIndex() == 0){ // Requerente
             try{
                 listaAtendimento = atendimentoDAO.FiltroBuscaRequerente(txtBusca1.getText());
                 if(listaAtendimento == null){
 
-                    JOptionPane.showMessageDialog(null, "Nenhum contato encontrado!","", JOptionPane.WARNING_MESSAGE);
                     atualizaTabelaAtendimento();
 
                 }else{
@@ -3369,12 +3363,87 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
             }
 
+        }else if(cbxBusca.getSelectedIndex() == 1){ // Criança
+            
+            try{
+                crianca = criancaDAO.buscaNome(txtBusca1.getText());
+                txtID.setText(String.valueOf(crianca.getAtendimento_Id()));
+                listaAtendimento = atendimentoDAO.FiltroBuscaAtendimentoID(Integer.valueOf(txtID.getText()));
+                if(listaAtendimento == null){
+
+                    atualizaTabelaAtendimento();
+
+                }else{
+
+                    atualizaTabelaAtendimentoBusca();
+
+                }
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+            }
+            
+        }else if(cbxBusca.getSelectedIndex() == 2){ // data do atendimento
+        
+         try{
+                listaAtendimento = atendimentoDAO.FiltroBuscaData(txtBusca1.getText());
+                if(listaAtendimento == null){
+
+                    atualizaTabelaAtendimento();
+
+                }else{
+
+                    atualizaTabelaAtendimentoBusca();
+
+                }
+            }catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, "Erro: "+ex.getMessage(), "erro", JOptionPane.WARNING_MESSAGE);
+            }   
         }
     }//GEN-LAST:event_txtBusca1CaretUpdate
 
     private void btnSalvarComentarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarComentarioActionPerformed
-        // TODO add your handling code here:
+    if(0>1){ //tblDireitosGeral.getValueAt(tblAcompanhante.getSelectedRow(),0) == null
+        JOptionPane.showMessageDialog(null, "Selecione a sala destino!");
+        }else{
+
+            try {
+                direitos = direitosDao.busca(Integer.parseInt(tblDireitosGeral.getValueAt(tblDireitosGeral.getSelectedRow(), 0).toString()));
+                direitos.setComentario(txtComentario.getText());
+                listaDireitosSelecionados.add(direitos);
+
+                for(int i = 0; i < listaDireitosGeral.size(); i++)
+                {
+                    DireitosM d = listaDireitosGeral.get(i);
+
+                    if(d.getId() == direitos.getId())
+                    {
+                        listaDireitosGeral.remove(d);
+                        break;
+                    }
+                }
+                btnSalvarFato.setEnabled(true);
+                
+                AtualizaTabelaDireitosDireita();
+                AtualizaTabelaDireitosEsquerda();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(AtendimentoView.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        }
+    txtComentario.setText("");
+    dlgComentario.dispose();
     }//GEN-LAST:event_btnSalvarComentarioActionPerformed
+
+    private void cbxBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxBuscaActionPerformed
+        if(cbxBusca.getSelectedIndex() == 0){
+            txtBusca1.setText("");
+        }else if(cbxBusca.getSelectedIndex() == 1){
+            txtBusca1.setText("");
+        }else if(cbxBusca.getSelectedIndex() == 2){
+            txtBusca1.setText("Dia/Mes/Ano");
+        }    
+    }//GEN-LAST:event_cbxBuscaActionPerformed
 
      public void AtualizaTabelaBuscaRequerente(){
         requerente = new RequerenteM();
@@ -3891,6 +3960,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSelecionarConselheiro1;
     private javax.swing.JButton btnSelecionarConselheiro2;
     private javax.swing.JButton btnSelecionarRequerente;
+    private javax.swing.JComboBox<String> cbxBusca;
     private javax.swing.JDialog dlgBuscaConselheiro;
     private javax.swing.JDialog dlgBuscaConselheiro2;
     private javax.swing.JDialog dlgBuscaRequerente;
@@ -3995,6 +4065,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtEnderecoCrianca;
     private javax.swing.JTextField txtEnderecoNucleo;
     private javax.swing.JComboBox<String> txtEstadoAcompanhante;
+    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtIdAcompanhante;
     private javax.swing.JTextField txtIdAtendimento;
     private javax.swing.JTextField txtIdCrianca;
@@ -4014,6 +4085,5 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtTelefoneAcompanhante;
     private javax.swing.JFormattedTextField txtTelefoneCrianca;
     private javax.swing.JFormattedTextField txtTelefoneNucleo;
-    private javax.swing.JLabel txtlabelbusca;
     // End of variables declaration//GEN-END:variables
 }

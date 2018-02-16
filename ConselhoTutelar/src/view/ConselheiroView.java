@@ -356,7 +356,7 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCancelar)
                     .addComponent(btnExcluir)
@@ -553,8 +553,8 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
                 }
             });
 
-            tblConselheiro.getColumnModel().getColumn(0).setPreferredWidth(0);
-            tblConselheiro.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tblConselheiro.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblConselheiro.getColumnModel().getColumn(0).setMinWidth(0);
             tblConselheiro.getColumnModel().getColumn(0).setPreferredWidth(0);
       
             
@@ -593,8 +593,9 @@ public class ConselheiroView extends javax.swing.JInternalFrame {
                     return canEdit[columnIndex];
                 }
             });
-
-            tblConselheiro.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tblConselheiro.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblConselheiro.getColumnModel().getColumn(0).setMinWidth(0);
+            tblConselheiro.getColumnModel().getColumn(0).setPreferredWidth(0);
             tblConselheiro.getColumnModel().getColumn(1).setPreferredWidth(15);
             tblConselheiro.getColumnModel().getColumn(2).setPreferredWidth(15);
       

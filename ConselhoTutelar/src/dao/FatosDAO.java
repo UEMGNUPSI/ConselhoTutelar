@@ -21,7 +21,7 @@ public class FatosDAO {
         String sql;
         for(DireitosM fatos : listafatos){
             
-            sql = "insert into Atendimento_has_Direitos values (?,?,?)";
+            sql = "insert into Atendimento_has_Direitos values (?,?,?,?)";
             pst = Conexao.getInstance().prepareStatement(sql);
             pst.setInt(1,0);            
             pst.setInt(2, atendimento);

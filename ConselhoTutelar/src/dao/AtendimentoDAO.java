@@ -134,7 +134,7 @@ public class AtendimentoDAO {
         return atendimento;
     }
         
-        public List<AtendimentoM> FiltroBuscaRequerente(String Name) throws SQLException{
+    public List<AtendimentoM> FiltroBuscaRequerente(String Name) throws SQLException{
         PreparedStatement pst;
         String sql;
         List<AtendimentoM> ListaBusca = new ArrayList<>();
@@ -162,6 +162,46 @@ public class AtendimentoDAO {
         pst.close();                           
         
         return ListaBusca;
+    }
+        
+    public List<AtendimentoM>FiltroBuscaAtendimentoID(int id) throws SQLException{ 
+        List<AtendimentoM> listaTodos = new ArrayList<>();
+        String sql = "select * from Atendimento where Id = ?";
+        PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()){
+        listaTodos.add(new AtendimentoM(rs.getInt("ID"), 
+                                   rs.getString("Data"),
+                                   rs.getString("Pasta"),
+                                   rs.getString("RelatoResumido"),
+                                   RequerenteDAO.busca(rs.getInt("Requerente_ID")),
+                                   ConselheiroDAO.busca(rs.getInt("Conselheiro1_ID")),
+                                   ConselheiroDAO.busca(rs.getInt("Conselheiro2_ID"))));
+                          
+          }
+        pst.close();
+    return listaTodos;
+    }
+    
+    public List<AtendimentoM>FiltroBuscaData(String data) throws SQLException{ 
+        List<AtendimentoM> listaTodos = new ArrayList<>();
+        String sql = "select * from Atendimento where Data = ?";
+        PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
+        pst.setString(1, data);
+        ResultSet rs = pst.executeQuery();
+        while (rs.next()){
+        listaTodos.add(new AtendimentoM(rs.getInt("ID"), 
+                                   rs.getString("Data"),
+                                   rs.getString("Pasta"),
+                                   rs.getString("RelatoResumido"),
+                                   RequerenteDAO.busca(rs.getInt("Requerente_ID")),
+                                   ConselheiroDAO.busca(rs.getInt("Conselheiro1_ID")),
+                                   ConselheiroDAO.busca(rs.getInt("Conselheiro2_ID"))));
+                          
+          }
+        pst.close();
+    return listaTodos;
     }
     
     
