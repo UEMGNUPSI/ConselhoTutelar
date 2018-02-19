@@ -3,6 +3,7 @@ package dao;
 
 
 import MODEL.AtendimentoM;
+import MODEL.CriançaM;
 import MODEL.RequerenteM;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -164,11 +165,11 @@ public class AtendimentoDAO {
         return ListaBusca;
     }
         
-    public List<AtendimentoM>FiltroBuscaAtendimentoID(int id) throws SQLException{ 
+    public List<AtendimentoM>FiltroBuscaAtendimentoID(CriançaM crianca) throws SQLException{ 
         List<AtendimentoM> listaTodos = new ArrayList<>();
-        String sql = "select * from Atendimento where Id = ?";
+        String sql = "select * from Atendimento where Atendimento.Id = ?";
         PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
-        pst.setInt(1, id);
+        pst.setObject(1, crianca, 1);
         ResultSet rs = pst.executeQuery();
         while (rs.next()){
         listaTodos.add(new AtendimentoM(rs.getInt("ID"), 

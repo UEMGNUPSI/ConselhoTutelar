@@ -40,6 +40,8 @@ public class LoginView extends javax.swing.JFrame {
         
         txtUsuario.setDocument(new LimiteDigitos(20));
         txtSenha.setDocument(new LimiteDigitos(20));
+        txtUsuario.setText("root");
+        txtSenha.setText("root");
     }
 
     
@@ -81,6 +83,7 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
+        txtSenha.setText("root");
         txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSenhaKeyPressed(evt);

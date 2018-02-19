@@ -90,7 +90,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtIdCrianca.setVisible(false);
         txtIdNucleo.setVisible(false);
         txtIdAcompanhante.setVisible(false);
-        txtID.setVisible(false);
+        //txtID.setVisible(false);
         Data();
         atualizaTabelaAtendimento();
         AtualizaTabelaDireitos();
@@ -3100,14 +3100,17 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtIdAtendimento.setText(Integer.toString(atendimento.getId()));
         txtDataAtendimento.setText(atendimento.getData());
         txtPasta.setText(atendimento.getPasta());
-        txtRequerenteAtendimento.setText(String.valueOf(atendimento.getRequerente_id().getNome()));
-        txtConselheiroAtendimento1.setText(String.valueOf(atendimento.getConselheiro1_id().getNome()));
-        txtConselheiroAtendimento2.setText(String.valueOf(atendimento.getConselheiro2_id().getNome()));
-        txtAtendimentoIdRequerente.setText(String.valueOf(atendimento.getRequerente_id().getId()));
-        txtAtendimentoIdConselheiro1.setText(String.valueOf(atendimento.getConselheiro1_id().getId()));
-        txtAtendimentoIdConselheiro2.setText(String.valueOf(atendimento.getConselheiro2_id().getId()));
         txtRelatoAtendimento.setText(String.valueOf(atendimento.getRelatoResumido()));
-       
+        txtRequerenteAtendimento.setText(String.valueOf(atendimento.getRequerente_id().getNome()));
+        txtAtendimentoIdRequerente.setText(String.valueOf(atendimento.getRequerente_id().getId()));
+        txtConselheiroAtendimento1.setText(String.valueOf(atendimento.getConselheiro1_id().getNome()));
+        txtAtendimentoIdConselheiro1.setText(String.valueOf(atendimento.getConselheiro1_id().getId()));
+        if(atendimento.getConselheiro2_id() == null){
+        
+        }else{
+        txtConselheiroAtendimento2.setText(String.valueOf(atendimento.getConselheiro2_id().getNome()));
+        txtAtendimentoIdConselheiro2.setText(String.valueOf(atendimento.getConselheiro2_id().getId()));
+        }
     }//GEN-LAST:event_tblAtendimentosMouseClicked
 
     private void tblCriancaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCriancaMouseClicked
@@ -3344,6 +3347,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
 
     private void txtBusca1CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBusca1CaretUpdate
         listaAtendimento = null;
+        crianca = null;
         if(txtBusca1.getText().equals("") )
         {
             atualizaTabelaAtendimento();
@@ -3368,8 +3372,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
             
             try{
                 crianca = criancaDAO.buscaNome(txtBusca1.getText());
-                txtID.setText(String.valueOf(crianca.getAtendimento_Id()));
-                listaAtendimento = atendimentoDAO.FiltroBuscaAtendimentoID(Integer.valueOf(txtID.getText()));
+                listaAtendimento = atendimentoDAO.FiltroBuscaAtendimentoID(crianca);
                 if(listaAtendimento == null){
 
                     atualizaTabelaAtendimento();
