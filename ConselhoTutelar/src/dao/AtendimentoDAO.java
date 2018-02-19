@@ -165,11 +165,12 @@ public class AtendimentoDAO {
         return ListaBusca;
     }
         
-    public List<AtendimentoM>FiltroBuscaAtendimentoID(CriançaM crianca) throws SQLException{ 
+    public List<AtendimentoM>FiltroBuscaAtendimentoID(String crianca) throws SQLException{ 
         List<AtendimentoM> listaTodos = new ArrayList<>();
-        String sql = "select * from Atendimento where Atendimento.Id = ?";
+        String nome = "%"+crianca+"%";
+        String sql = "select Atendimento.id, Atendimento.Data, Atendimento.Pasta, Atendimento.RelatoResumido, Atendimento.Requerente_ID, Atendimento.Conselheiro1_ID, Atendimento.Conselheiro2_ID from Atendimento, Crianca where Atendimento.Id = Crianca.Atendimento_ID and Crianca.nome like ?";
         PreparedStatement pst = Conexao.getInstance().prepareStatement(sql);
-        pst.setObject(1, crianca, 1);
+        pst.setString(1, nome);
         ResultSet rs = pst.executeQuery();
         while (rs.next()){
         listaTodos.add(new AtendimentoM(rs.getInt("ID"), 

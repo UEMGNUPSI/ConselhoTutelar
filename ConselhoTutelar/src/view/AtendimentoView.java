@@ -1277,9 +1277,9 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jButton5)
                         .addGap(216, 216, 216)
                         .addComponent(jLabel15)
@@ -1292,7 +1292,6 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -3371,8 +3370,7 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         }else if(cbxBusca.getSelectedIndex() == 1){ // Criança
             
             try{
-                crianca = criancaDAO.buscaNome(txtBusca1.getText());
-                listaAtendimento = atendimentoDAO.FiltroBuscaAtendimentoID(crianca);
+                listaAtendimento = atendimentoDAO.FiltroBuscaAtendimentoID(txtBusca1.getText());
                 if(listaAtendimento == null){
 
                     atualizaTabelaAtendimento();
