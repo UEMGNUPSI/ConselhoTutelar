@@ -90,7 +90,8 @@ public class AtendimentoView extends javax.swing.JInternalFrame {
         txtIdCrianca.setVisible(false);
         txtIdNucleo.setVisible(false);
         txtIdAcompanhante.setVisible(false);
-        //txtID.setVisible(false);
+        txtID.setVisible(false);
+        
         Data();
         atualizaTabelaAtendimento();
         AtualizaTabelaDireitos();

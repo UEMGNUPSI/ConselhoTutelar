@@ -1,3 +1,0 @@
-usuario = "nupsi";
-senha = "1a2b3c4d";
-url = "jdbc:mysql://10.40.0.196/conselhotutelar";

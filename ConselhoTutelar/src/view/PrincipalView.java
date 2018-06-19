@@ -2,9 +2,11 @@
 package view;
 
 import MODEL.ConselheiroM;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -30,8 +32,15 @@ public class PrincipalView extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
-        pnl = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/view/imagem/conslhotutelar.png"));
+        Image image = icon.getImage();
+        pnlPrincipal = new javax.swing.JDesktopPane(){
+
+            public void paintComponent(Graphics g){
+                g.drawImage(image, pnlPrincipal.getWidth()/2 - icon.getIconWidth()/2,pnlPrincipal.getHeight()/2 - icon.getIconHeight()/2,this);
+            }
+        }
+        ;
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -49,23 +58,18 @@ public class PrincipalView extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1024, 768));
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagem/conslhotutelar.png"))); // NOI18N
-
-        javax.swing.GroupLayout pnlLayout = new javax.swing.GroupLayout(pnl);
-        pnl.setLayout(pnlLayout);
-        pnlLayout.setHorizontalGroup(
-            pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1400, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
+        pnlPrincipal.setLayout(pnlPrincipalLayout);
+        pnlPrincipalLayout.setHorizontalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1400, Short.MAX_VALUE)
         );
-        pnlLayout.setVerticalGroup(
-            pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlLayout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 61, Short.MAX_VALUE))
+        pnlPrincipalLayout.setVerticalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 763, Short.MAX_VALUE)
         );
 
-        getContentPane().add(pnl);
+        getContentPane().add(pnlPrincipal);
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -150,30 +154,34 @@ public class PrincipalView extends javax.swing.JFrame {
 
     private void mnuAtendimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuAtendimentoMouseClicked
     AtendimentoView ate = new AtendimentoView();
-        pnl.removeAll();
-        pnl.add(ate);
-        pnl.updateUI();
+        pnlPrincipal.removeAll();
+        ate.setLocation(pnlPrincipal.getWidth()/2 - ate.getWidth()/2,pnlPrincipal.getHeight()/2 - ate.getHeight()/2);
+        pnlPrincipal.add(ate);
+        pnlPrincipal.updateUI();
     }//GEN-LAST:event_mnuAtendimentoMouseClicked
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         RequerenteView requerente = new RequerenteView();
-        pnl.removeAll(); 
-        pnl.add(requerente); 
-        pnl.updateUI();
+        pnlPrincipal.removeAll(); 
+        requerente.setLocation(pnlPrincipal.getWidth()/2 - requerente.getWidth()/2,pnlPrincipal.getHeight()/2 - requerente.getHeight()/2);
+        pnlPrincipal.add(requerente); 
+        pnlPrincipal.updateUI();
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         ConselheiroView conselheiro = new ConselheiroView();
-        pnl.removeAll(); 
-        pnl.add(conselheiro); 
-        pnl.updateUI();
+        pnlPrincipal.removeAll(); 
+        conselheiro.setLocation(pnlPrincipal.getWidth()/2 - conselheiro.getWidth()/2,pnlPrincipal.getHeight()/2 - conselheiro.getHeight()/2);
+        pnlPrincipal.add(conselheiro); 
+        pnlPrincipal.updateUI();
     }//GEN-LAST:event_jMenu2MouseClicked
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
         DireitosView direitos = new DireitosView();
-        pnl.removeAll(); 
-        pnl.add(direitos); 
-        pnl.updateUI();
+        pnlPrincipal.removeAll(); 
+        direitos.setLocation(pnlPrincipal.getWidth()/2 - direitos.getWidth()/2,pnlPrincipal.getHeight()/2 - direitos.getHeight()/2);
+        pnlPrincipal.add(direitos); 
+        pnlPrincipal.updateUI();
     }//GEN-LAST:event_jMenu3MouseClicked
 
     /**
@@ -182,7 +190,6 @@ public class PrincipalView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -193,6 +200,6 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JMenu mnuAtendimento;
     private javax.swing.JMenu mnuSair;
-    private javax.swing.JPanel pnl;
+    private javax.swing.JDesktopPane pnlPrincipal;
     // End of variables declaration//GEN-END:variables
 }
